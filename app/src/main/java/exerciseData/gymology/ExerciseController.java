@@ -4,23 +4,27 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import com.google.gson.Gson;
-
+import team13.gymology.R;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ExerciseController implements Runnable {
     private static String query;
+    ListView _viewList;
     private Activity activity;
     private ExerciseList _exerciseList;
+    public List<String> _stringList;
     private final static Gson g = new Gson();
-    private Boolean _tempOnly;
+    private String _type;
+    ArrayAdapter<String> _arrayAdapter;
 
     private final String TAG = "ExerciseController";
 
@@ -31,9 +35,10 @@ public class ExerciseController implements Runnable {
     public ExerciseController(ExerciseList exercise) {
         this._exerciseList = exercise;
     }
-    public ExerciseController(WeakReference<Activity> activity, Boolean tempOnly) {
-        _tempOnly = tempOnly;
+    public ExerciseController(WeakReference<Activity> activity, String type) {
         this.activity = activity.get();
+        this._type = type;
+        this._stringList = new ArrayList<>();
     }
 
     @Override
@@ -41,50 +46,31 @@ public class ExerciseController implements Runnable {
         Log.d(TAG,
                 "run: Getting Wger API data");
         try {
-            // Check which data is to be retrieved
-            if (_tempOnly) {
-                _exerciseList = displayExercises();
-
-
-                Log.d(TAG,
-                        "run: DisplayExercises()");
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    // Grab context of application, display toast
-                    if (activity != null) {
-                        Toast msg = Toast.makeText(activity.getApplicationContext(),
-                                String.format(Locale.getDefault(), "Exercise's found: %s",
-                                        this._exerciseList.getExercise().size()),
-                                Toast.LENGTH_LONG);
-                        msg.show();
-                    }
-                });
-            }
-            else {
-                displayExercises();
+            // Retrieve Data
+            _exerciseList = displayExercises();
+            for (Exercise exercise: _exerciseList.getExercise()) {
+                _stringList.add(exercise.getName());
             }
             Thread.sleep(300);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-//        if (activity != null) {
-//            // define list element
-//            _displayForecast = activity.findViewById(R.id.displayForecast);
-//
-//            // create adapter, plus font to white
-//            _arrayAdapter = (new ArrayAdapter<>(activity, R.layout.list_font_black, R.id.list_data,
-//                    _forecastList
-//
-//            ));
-//        }
-//        if (_tempOnly) {
-//            _forecastList.add(_temp);
-//        }
-//
-//        new Handler(Looper.getMainLooper()).post(() -> {
-//            _displayForecast.setAdapter(_arrayAdapter);
-//            _arrayAdapter.notifyDataSetChanged();
-//
-//        });
+        if (activity != null) {
+            // Define whole list
+            _viewList = activity.findViewById(R.id.workouts_CB);
+
+            // create adapter for list elements
+            _arrayAdapter = (new ArrayAdapter<>(
+                    activity.getApplicationContext(),
+                    R.layout.list_style_buttons_text,
+                    R.id.list_data,
+                    _stringList));
+        }
+        new Handler(Looper.getMainLooper()).post(() -> {
+            _viewList.setAdapter(_arrayAdapter);
+            _arrayAdapter.notifyDataSetChanged();
+
+        });
     }
 
     /**Getter Functions
@@ -259,6 +245,7 @@ public class ExerciseController implements Runnable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        assert exercise_CB != null;
         return exercise_CB._exerciseList;
 
     } // End of displayExercises()

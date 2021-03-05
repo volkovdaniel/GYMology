@@ -1,13 +1,9 @@
 package team13.gymology;
 
-import android.app.Activity;
+
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.os.Bundle;
-import exerciseData.gymology.ExerciseController;
-
-import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,21 +12,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.button).setOnClickListener(v ->
-                retrieveWgerAPI(new WeakReference<>(MainActivity.this)));
-
-
-
-
-
+        findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
     }
 
-    private void retrieveWgerAPI(WeakReference<Activity> weakActivity) {
-
-        // Create  and start thread
-        ExerciseController exercise = new ExerciseController(weakActivity, true);
-        Thread t1 = new Thread(exercise);
-        t1.start();
-
+    public void savedWorkouts() {
+        // Start Activity
+        startActivity(new Intent(this, SavedWorkouts.class));
     }
+
+
 }
