@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+    /*
+    TODO: Save any updated workouts/exercises onStop() of app
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

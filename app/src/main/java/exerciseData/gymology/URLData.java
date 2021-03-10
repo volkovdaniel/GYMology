@@ -22,7 +22,7 @@ public enum URLData {
     LANGUAGE("language=2"),
     CATEGORY_SINGLE("category="),
     EQUIPMENT_SINGLE("equipment="),
-    MUSCLE_SINGLE("muscle=")
+    MUSCLE_SINGLE("muscle="),
 
 
     ;

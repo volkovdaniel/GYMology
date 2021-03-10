@@ -1,14 +1,15 @@
 package exerciseData.gymology;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.google.gson.Gson;
 import team13.gymology.R;
-import java.io.IOException;
+
+import java.io.*;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.net.URLConnection;
@@ -23,8 +24,7 @@ public class ExerciseController implements Runnable {
     private ExerciseList _exerciseList;
     public List<String> _stringList;
     private final static Gson g = new Gson();
-    private String _type;
-    ArrayAdapter<String> _arrayAdapter;
+    List<Exercise> _nameList;
 
     private final String TAG = "ExerciseController";
 
@@ -37,8 +37,8 @@ public class ExerciseController implements Runnable {
     }
     public ExerciseController(WeakReference<Activity> activity, String type) {
         this.activity = activity.get();
-        this._type = type;
         this._stringList = new ArrayList<>();
+        this._nameList = new ArrayList<>();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ExerciseController implements Runnable {
         try {
             // Retrieve Data
             _exerciseList = displayExercises();
-            for (Exercise exercise: _exerciseList.getExercise()) {
+            for (Exercise exercise : _exerciseList.getExercise()) {
                 _stringList.add(exercise.getName());
             }
             Thread.sleep(300);
@@ -59,18 +59,22 @@ public class ExerciseController implements Runnable {
             // Define whole list
             _viewList = activity.findViewById(R.id.workouts_CB);
 
-            // create adapter for list elements
-            _arrayAdapter = (new ArrayAdapter<>(
-                    activity.getApplicationContext(),
-                    R.layout.list_style_buttons_text,
-                    R.id.list_data,
-                    _stringList));
-        }
-        new Handler(Looper.getMainLooper()).post(() -> {
-            _viewList.setAdapter(_arrayAdapter);
-            _arrayAdapter.notifyDataSetChanged();
 
-        });
+//            // create adapter for list elements
+//            _arrayAdapter = (new ArrayAdapter<>(
+//                    activity.getApplicationContext(),
+//                    R.layout.list_style_buttons_text,
+//                    R.id.list_data,
+//                    _stringList));
+            ExerciseAdapter adapter = new ExerciseAdapter(activity,
+                    R.layout.list_style_buttons_text, _exerciseList.getExercise());
+
+            new Handler(Looper.getMainLooper()).post(() -> {
+                _viewList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            });
+        }
     }
 
     /**Getter Functions
@@ -88,6 +92,30 @@ public class ExerciseController implements Runnable {
                 URLData.EQUIPMENT.getData() + URLData.QUERY_DEFAULT.getData()),
                 SimpleList.class);
     }
+
+    public static void saveExercise(Context context, Exercise exercise) throws IOException {
+        Log.d("Exercise Controller:"," Saving file");
+        // Get Files directory, and the new file name
+        File file = new File(context.getFilesDir(), exercise.getId());
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(exercise.getExercise());
+        bufferedWriter.close();
+    }
+
+    public static Exercise loadExercise(Context context, Exercise exercise) throws IOException {
+        Log.d("Exercise Controller: ", "Loading file");
+        File file = new File(context.getFilesDir(), exercise.getId());
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        return g.fromJson(bufferedReader,Exercise.class);
+    }
+
+    public static void clearExercise(Context context, String id) {
+        context.deleteFile(id);
+    }
+
+
     /**
      * Method that makes a connection to an API
      * @param url-made custom from
@@ -119,7 +147,7 @@ public class ExerciseController implements Runnable {
         -exercise_db contains all exercises, pages of them
 
         Todo: Process multiple pages from one category.
-        Todo: Pass in the value that selects the category from an onclick event
+        DONE: Pass in the value that selects the category from an onclick event
         Todo: Use given pictures from muscle category
         Todo: Process youtube links, and see if most exercises have them.
 

@@ -1,7 +1,11 @@
 package exerciseData.gymology;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +14,8 @@ import java.util.List;
  * Purpose: To provide an exercise object that includes all info on said exercise.
  */
 public class Exercise {
-    private int id;
-    private int category;
+    private String id;
+    private String category;
     private String description;
     private String name;
     // Values below will need to be retrieved.
@@ -39,11 +43,11 @@ public class Exercise {
      * Getter and Setter Methods
      *
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public int getCategory() {
+    public String  getCategory() {
         return category;
     }
 
@@ -77,6 +81,11 @@ public class Exercise {
 
     public void setEquipmentList(List<String> equipment) {
         this.equipmentList = equipment;
+    }
+
+    public String getExercise() {
+        Gson g = new Gson();
+        return g.toJson(this);
     }
 
     @Override

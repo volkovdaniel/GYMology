@@ -27,7 +27,8 @@ package exerciseData.gymology;//package hyatt;
 //     */
 //    public static void displayWorkouts() {
         /*
-        TODO: Store exercises as an id, and call ExerciseController to retrieve exercise infoby ID
+        DONE: Stored exercises by id, as an exercise object all inclusive
+        TODO: Call ExerciseController to retrieve exercise infoby ID
         TODO: Workout json would include: Type, ExercisesList(id, name), (Saved Preferences?)
          */
 //        try {

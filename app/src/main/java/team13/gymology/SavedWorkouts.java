@@ -24,6 +24,8 @@ public class SavedWorkouts extends AppCompatActivity {
 
         retrieveWgerAPI(new WeakReference<>(this));
 
+
+
     }
     private void retrieveWgerAPI(WeakReference<Activity> weakActivity) {
         // Create  and start thread
