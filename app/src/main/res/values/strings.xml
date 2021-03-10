@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">GYMology</string>
-
+    <string name="saved_workouts">Saved Workouts</string>
+    <string name="menu">Menu</string>
+    <string name="start_workout">Begin Workout</string>
+    <string name="add_new_workout">Add New Workout</string>
+    <string name="weight_label">Weight:</string>
+    <string name="reps_label">Reps:</string>
+    <string name="time_label">Time:</string>
+    <string name="stopwatch">Stopwatch</string>
+    <string name="save_set">Save Set</string>
+    <string name="log_exercise">Log Exercise</string>
+    <string name="stats">My Statistics</string>
 </resources>
