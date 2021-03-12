@@ -11,9 +11,9 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:background="#C2D0DC"
-        android:text="(Exercise Name)"
+        android:background="@drawable/gradient"
         android:gravity="center"
+        android:text="(Exercise Name)"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
 
     <EditText
         android:id="@+id/timeLabel"
-        android:layout_width="116dp"
+        android:layout_width="106dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -75,7 +75,7 @@
         android:layout_width="106dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/light_gray"
+        android:background="@color/gray"
         android:gravity="center"
         android:hint="50"
         android:textSize="24sp"
@@ -86,7 +86,7 @@
         android:id="@+id/input_reps"
         android:layout_width="106dp"
         android:layout_height="50dp"
-        android:background="@color/light_gray"
+        android:background="@color/gray"
         android:gravity="center"
         android:hint="12"
         android:textSize="24sp"
@@ -99,7 +99,7 @@
         android:layout_width="106dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:background="@color/light_gray"
+        android:background="@color/gray"
         android:gravity="center"
         android:hint="HH:MM:SS"
         android:textSize="18sp"
@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/timeLabel" />
 
     <TableRow
-        android:id="@+id/tableRow"
+        android:id="@+id/tableRowSet1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="16dp"
@@ -157,7 +157,7 @@
         android:background="#E6EFCE6C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableRow" />
+        app:layout_constraintTop_toBottomOf="@+id/tableRowSet1" />
 
     <Button
         android:id="@+id/button"

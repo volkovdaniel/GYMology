@@ -1,6 +1,7 @@
 package team13.gymology;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -12,7 +13,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedWorkouts extends AppCompatActivity {
+public class SavedWorkouts extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,5 @@ public class SavedWorkouts extends AppCompatActivity {
         t1.start();
 
     }
-
 
 }
