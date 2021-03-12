@@ -4,24 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0F1E77"
     tools:context=".SavedWorkouts">
-
-    <ListView
-        android:id="@+id/list_stats"
-        android:layout_width="348dp"
-        android:layout_height="472dp"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_savedWO" />
-
-
 
     <TextView
         android:id="@+id/label_savedWO"
-        android:layout_width="332dp"
+        android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:background="#C2D0DC"
         android:text="@string/saved_workouts"
         android:textAlignment="center"
         android:textSize="30sp"
@@ -29,9 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ListView
+        android:id="@+id/list_stats"
+        android:layout_width="350dp"
+        android:layout_height="550dp"
+        android:background="#E6EFCE6C"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_savedWO" />
+
+
     <Button
         android:id="@+id/btn_add_newWO"
-        android:layout_width="332dp"
+        android:layout_width="350dp"
         android:layout_height="35dp"
         android:text="@string/add_new_workout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +42,7 @@
 
     <Button
         android:id="@+id/btn_startWO"
-        android:layout_width="332dp"
+        android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="@string/start_workout"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -48,6 +50,8 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_add_newWO" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

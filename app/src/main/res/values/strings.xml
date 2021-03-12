@@ -11,4 +11,13 @@
     <string name="save_set">Save Set</string>
     <string name="log_exercise">Log Exercise</string>
     <string name="stats">My Statistics</string>
+    <string name="log_workout">Log Workout</string>
+    <string name="edit_workout">Edit Workout Routine</string>
+    <string name="create_workout">Create Workout</string>
+    <string name="name_label">Name:</string>
+    <string name="type_label">Type:</string>
+    <string name="radio_weights">Weights</string>
+    <string name="radio_cardio">Cardio</string>
+    <string name="radio_HIIT">HIIT</string>
+    <string name="save_new">Save New Workout</string>
 </resources>
