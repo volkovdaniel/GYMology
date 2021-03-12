@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import team13.gymology.R;
+
+public class BMI extends AppCompatActivity {
 
     private EditText height;
     private EditText weight;
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.Statistics);
+        setContentView(R.layout.statistics);
         height = (EditText) findViewById(R.id.height);
         weight = (EditText) findViewById(R.id.weight);
         result = (TextView) findViewById(R.id.result);
@@ -40,21 +42,21 @@ public class MainActivity extends AppCompatActivity {
         String bmiLabel = "";
 
         if (Float.compare(bmi, 15f) <= 0) {
-            bmiLabel = getString(R.string.very_severely_underweight);
+            //bmiLabel = getString(R.string.very_severely_underweight);
         } else if (Float.compare(bmi, 15f) > 0  &&  Float.compare(bmi, 16f) <= 0) {
-            bmiLabel = getString(R.string.severely_underweight);
+            //bmiLabel = getString(R.string.severely_underweight);
         } else if (Float.compare(bmi, 16f) > 0  &&  Float.compare(bmi, 18.5f) <= 0) {
-            bmiLabel = getString(R.string.underweight);
+           // bmiLabel = getString(R.string.underweight);
         } else if (Float.compare(bmi, 18.5f) > 0  &&  Float.compare(bmi, 25f) <= 0) {
-            bmiLabel = getString(R.string.normal);
+           // bmiLabel = getString(R.string.normal);
         } else if (Float.compare(bmi, 25f) > 0  &&  Float.compare(bmi, 30f) <= 0) {
-            bmiLabel = getString(R.string.overweight);
+            //bmiLabel = getString(R.string.overweight);
         } else if (Float.compare(bmi, 30f) > 0  &&  Float.compare(bmi, 35f) <= 0) {
-            bmiLabel = getString(R.string.obese_class_i);
+            //bmiLabel = getString(R.string.obese_class_i);
         } else if (Float.compare(bmi, 35f) > 0  &&  Float.compare(bmi, 40f) <= 0) {
-            bmiLabel = getString(R.string.obese_class_ii);
+            //bmiLabel = getString(R.string.obese_class_ii);
         } else {
-            bmiLabel = getString(R.string.obese_class_iii);
+           // bmiLabel = getString(R.string.obese_class_iii);
         }
 
         bmiLabel = bmi + "\n\n" + bmiLabel;
