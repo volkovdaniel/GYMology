@@ -57,7 +57,7 @@ public class ExerciseController implements Runnable {
         }
         if (activity != null) {
             // Define whole list
-            _viewList = activity.findViewById(R.id.list_stats);
+            _viewList = activity.findViewById(R.id.list_DB_exercises);
 
 
 //            // create adapter for list elements

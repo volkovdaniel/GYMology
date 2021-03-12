@@ -22,4 +22,13 @@
     <string name="radio_HIIT">HIIT</string>
     <string name="save_new">Save New Workout</string>
     <string name="calculate_BMI">Calculate BMI:</string>
+    <string name="settings">My Settings</string>
+    <string name="age_label">Age:</string>
+    <string name="calories_label">Estimate Calories?</string>
+    <string name="water_label">Water Reminders?</string>
+    <string name="meal_label">Meal Reminders?</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="stats_button">View Stats</string>
+    <string name="badges_button">View Badges</string>
+    <string name="database_label">Exercises Database</string>
 </resources>
