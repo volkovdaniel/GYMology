@@ -4,6 +4,7 @@
     <string name="menu">Menu</string>
     <string name="start_workout">Begin Workout</string>
     <string name="add_new_workout">Add New Workout</string>
+    <string name="height_label">Height:</string>
     <string name="weight_label">Weight:</string>
     <string name="reps_label">Reps:</string>
     <string name="time_label">Time:</string>
@@ -20,4 +21,5 @@
     <string name="radio_cardio">Cardio</string>
     <string name="radio_HIIT">HIIT</string>
     <string name="save_new">Save New Workout</string>
+    <string name="calculate_BMI">Calculate BMI:</string>
 </resources>
