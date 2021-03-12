@@ -10,9 +10,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
-
 import circualreveal.animation.SupportAnimator;
 import circualreveal.animation.ViewAnimationUtils;
 import circualreveal.widget.RevealFrameLayout;
