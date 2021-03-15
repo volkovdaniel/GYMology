@@ -35,6 +35,7 @@ public class ExerciseController implements Runnable {
     public ExerciseController(ExerciseList exercise) {
         this._exerciseList = exercise;
     }
+
     public ExerciseController(WeakReference<Activity> activity, String type) {
         this.activity = activity.get();
         this._stringList = new ArrayList<>();
