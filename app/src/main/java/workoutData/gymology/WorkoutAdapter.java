@@ -69,7 +69,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
 
             holder._addButton.setOnClickListener(view -> {
                 try {
-                    // getItem is essentially accessing the current exercise in the list
+                    // getItem is essentially accessing the current workout in the list
                     WorkoutController.saveWorkout(actContext, getItem(location));
                     Toast.makeText(actContext,
                             String.format("Saved: %s", getItem(location).getName()), Toast.LENGTH_SHORT).show();
