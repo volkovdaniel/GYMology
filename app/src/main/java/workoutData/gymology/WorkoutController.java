@@ -1,43 +1,44 @@
 package workoutData.gymology;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Looper;
+
+import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
 import exerciseData.gymology.Exercise;
-import exerciseData.gymology.ExerciseAdapter;
-import exerciseData.gymology.ExerciseList;
-import team13.gymology.R;
 
+
+import java.io.*;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class WorkoutController {
-    private Map<String,Workout> _workout_DB;
+    private List<String> _stringList;
+    private Activity activity;
+    private List<Workout> _nameList;
+    private WorkoutList _workout_DB;
     private Workout _workout;
-    private final String TAG = "Workout Controller: ";
+    private final static String TAG = "Workout Controller: ";
 
     private final static Gson g = new Gson();
 
-    public WorkoutController() {
-        _workout_DB = new HashMap<>();
+    public WorkoutController(WorkoutList workout) {
+        _workout_DB = workout;
         _workout = new Workout();
     }
+    public WorkoutController(WeakReference<Activity> activity) {
+        this.activity = activity.get();
+        this._stringList = new ArrayList<>();
+        this._nameList = new ArrayList<>();
+    }
 
-//    public WorkoutController(WeakReference<Activity> activity, String type) {
-//        this.activity = activity.get();
-//        this._stringList = new ArrayList<>();
-//        this._nameList = new ArrayList<>();
-//    }
-//
+
 //    @Override
 //    public void run() {
 //        Log.d(TAG,
-//                "run: Getting Wger API data");
+//                "run: Getting Workout DataBase");
 //        try {
 //            // Retrieve Data
 //            _workout_DB = displayWorkouts();
@@ -69,6 +70,27 @@ public class WorkoutController {
 //            });
 //        }
 //    } // End of run()
+
+    public static Workout loadWorkout(Context context, Workout workout) throws IOException {
+        Log.d(TAG, "Loading Workout file");
+        File file = new File(context.getFilesDir(), workout.get_name());
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        return g.fromJson(bufferedReader,Workout.class);
+    }
+
+    public static void saveWorkout(Context context, Workout workout) throws IOException {
+        Log.d(TAG," Saving Workout file");
+        // Get Files directory, and the new file name
+        File file = new File(context.getFilesDir(), workout.get_name());
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(g.toJson(workout));
+
+        System.out.format(g.toJson(workout));
+
+        bufferedWriter.close();
+    }
 //
 //    public Map<String,Workout> displayWorkouts() {
 //

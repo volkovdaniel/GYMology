@@ -9,10 +9,16 @@ public class Workout {
     private Map<String, Exercise> _workoutExercises;
     private Exercise _exercise;
     private String _name;
+    private String _completed;
+    private String _type;
 
     public Workout() {
-        _workoutExercises = new HashMap<>();
-        _exercise = new Exercise();
+
+        this._workoutExercises = new HashMap<>();
+        this._exercise = new Exercise();
+        this._name = _name;
+        this._completed = "";
+        this._type = "";
     }
 
     public Map<String, Exercise> get_workoutMap() {
