@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77"
+    android:background="#003566"
     tools:context=".SavedWorkouts">
 
     <TextView
@@ -24,7 +24,7 @@
         android:id="@+id/list_DB_exercises"
         android:layout_width="350dp"
         android:layout_height="500dp"
-        android:background="#E6EFCE6C"
+        android:background="#EECF6D"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +36,7 @@
         android:layout_width="350dp"
         android:layout_height="35dp"
         android:text="@string/add_new_workout"
+        android:background="#001d3d"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_DB_exercises" />
@@ -45,6 +46,7 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:text="@string/start_workout"
+        android:background="#001d3d"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -58,6 +60,7 @@
         android:layout_alignParentBottom="true"
         android:onClick="showClose"
         android:text="@string/menu"
+        android:background="#001d3d"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

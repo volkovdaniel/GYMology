@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77"
+    android:background="#003566"
     tools:context=".MainActivity">
 
     <Button
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
-        android:background="#8E9398"
+        android:background="#001d3d"
         android:onClick="@string/saved_workouts"
         android:text="@string/saved_workouts"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,13 +32,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="350dp"
-        android:layout_height="275dp"
-        android:layout_marginBottom="88dp"
-        android:background="#E6EFCE6C"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="16dp"
+        android:background="#E9b872"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainLogo" />
 
     <Button
         android:id="@+id/button"
@@ -47,6 +47,7 @@
         android:layout_alignParentBottom="true"
         android:onClick="showClose"
         android:text="@string/menu"
+        android:background="#001d3d"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
