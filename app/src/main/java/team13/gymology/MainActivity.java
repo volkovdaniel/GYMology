@@ -29,17 +29,17 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
+ //       findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
 
         // Testing radial menu
         radialMenuView = findViewById(R.id.radial_menu_view);
         button = findViewById(R.id.button);
 
-        MenuItemView itemOne = new MenuItemView(this ,"Soru Sor",R.drawable.ic_profile_white, R.color.orange);
-        MenuItemView itemTwo = new MenuItemView(this,"Arkadaşlar",R.drawable.ic_babies_calendar, R.color.green);
-        MenuItemView itemThree = new MenuItemView(this,"Galeri", R.drawable.ic_drawer_settings, R.color.vividPurple);
-        MenuItemView itemFour = new MenuItemView(this,"Naber", R.drawable.ic_blog_white, R.color.darkRed);
-        MenuItemView itemFive = new MenuItemView(this, "Selam", R.drawable.ic_profile_white, R.color.darkGreen2);
+        MenuItemView itemOne = new MenuItemView(this ,"Profile",R.drawable.ic_person, R.color.grayWeb);
+        MenuItemView itemTwo = new MenuItemView(this,"Workouts",R.drawable.ic_fitness, R.color.prussianBlue);
+        MenuItemView itemThree = new MenuItemView(this,"Home", R.drawable.ic_home, R.color.grayWeb);
+        MenuItemView itemFour = new MenuItemView(this,"Stats", R.drawable.ic_stats, R.color.prussianBlue);
+        MenuItemView itemFive = new MenuItemView(this, "Calendar", R.drawable.ic_calendar, R.color.grayWeb);
         ArrayList<MenuItemView> items = new ArrayList<>();
         items.add(itemOne);
         items.add(itemTwo);
@@ -57,7 +57,16 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
 
     @Override
     public void onItemClicked(int i) {
-        Toast.makeText(this, "Item clicked - " + String.valueOf(i), Toast.LENGTH_SHORT).show();
+        if (i==0){
+            findViewById(R.id.btn_menu).setOnClickListener(v -> savedWorkouts());
+        }
+        else if (i==1) {
+            findViewById(R.id.btn_menu).setOnClickListener(v -> savedWorkouts());
+        }
+        else if (i==3) {
+            findViewById(R.id.btn_menu).setOnClickListener(v -> statistics());
+        }
+        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
     }
     // end test
 
@@ -66,5 +75,9 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         startActivity(new Intent(this, SavedWorkouts.class));
     }
 
+    public void statistics() {
+        // Start Activity
+        startActivity(new Intent(this, Statistics.class));
+    }
 
 }

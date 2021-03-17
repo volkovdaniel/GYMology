@@ -60,7 +60,6 @@
         android:layout_alignParentBottom="true"
         android:onClick="showClose"
         android:text="@string/menu"
-        android:background="#001d3d"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

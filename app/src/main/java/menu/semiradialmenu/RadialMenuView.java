@@ -102,9 +102,9 @@ public class RadialMenuView extends RevealFrameLayout {
             rootView.addView(new SliceView(getContext(), innerCircleColor, 0, -180, true));
         }
 
-        if (menuItemViews.size() > 3) {
-            allowTitle = false;
-        }
+//        if (menuItemViews.size() > 3) {
+//            allowTitle = false;
+//        }
 
         new Handler().postDelayed(new Runnable() {
             @Override

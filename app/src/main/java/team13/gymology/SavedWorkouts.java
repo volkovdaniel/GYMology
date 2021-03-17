@@ -7,15 +7,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import exerciseData.gymology.ExerciseController;
+import menu.semiradialmenu.RadialMenuView;
 import workoutData.gymology.WorkoutController;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedWorkouts extends AppCompatActivity  {
+public class SavedWorkouts extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
+    RadialMenuView radialMenuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,5 +48,11 @@ public class SavedWorkouts extends AppCompatActivity  {
 //        t1.start();
 //
 //    }
+    public void showClose(View view) {
+    radialMenuView.show();
+}
 
+    public void onItemClicked(int i) {
+        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+    }
 }
