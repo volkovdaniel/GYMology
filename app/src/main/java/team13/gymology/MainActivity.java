@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         setContentView(R.layout.activity_main);
 
  //       findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
+//        radialMenuView.createRadialMenu();
 
         // Testing radial menu
         radialMenuView = findViewById(R.id.radial_menu_view);
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         MenuItemView itemOne = new MenuItemView(this ,"Profile",R.drawable.ic_person, R.color.grayWeb);
         MenuItemView itemTwo = new MenuItemView(this,"Workouts",R.drawable.ic_fitness, R.color.prussianBlue);
         MenuItemView itemThree = new MenuItemView(this,"Home", R.drawable.ic_home, R.color.grayWeb);
-        MenuItemView itemFour = new MenuItemView(this,"Stats", R.drawable.ic_stats, R.color.prussianBlue);
+        MenuItemView itemFour = new MenuItemView(this,"Stats", R.drawable.ic_stats,
+                R.color.prussianBlue);
         MenuItemView itemFive = new MenuItemView(this, "Calendar", R.drawable.ic_calendar, R.color.grayWeb);
         ArrayList<MenuItemView> items = new ArrayList<>();
         items.add(itemOne);
@@ -52,20 +54,9 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         items.add(itemFive);
         radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true,
                 R.color.white).setOffset(10).build();
-//        ArrayList<View> menuViews = getRootView().getFocusables((R.id.btn_menu));
-//        if (radialMenuView.isOpen) {
-//            for (View menu : menuViews) {
-//                menu.setOnClickListener(v -> {
-//                    Toast.makeText(getContext(),
-//                            ":::DO IT:::::",
-//                            Toast.LENGTH_SHORT).show();
-//                });
-//            }
-//        }
-        // end test
-    }
+    } // end onCreate()
 
-    // Testing radial menu
+    // Show that radial menu
     public void showClose(View view) {
         radialMenuView.show();
     }
@@ -74,27 +65,29 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
     public void onItemClicked(int i) {
         switch (i) {
             case 0:
-                savedWorkouts(new WeakReference<>(this));
+                // Profile Screen
+                startActivity(new Intent(this, Profile.class));
                 break;
             case 1:
-                savedWorkouts(new WeakReference<>(this));
+                // Workouts DB Screen
+                startActivity(new Intent(this, SavedWorkouts.class));
+                break;
+                // Home Screen
+            case 2:
+                Toast.makeText(this, "Welcome Home", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                // Statistics
+                startActivity(new Intent(this, Statistics.class));
+                break;
+            case 4:
+                // Calendar Screen
+                startActivity(new Intent(this, Calendar.class));
                 break;
         }
-    }
-//     end test
-
-    public void savedWorkouts(WeakReference<Activity> weakActivity) {
-        // Start Activity
-        startActivity(new Intent(this, SavedWorkouts.class));
-//        ExerciseController exercise = new ExerciseController(weakActivity, "category");
-//        Thread t1 = new Thread(exercise);
-//        t1.start();
-    }
+    } // end OnItemClicked()
 
 
-    public void statistics() {
-        // Start Activity
-        startActivity(new Intent(this, Statistics.class));
-    }
+
 
 }

@@ -2,15 +2,19 @@ package menu.semiradialmenu;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Bundle;
 import android.os.Handler;
 
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import circualreveal.animation.SupportAnimator;
 import circualreveal.animation.ViewAnimationUtils;
@@ -34,6 +38,9 @@ public class RadialMenuView extends RevealFrameLayout {
     private SliceView v1;
     private FrameLayout rootView;
     private int offset = 0;
+
+    RadialMenuView radialMenuView;
+    Button button;
 
     public RadialMenuView(Context context) {
         super(context);
@@ -70,6 +77,30 @@ public class RadialMenuView extends RevealFrameLayout {
         Utils.getInstance(getContext()).setCenterView(v);
         return this;
     }
+
+//    public void createRadialMenu() {
+//        // Testing radial menu
+//        radialMenuView = findViewById(R.id.radial_menu_view);
+//        button = findViewById(R.id.button);
+//
+//        MenuItemView itemOne = new MenuItemView(getContext() ,"Profile",R.drawable.ic_person,
+//                R.color.grayWeb);
+//        MenuItemView itemTwo = new MenuItemView(getContext(),"Workouts",R.drawable.ic_fitness,
+//                R.color.prussianBlue);
+//        MenuItemView itemThree = new MenuItemView(getContext(),"Home", R.drawable.ic_home, R.color.grayWeb);
+//        MenuItemView itemFour = new MenuItemView(getContext(),"New", R.drawable.ic_fitness,
+//                R.color.prussianBlue);
+//        MenuItemView itemFive = new MenuItemView(getContext(), "Calendar", R.drawable.ic_calendar,
+//                R.color.grayWeb);
+//        ArrayList<MenuItemView> items = new ArrayList<>();
+//        items.add(itemOne);
+//        items.add(itemTwo);
+//        items.add(itemThree);
+//        items.add(itemFour);
+//        items.add(itemFive);
+//        radialMenuView.setListener(listener).setMenuItems(items).setCenterView(button).setInnerCircle(true,
+//                R.color.white).setOffset(10).build();
+//    }
 
     public void build() {
         utils = Utils.getInstance(getContext());

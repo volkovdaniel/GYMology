@@ -16,7 +16,7 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_workouts);
+        setContentView(R.layout.new_workout);
 
 //        Resource to add button functionality on each list item
 //        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview

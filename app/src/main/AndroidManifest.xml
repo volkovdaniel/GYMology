@@ -11,6 +11,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.GYMology">
+        <activity android:name=".LogExercise">
+        </activity>
+        <activity android:name=".BMICalculator">
+        </activity>
+        <activity android:name=".LogWorkout">
+        </activity>
+        <activity android:name=".Calendar">
+        </activity>
+        <activity android:name=".Profile">
+        </activity>
         <activity android:name=".CreateWorkout">
         </activity>
         <activity android:name=".Statistics"/>
