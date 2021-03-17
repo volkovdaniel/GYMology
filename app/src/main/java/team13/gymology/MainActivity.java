@@ -1,14 +1,18 @@
 package team13.gymology;
 
+import android.app.Activity;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 // imports for radial menu
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import exerciseData.gymology.ExerciseController;
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
 import menu.semiradialmenu.Utils;
@@ -46,7 +50,18 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         items.add(itemThree);
         items.add(itemFour);
         items.add(itemFive);
-        radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true, R.color.white).setOffset(10).build();
+        radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true,
+                R.color.white).setOffset(10).build();
+//        ArrayList<View> menuViews = getRootView().getFocusables((R.id.btn_menu));
+//        if (radialMenuView.isOpen) {
+//            for (View menu : menuViews) {
+//                menu.setOnClickListener(v -> {
+//                    Toast.makeText(getContext(),
+//                            ":::DO IT:::::",
+//                            Toast.LENGTH_SHORT).show();
+//                });
+//            }
+//        }
         // end test
     }
 
@@ -57,23 +72,25 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
 
     @Override
     public void onItemClicked(int i) {
-        if (i==0){
-            findViewById(R.id.btn_menu).setOnClickListener(v -> savedWorkouts());
+        switch (i) {
+            case 0:
+                savedWorkouts(new WeakReference<>(this));
+                break;
+            case 1:
+                savedWorkouts(new WeakReference<>(this));
+                break;
         }
-        else if (i==1) {
-            findViewById(R.id.btn_menu).setOnClickListener(v -> savedWorkouts());
-        }
-        else if (i==3) {
-            findViewById(R.id.btn_menu).setOnClickListener(v -> statistics());
-        }
-        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
     }
-    // end test
+//     end test
 
-    public void savedWorkouts() {
+    public void savedWorkouts(WeakReference<Activity> weakActivity) {
         // Start Activity
         startActivity(new Intent(this, SavedWorkouts.class));
+//        ExerciseController exercise = new ExerciseController(weakActivity, "category");
+//        Thread t1 = new Thread(exercise);
+//        t1.start();
     }
+
 
     public void statistics() {
         // Start Activity

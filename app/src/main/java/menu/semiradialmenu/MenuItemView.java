@@ -1,10 +1,6 @@
 package menu.semiradialmenu;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +23,13 @@ public class MenuItemView extends LinearLayout {
     private boolean allowTitle = true;
     private View v;
 
+    /** MenuItemView Class
+     * The LinearLayout of the Menu display on click
+     * @param context activity context
+     * @param title button title
+     * @param image button image
+     * @param color button color
+     */
     public MenuItemView(Context context, String title, int image, int color) {
         super(context);
         this.title = title;
@@ -37,7 +40,7 @@ public class MenuItemView extends LinearLayout {
 
     public MenuItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+//        init();
     }
 
     public String getTitle() {
@@ -65,19 +68,19 @@ public class MenuItemView extends LinearLayout {
     }
 
     private void init() {
+
+        // Grab the context of the radialMenuItemLayout for placing buttons
         if (v == null) {
             v = inflate(getContext(), R.layout.radial_menu_item_layout, this);
         }
 
+        // Grab each view item
         TextView tv = v.findViewById(R.id.text);
         ImageView iv = v.findViewById(R.id.image);
 
-        if (TextUtils.isEmpty(title) || !allowTitle) {
-            tv.setVisibility(View.GONE);
-        } else {
-            tv.setVisibility(View.VISIBLE);
-            tv.setText(title);
-        }
+        tv.setEnabled(allowTitle);
+        tv.setText(title);
+
         iv.setImageResource(image);
     }
 
@@ -86,17 +89,4 @@ public class MenuItemView extends LinearLayout {
         init();
     }
 
-    public void setAngleRotation(float angleRotation) {
-        this.angleRotation = angleRotation;
-        invalidate();
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        Rect clipBounds = canvas.getClipBounds();
-        canvas.save();
-        canvas.rotate(angleRotation, clipBounds.exactCenterX(), clipBounds.exactCenterY());
-        super.onDraw(canvas);
-        canvas.restore();
-    }
 }

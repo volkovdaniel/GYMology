@@ -3,6 +3,7 @@ package menu.semiradialmenu;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,7 @@ import team13.gymology.R;
 
 public class RadialMenuView extends RevealFrameLayout {
     Utils utils;
+
 
     RadialMenuListener listener;
     private int maxDistance;
@@ -87,6 +89,7 @@ public class RadialMenuView extends RevealFrameLayout {
         View v = inflate(getContext(), R.layout.radial_menu_layout, this);
         rootView = v.findViewById(R.id.root_view);
         final int sweepAngle = 180 / menuItemViews.size();
+
         int index = 1;
         for (MenuItemView view : menuItemViews) {
             if (index == 1) {
@@ -101,10 +104,6 @@ public class RadialMenuView extends RevealFrameLayout {
         if (innerCircle) {
             rootView.addView(new SliceView(getContext(), innerCircleColor, 0, -180, true));
         }
-
-//        if (menuItemViews.size() > 3) {
-//            allowTitle = false;
-//        }
 
         new Handler().postDelayed(new Runnable() {
             @Override

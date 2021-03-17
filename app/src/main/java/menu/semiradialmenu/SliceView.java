@@ -8,7 +8,11 @@ import android.graphics.RectF;
 //import android.support.v4.content.ContextCompat;
 import android.view.View;
 
+import android.widget.Toast;
 import androidx.core.content.ContextCompat;
+import team13.gymology.R;
+
+import java.util.ArrayList;
 
 public class SliceView extends View {
 
