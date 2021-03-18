@@ -25,11 +25,18 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
 
         // TODO: Dropdown menu passes in category
         retrieveWgerAPI(new WeakReference<>(this), category);
-        View save = findViewById(R.id.btn_saveNewWO);
 
-//        findViewById(R.id.btn_saveNewWO).setOnClickListener(save -> {
-//            saveWorkout(new WeakReference<Activity>(this));
-//        });
+        /*
+        Event Listeners
+         */
+
+        // Save Workout
+        findViewById(R.id.btn_saveNewWO).setOnClickListener(v ->
+                saveWorkout(new WeakReference<Activity>(this)));
+
+        // Add Exercise to Workout
+
+        // Edit
 
     }
 
@@ -47,18 +54,18 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
 
     }
 
-//    /**
-//     * Retrieve exercise database by category
-//     * @param weakActivity
-//     * @param category default "arms"
-//     */
-//    private void saveWorkout(WeakReference<Activity> weakActivity) {
-//        // Create  and start thread
-//        WorkoutController workout = new WorkoutController(weakActivity);
-//        Thread t1 = new Thread();
-//        t1.start();
-//
-//    }
+    /**
+     * Retrieve exercise database by category
+     * @param weakActivity
+     * @param category default "arms"
+     */
+    private void saveWorkout(WeakReference<Activity> weakActivity) {
+        // Create  and start thread
+        WorkoutController workout = new WorkoutController(weakActivity);
+        Thread t1 = new Thread(workout);
+        t1.start();
+
+    }
 
     public void showClose(View view) {
         radialMenuView.show();

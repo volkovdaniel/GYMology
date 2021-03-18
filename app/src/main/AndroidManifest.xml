@@ -13,9 +13,7 @@
             android:theme="@style/Theme.GYMology">
         <activity android:name=".LogExercise">
         </activity>
-        <activity android:name=".BMICalculator">
-        </activity>
-        <activity android:name=".LogWorkout">
+        <activity android:name=".WorkoutDetails">
         </activity>
         <activity android:name=".Calendar">
         </activity>
@@ -25,7 +23,7 @@
         </activity>
         <activity android:name=".Stopwatch"/>
         <activity android:name=".Statistics"/>
-        <activity android:name=".SavedWorkouts"/>
+        <activity android:name=".WorkoutDatabase"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -24,7 +24,7 @@ public class Profile extends AppCompatActivity implements RadialMenuView.RadialM
                 break;
             case 1:
                 // Workouts DB Screen
-                startActivity(new Intent(this, SavedWorkouts.class));
+                startActivity(new Intent(this, WorkoutDatabase.class));
                 break;
             // Home Screen
             case 3:
