@@ -1,10 +1,12 @@
 package team13.gymology;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import menu.semiradialmenu.RadialMenuView;
+import profile.gymology.BMI;
 
 public class Profile extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
@@ -40,5 +42,10 @@ public class Profile extends AppCompatActivity implements RadialMenuView.RadialM
                 break;
         }
 
+    }
+    // Testing layouts
+    public void bmiCalc(View view) {
+        Intent intent = new Intent(this, BMI.class);
+        startActivity(intent);
     }
 }

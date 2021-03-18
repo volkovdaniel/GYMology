@@ -20,7 +20,7 @@ public class BMI extends AppCompatActivity {
         setContentView(R.layout.statistics);
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
-        result = (TextView) findViewById(R.id.bmi_result);
+        result = findViewById(R.id.bmi_result);
     }
 
     public void calculateBMI(View v) {

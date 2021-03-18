@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import profile.gymology.BMI;
 
@@ -18,9 +16,4 @@ public class Statistics extends AppCompatActivity {
         setContentView(R.layout.statistics);
     }
 
-    // Testing layouts
-    public void bmiCalc(View view) {
-        Intent intent = new Intent(this, BMI.class);
-        startActivity(intent);
-    }
 }
