@@ -1,30 +1,20 @@
 package team13.gymology;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import exerciseData.gymology.ExerciseController;
 import menu.semiradialmenu.RadialMenuView;
-import workoutData.gymology.WorkoutController;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-
-public class SavedWorkouts extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
+public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
     RadialMenuView radialMenuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_workouts);
+        setContentView(R.layout.workout_db);
 
 //        Resource to add button functionality on each list item
 //        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
@@ -59,7 +49,7 @@ public class SavedWorkouts extends AppCompatActivity implements RadialMenuView.R
 
     // Testing screens
     public void workoutView(View view) {
-        Intent intent = new Intent(this, LogWorkout.class);
+        Intent intent = new Intent(this, WorkoutDetails.class);
         startActivity(intent);
     }
 }

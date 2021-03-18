@@ -24,9 +24,8 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
     public static class ViewHolder {
         RelativeLayout _listLayout;
         TextView _workoutData;
-        Button _addButton;
-        Button _clearButton;
-        Button _editButton;
+        CheckBox _addButton;
+//        Button _editButton;
     }
 
     @NonNull
@@ -43,9 +42,9 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             // Hold the items in each list item
             holder._listLayout = alterView.findViewById(R.id.list_layout);
             holder._workoutData = alterView.findViewById(R.id.list_data);
-            holder._editButton = alterView.findViewById(R.id.btn_edit);
+//            holder._editButton = alterView.findViewById(R.id.btn_edit);
             holder._addButton = alterView.findViewById(R.id.btn_add);
-            holder._clearButton = alterView.findViewById(R.id.btn_clear);
+//            holder._clearButton = alterView.findViewById(R.id.btn_clear);
 
 
             /*
@@ -55,37 +54,37 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
 
              */
             // Set Listeners to each button for each list item
-            holder._editButton.setOnClickListener(view -> {
-                try {
-                    // Retrieves Exercise from json file by id as an Exercise object
-                    Exercise exercise = ExerciseController.loadExercise(actContext,
-                            getItem(location));
-                    Toast.makeText(actContext,
-                            String.format("Loaded: %s", getItem(location).getName()),
-                            Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+//            holder._editButton.setOnClickListener(view -> {
+//                try {
+//                    // Retrieves Exercise from json file by id as an Exercise object
+//                    Exercise exercise = ExerciseController.loadExercise(actContext,
+//                            getItem(location));
+//                    Toast.makeText(actContext,
+//                            String.format("Loaded: %s", getItem(location).getName()),
+//                            Toast.LENGTH_SHORT).show();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
 
             holder._addButton.setOnClickListener(view -> {
-                try {
+//                try {
                 // getItem is essentially accessing the current exercise in the list
-                ExerciseController.saveExercise(actContext, getItem(location));
+//                ExerciseController.saveExercise(actContext, getItem(location));
                 Toast.makeText(actContext,
                         String.format("Saved: %s", getItem(location).getName()), Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         });
 
-            holder._clearButton.setOnClickListener(view -> {
-                    // Deletes exercise in localStorage
-                    ExerciseController.clearExercise(actContext,getItem(location).getId());
-                    Toast.makeText(actContext,getItem(location).getId(), Toast.LENGTH_SHORT).show();
-                    });
-
-            alterView.setTag(holder);
+//            holder._clearButton.setOnClickListener(view -> {
+//                    // Deletes exercise in localStorage
+//                    ExerciseController.clearExercise(actContext,getItem(location).getId());
+//                    Toast.makeText(actContext,getItem(location).getId(), Toast.LENGTH_SHORT).show();
+//                    });
+//
+//            alterView.setTag(holder);
         }
         else {
             holder = (ViewHolder)alterView.getTag();

@@ -2,6 +2,7 @@ package workoutData.gymology;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import com.google.gson.Gson;
 import exerciseData.gymology.ExerciseController;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WorkoutController {
+public class WorkoutController implements Runnable {
     // Final Static Variables
     private final static String TAG = "Workout Controller: ";
     private final static Gson g = new Gson();
@@ -39,10 +40,10 @@ public class WorkoutController {
     }
 
 
-//        @Override
-//    public void run() {
-//        Log.d(TAG,
-//                "run: Getting Workout DataBase");
+        @Override
+    public void run() {
+        Log.d(TAG,
+                "run: Getting Workout DataBase");
 //        try {
 //            // Retrieve Data
 //            _workout_DB = displayWorkouts();
@@ -73,7 +74,13 @@ public class WorkoutController {
 //
 //            });
 //        }
-//    } // End of run()
+    } // End of run()
+
+//    public void editWorkout(Workout workout) {
+//        startActivity(new Intent(this.activity.getApplicationContext(), EditWorkout.class));
+//    }
+
+
     /*
     TODO: Make Utility package containing overloaded methods like loadWorkout, and adapter View's
      */
