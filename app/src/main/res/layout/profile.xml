@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77">
+    android:background="@color/prussianBlue">
 
     <TextView
         android:id="@+id/settings"
@@ -199,12 +199,13 @@
         app:layout_constraintTop_toBottomOf="@+id/mealLabel" />
 
     <Button
-        android:id="@+id/btn_saveSet2"
+        android:id="@+id/btn_viewBMI"
         android:layout_width="158dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="30dp"
-        android:text="@string/badges_button"
+        android:onClick="bmiCalc"
+        android:text="@string/bmi_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableRowSet2" />
 

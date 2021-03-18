@@ -5,17 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77">
+    android:background="@color/prussianBlue">
 
-    <ListView
-        android:id="@+id/list_DB_exercises"
-        android:layout_width="350dp"
-        android:layout_height="600dp"
-        android:background="#E6EFCE6C"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_stats" />
 
     <TextView
         android:id="@+id/label_stats"

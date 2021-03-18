@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77">
+    android:background="@color/prussianBlue">
 
     <TextView
         android:id="@+id/createWO"
@@ -126,7 +126,7 @@
         android:id="@+id/list_exercises"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:background="#E6EFCE6C"
+        android:background="@color/jasmine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"

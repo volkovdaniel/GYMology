@@ -1,6 +1,7 @@
 package team13.gymology;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -54,5 +55,11 @@ public class SavedWorkouts extends AppCompatActivity implements RadialMenuView.R
 
     public void onItemClicked(int i) {
         Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+    }
+
+    // Testing screens
+    public void workoutView(View view) {
+        Intent intent = new Intent(this, LogWorkout.class);
+        startActivity(intent);
     }
 }

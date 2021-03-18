@@ -23,7 +23,7 @@
         android:layout_width="350dp"
         android:layout_height="300dp"
         android:layout_marginTop="16dp"
-        android:background="@color/orangeYellow"
+        android:background="@color/jasmine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_alignParentBottom="true"
         android:onClick="showClose"
         android:text="@string/menu"
-        android:background="#001d3d"
+        android:background="@color/oxfordBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
