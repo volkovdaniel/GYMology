@@ -1,7 +1,10 @@
 package team13.gymology;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class LogWorkout extends AppCompatActivity {
 
@@ -10,5 +13,11 @@ public class LogWorkout extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.workout_details);
+    }
+
+    // testing screens
+    public void exerciseView(View view) {
+        Intent intent = new Intent(this, LogExercise.class);
+        startActivity(intent);
     }
 }

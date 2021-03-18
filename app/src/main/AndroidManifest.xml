@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".CreateWorkout">
         </activity>
+        <activity android:name=".Stopwatch"/>
         <activity android:name=".Statistics"/>
         <activity android:name=".SavedWorkouts"/>
         <activity android:name=".MainActivity">

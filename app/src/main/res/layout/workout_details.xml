@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77">
+    android:background="@color/prussianBlue">
 
     <TextView
         android:id="@+id/routineName"
@@ -25,7 +25,7 @@
         android:id="@+id/routineExerciseList"
         android:layout_width="350dp"
         android:layout_height="530dp"
-        android:background="#E6EFCE6C"
+        android:background="@color/jasmine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,5 +72,14 @@
         android:layout_above="@id/button"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/test_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="exerciseView"
+        android:text="Testing"
+        app:layout_constraintEnd_toEndOf="@+id/routineExerciseList"
+        app:layout_constraintTop_toBottomOf="@+id/routineName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
