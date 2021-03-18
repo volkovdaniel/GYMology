@@ -38,4 +38,22 @@
         android:visibility="invisible"
         tools:visibility="visible" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="showClose"
+        android:text="@string/menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <menu.semiradialmenu.RadialMenuView
+        android:id="@+id/radial_menu_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </RelativeLayout>

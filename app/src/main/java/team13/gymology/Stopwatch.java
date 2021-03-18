@@ -8,10 +8,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Stopwatch extends AppCompatActivity {
+import menu.semiradialmenu.RadialMenuView;
+
+public class Stopwatch extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
+    RadialMenuView radialMenuView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,4 +52,11 @@ public class Stopwatch extends AppCompatActivity {
         pauseOffset = 0;
     }
 
+    public void showClose(View view) {
+        radialMenuView.show();
+    }
+
+    public void onItemClicked(int i) {
+        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+    }
 }

@@ -10,6 +10,8 @@ import profile.gymology.BMI;
 
 public class Profile extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
+    RadialMenuView radialMenuView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,5 +49,9 @@ public class Profile extends AppCompatActivity implements RadialMenuView.RadialM
     public void bmiCalc(View view) {
         Intent intent = new Intent(this, BMI.class);
         startActivity(intent);
+    }
+
+    public void showClose(View view) {
+        radialMenuView.show();
     }
 }

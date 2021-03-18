@@ -5,12 +5,15 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
-public class Timer extends AppCompatActivity {
+import menu.semiradialmenu.RadialMenuView;
+
+public class Timer extends AppCompatActivity implements RadialMenuView.RadialMenuListener{
 
     private static final long START_TIME_IN_MILLIS = 600000;
     private TextView mTextViewCountDown;
@@ -19,6 +22,8 @@ public class Timer extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+
+    RadialMenuView radialMenuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +85,13 @@ public class Timer extends AppCompatActivity {
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         mTextViewCountDown.setText(timeLeftFormatted);
+    }
 
+    public void showClose(View view) {
+        radialMenuView.show();
+    }
+
+    public void onItemClicked(int i) {
+        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
     }
 }

@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
-public class WorkoutDetails extends AppCompatActivity {
+import menu.semiradialmenu.RadialMenuView;
+
+public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
+    RadialMenuView radialMenuView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +23,13 @@ public class WorkoutDetails extends AppCompatActivity {
     public void exerciseView(View view) {
         Intent intent = new Intent(this, LogExercise.class);
         startActivity(intent);
+    }
+
+    public void showClose(View view) {
+        radialMenuView.show();
+    }
+
+    public void onItemClicked(int i) {
+        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
     }
 }
