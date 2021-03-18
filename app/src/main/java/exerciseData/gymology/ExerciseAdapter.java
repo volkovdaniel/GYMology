@@ -43,7 +43,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             holder._listLayout = alterView.findViewById(R.id.list_layout);
             holder._workoutData = alterView.findViewById(R.id.list_data);
 //            holder._editButton = alterView.findViewById(R.id.btn_edit);
-            holder._addButton = alterView.findViewById(R.id.btn_add);
+            holder._addButton = alterView.findViewById(R.id.cb_add);
 //            holder._clearButton = alterView.findViewById(R.id.btn_clear);
 
 
