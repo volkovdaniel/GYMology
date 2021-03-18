@@ -17,10 +17,10 @@ public class BMI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bmi_calculator);
+        setContentView(R.layout.statistics);
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
-        result = (TextView) findViewById(R.id.result);
+        result = (TextView) findViewById(R.id.bmi_result);
     }
 
     public void calculateBMI(View v) {

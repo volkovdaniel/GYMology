@@ -13,8 +13,6 @@
             android:theme="@style/Theme.GYMology">
         <activity android:name=".LogExercise">
         </activity>
-        <activity android:name=".BMICalculator">
-        </activity>
         <activity android:name=".LogWorkout">
         </activity>
         <activity android:name=".Calendar">
