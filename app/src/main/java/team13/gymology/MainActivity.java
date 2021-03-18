@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         items.add(itemFour);
         items.add(itemFive);
         radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true,
-                R.color.white).setOffset(10).build();
+                R.color.black).setOffset(10).build();
     } // end onCreate()
 
     // Show that radial menu
