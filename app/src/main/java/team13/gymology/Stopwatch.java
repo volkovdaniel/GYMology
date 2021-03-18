@@ -18,7 +18,7 @@ public class Stopwatch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stopwatch);
         chronometer = findViewById(R.id.chronometer);
-        chronometer.setFormat("Time: %s");
+        chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
