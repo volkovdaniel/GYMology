@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F1E77">
+    android:background="@color/prussianBlue">
 
     <TextView
         android:id="@+id/createWO"
@@ -42,7 +43,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:background="@color/gray"
+        android:background="@color/lightCyan"
         android:gravity="center"
         android:hint="Chest &amp; Arms"
         android:textSize="24sp"
@@ -123,14 +124,16 @@
         app:layout_constraintTop_toBottomOf="@+id/radioCardio" />
 
     <ListView
-            android:id="@+id/list_exercises"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:background="#E6EFCE6C"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dropdown_exercise_group">
+        android:id="@+id/list_exercises"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@color/grayWeb"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropdown_exercise_group">
 
     </ListView>
 

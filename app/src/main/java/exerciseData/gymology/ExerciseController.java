@@ -61,20 +61,20 @@ public class ExerciseController implements Runnable {
             _viewList = activity.findViewById(R.id.list_exercises);
 
 
-//            // create adapter for list elements
+            // create adapter for list elements
 //            _arrayAdapter = (new ArrayAdapter<>(
 //                    activity.getApplicationContext(),
 //                    R.layout.list_style_buttons_text,
 //                    R.id.list_data,
 //                    _stringList));
-//            ExerciseAdapter adapter = new ExerciseAdapter(activity,
-//                    R.layout.list_items_new_workout, _exerciseList.getExercise());
+            ExerciseAdapter adapter = new ExerciseAdapter(activity,
+                    R.layout.list_items_new_workout, _exerciseList.getExercise());
 
-//            new Handler(Looper.getMainLooper()).post(() -> {
-//                _viewList.setAdapter(adapter);
-//                adapter.notifyDataSetChanged();
+            new Handler(Looper.getMainLooper()).post(() -> {
+                _viewList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
-//            });
+            });
         }
     }
 
