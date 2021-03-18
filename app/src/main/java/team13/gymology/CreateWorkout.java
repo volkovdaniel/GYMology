@@ -7,11 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import exerciseData.gymology.ExerciseController;
 import menu.semiradialmenu.RadialMenuView;
+import workoutData.gymology.WorkoutController;
 
 import java.lang.ref.WeakReference;
 
 public class CreateWorkout extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
+    private String category = "arms";
     RadialMenuView radialMenuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,18 +23,43 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
 //        Resource to add button functionality on each list item
 //        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
 
-        retrieveWgerAPI(new WeakReference<>(this));
+        // TODO: Dropdown menu passes in category
+        retrieveWgerAPI(new WeakReference<>(this), category);
+        View save = findViewById(R.id.btn_saveNewWO);
 
-
+//        findViewById(R.id.btn_saveNewWO).setOnClickListener(save -> {
+//            saveWorkout(new WeakReference<Activity>(this));
+//        });
 
     }
-        private void retrieveWgerAPI(WeakReference<Activity> weakActivity) {
+
+
+    /**
+     * Retrieve exercise database by category
+     * @param weakActivity
+     * @param category default "arms"
+     */
+        private void retrieveWgerAPI(WeakReference<Activity> weakActivity, String category) {
         // Create  and start thread
-        ExerciseController exercise = new ExerciseController(weakActivity, "category");
+        ExerciseController exercise = new ExerciseController(weakActivity, category);
         Thread t1 = new Thread(exercise);
         t1.start();
 
     }
+
+//    /**
+//     * Retrieve exercise database by category
+//     * @param weakActivity
+//     * @param category default "arms"
+//     */
+//    private void saveWorkout(WeakReference<Activity> weakActivity) {
+//        // Create  and start thread
+//        WorkoutController workout = new WorkoutController(weakActivity);
+//        Thread t1 = new Thread();
+//        t1.start();
+//
+//    }
+
     public void showClose(View view) {
         radialMenuView.show();
     }

@@ -1,6 +1,6 @@
 package profile.gymology;
 
-public class user_profile {
+public class UserProfile {
     BMI bmi = new BMI();
     // variables are unused right now, I assume they will be used once
     // we link them to a field/box/area/whatever on oru display.
