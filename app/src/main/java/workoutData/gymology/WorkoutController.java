@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
+import exerciseData.gymology.ExerciseController;
+import exerciseData.gymology.ExerciseList;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
@@ -96,43 +98,51 @@ public class WorkoutController {
         bufferedWriter.close();
     }
 
-//    public static WorkoutList load_workout_DB(Context context) {
-//        Log.d(TAG, "Loading Workout Database");
-//
-//        // Grab the directory Saved Workouts
-//        File newDir = context.getDir("SavedWorkouts", Context.MODE_PRIVATE);
-//
-//        // Make the directory if it doesn't exist
-//        if (!newDir.exists()) {
-//            newDir.mkdirs();
-//        }
-//
-//        // Grab Type Folders
-//        String db_path = newDir.getAbsolutePath();
-//        File db_cardio = context.getDir(db_path + "/cardio", Context.MODE_PRIVATE);
-//        File db_strength = context.getDir(db_path + "/strength", Context.MODE_PRIVATE);
-//        File db_hiit = context.getDir(db_path + "/hiit", Context.MODE_PRIVATE);
-//
-//        // Make Folders if they don't exist
-//        if (!db_cardio.exists() && !db_strength.exists() && !db_hiit.exists()) {
-//            db_cardio.mkdirs();
-//            db_strength.mkdirs();
-//            db_hiit.mkdirs();
-//        }
-//
-//        //File path names
-//        db_cardio_fPath = db_cardio.getAbsolutePath();
-//        db_strength_fPath = db_strength.getAbsolutePath();
-//        db_hiit_fPath = db_hiit.getAbsolutePath();
-//
-//        //Get files in folders
-//        File[] cardioFiles = db_cardio.listFiles();
-//        File[] strengthFiles = db_cardio.listFiles();
-//        File[] hiitFiles = db_cardio.listFiles();
-//
-//        // Files, display, and add listeners
-//
-//    }
+    // Not sure if this works yet, building the save part to add workouts to ls
+    public static void load_workout_DB(Context context) throws FileNotFoundException {
+        Log.d(TAG, "Loading Workout Database");
+
+        // Grab the directory Saved Workouts
+        File newDir = context.getDir("SavedWorkouts", Context.MODE_PRIVATE);
+
+        // Make the directory if it doesn't exist
+        if (!newDir.exists()) {
+            newDir.mkdirs();
+        }
+
+        // Grab Type Folders
+        String db_path = newDir.getAbsolutePath();
+        File db_cardio = context.getDir(db_path + "/cardio", Context.MODE_PRIVATE);
+        File db_strength = context.getDir(db_path + "/strength", Context.MODE_PRIVATE);
+        File db_hiit = context.getDir(db_path + "/hiit", Context.MODE_PRIVATE);
+
+        // Make Folders if they don't exist
+        if (!db_cardio.exists() && !db_strength.exists() && !db_hiit.exists()) {
+            db_cardio.mkdirs();
+            db_strength.mkdirs();
+            db_hiit.mkdirs();
+        }
+
+        //File path names
+        db_cardio_fPath = db_cardio.getAbsolutePath();
+        db_strength_fPath = db_strength.getAbsolutePath();
+        db_hiit_fPath = db_hiit.getAbsolutePath();
+
+        //Get files in folders
+        File[] cardioFiles = db_cardio.listFiles();
+        File[] strengthFiles = db_cardio.listFiles();
+        File[] hiitFiles = db_cardio.listFiles();
+
+        // Files, display, and add listeners
+        for (int i = 0; i < cardioFiles.length; i++) {
+            FileReader fileReader = new FileReader(cardioFiles[i]);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            WorkoutList workoutList = g.fromJson(bufferedReader, WorkoutList.class);
+            new WorkoutController(workoutList);
+        }
+
+
+    }
         /*
         TODO: Make edit functions
         TODO: LogPackage, Statistics Package

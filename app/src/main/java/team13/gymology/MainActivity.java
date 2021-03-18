@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
                 break;
             case 1:
                 // Workouts DB Screen
-                startActivity(new Intent(this, SavedWorkouts.class));
+                startActivity(new Intent(this, CreateWorkout.class));
                 break;
-                // Home Screen
             case 2:
+                // Home Screen
                 Toast.makeText(this, "Welcome Home", Toast.LENGTH_SHORT).show();
                 break;
             case 3:

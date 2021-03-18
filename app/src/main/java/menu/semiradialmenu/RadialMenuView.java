@@ -163,6 +163,7 @@ public class RadialMenuView extends RevealFrameLayout {
                         if (angle <= (sweepAngle * (i + 1))) {
                             if (listener != null) {
                                 listener.onItemClicked(i);
+                                System.out.format(String.valueOf(listener));
                             }
                             break loop;
                         }

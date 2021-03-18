@@ -122,17 +122,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioCardio" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_exercises"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:background="#E6EFCE6C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dropdown_exercise_group">
+    <ListView
+            android:id="@+id/list_exercises"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:background="#E6EFCE6C"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dropdown_exercise_group">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </ListView>
 
     <Spinner
         android:id="@+id/dropdown_exercise_group"

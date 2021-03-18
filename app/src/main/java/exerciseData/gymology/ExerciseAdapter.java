@@ -40,7 +40,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             alterView = inflater.inflate(actResource, group, false);
             holder = new ViewHolder();
 
-            // Hold the items in the listview
+            // Hold the items in each list item
             holder._listLayout = alterView.findViewById(R.id.list_layout);
             holder._workoutData = alterView.findViewById(R.id.list_data);
             holder._editButton = alterView.findViewById(R.id.btn_edit);
