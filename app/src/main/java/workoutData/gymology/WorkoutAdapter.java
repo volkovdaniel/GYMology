@@ -1,16 +1,13 @@
 package workoutData.gymology;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
-import team13.gymology.Profile;
 import team13.gymology.R;
 
-import java.io.IOException;
 import java.util.List;
 
 public class WorkoutAdapter extends ArrayAdapter<Workout> {
@@ -18,17 +15,9 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
     int actResource;
 
     public WorkoutAdapter(@NonNull Context context, int resource, @NonNull List<Workout> objects) {
-        super(context,resource,objects);
+        super(context, resource, objects);
         actContext = context;
         actResource = resource;
-    }
-
-    public static class ViewHolder {
-        RelativeLayout _listLayout;
-        TextView _workoutData;
-        Button _addButton;
-        Button _clearButton;
-        Button _editButton;
     }
 
     @NonNull
@@ -63,9 +52,9 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
 //                    // Retrieves Workout from json file by id as a Workout object
 //                    Workout workout = WorkoutController.loadWorkout(actContext,
 //                            getItem(location));
-                    Toast.makeText(actContext,
-                            String.format("Loaded: %s", getItem(location).get_name()),
-                            Toast.LENGTH_SHORT).show();
+                Toast.makeText(actContext,
+                        String.format("Loaded: %s", getItem(location).get_name()),
+                        Toast.LENGTH_SHORT).show();
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
@@ -89,12 +78,19 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
 //            });
 //
 //            alterView.setTag(holder);
-        }
-        else {
-            holder = (ViewHolder)alterView.getTag();
+        } else {
+            holder = (ViewHolder) alterView.getTag();
         }
 
 //        holder._workoutData.setText(getItem(location).getName());
         return alterView;
-   }
+    }
+
+    public static class ViewHolder {
+        RelativeLayout _listLayout;
+        TextView _workoutData;
+        Button _addButton;
+        Button _clearButton;
+        Button _editButton;
+    }
 }

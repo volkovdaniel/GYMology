@@ -2,11 +2,8 @@ package workoutData.gymology;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import com.google.gson.Gson;
-import exerciseData.gymology.ExerciseController;
-import exerciseData.gymology.ExerciseList;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
@@ -39,48 +36,6 @@ public class WorkoutController implements Runnable {
         this._nameList = new ArrayList<>();
     }
 
-
-        @Override
-    public void run() {
-        Log.d(TAG,
-                "run: Getting Workout DataBase");
-//        try {
-//            // Retrieve Data
-//            _workout_DB = displayWorkouts();
-//            for (Workout workout : _workout_DB.getWorkout()) {
-//                _stringList.add(workout.get_name());
-//            }
-//            Thread.sleep(300);
-//        } catch (InterruptedException ex) {
-//            ex.printStackTrace();
-//        }
-//        if (activity != null) {
-//            // Define whole list
-//            _viewList = activity.findViewById(R.id.list_stats);
-//
-//
-////            // create adapter for list elements
-////            _arrayAdapter = (new ArrayAdapter<>(
-////                    activity.getApplicationContext(),
-////                    R.layout.list_style_buttons_text,
-////                    R.id.list_data,
-////                    _stringList));
-//            ExerciseAdapter adapter = new ExerciseAdapter(activity,
-//                    R.layout.list_style_buttons_text, _exerciseList.getExercise());
-//
-//            new Handler(Looper.getMainLooper()).post(() -> {
-//                _viewList.setAdapter(adapter);
-//                adapter.notifyDataSetChanged();
-//
-//            });
-//        }
-    } // End of run()
-
-//    public void editWorkout(Workout workout) {
-//        startActivity(new Intent(this.activity.getApplicationContext(), EditWorkout.class));
-//    }
-
-
     /*
     TODO: Make Utility package containing overloaded methods like loadWorkout, and adapter View's
      */
@@ -91,6 +46,10 @@ public class WorkoutController implements Runnable {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         return g.fromJson(bufferedReader, Workout.class);
     }
+
+//    public void editWorkout(Workout workout) {
+//        startActivity(new Intent(this.activity.getApplicationContext(), EditWorkout.class));
+//    }
 
     public static void saveWorkout(Context context, Workout workout) throws IOException {
         Log.d(TAG, " Saving Workout file");
@@ -150,17 +109,6 @@ public class WorkoutController implements Runnable {
 
 
     }
-        /*
-        TODO: Make edit functions
-        TODO: LogPackage, Statistics Package
-         */
-//    public List<Workout> displayWorkouts() {
-//        //Load Workout
-//        _workout_DB
-//
-//
-//    }
-
 
     public static void displayWorkoutByType(String type) {
         switch (type) {
@@ -182,4 +130,50 @@ public class WorkoutController implements Runnable {
 
 
     }
+        /*
+        TODO: Make edit functions
+        TODO: LogPackage, Statistics Package
+         */
+//    public List<Workout> displayWorkouts() {
+//        //Load Workout
+//        _workout_DB
+//
+//
+//    }
+
+    @Override
+    public void run() {
+        Log.d(TAG,
+                "run: Getting Workout DataBase");
+//        try {
+//            // Retrieve Data
+//            _workout_DB = displayWorkouts();
+//            for (Workout workout : _workout_DB.getWorkout()) {
+//                _stringList.add(workout.get_name());
+//            }
+//            Thread.sleep(300);
+//        } catch (InterruptedException ex) {
+//            ex.printStackTrace();
+//        }
+//        if (activity != null) {
+//            // Define whole list
+//            _viewList = activity.findViewById(R.id.list_stats);
+//
+//
+////            // create adapter for list elements
+////            _arrayAdapter = (new ArrayAdapter<>(
+////                    activity.getApplicationContext(),
+////                    R.layout.list_style_buttons_text,
+////                    R.id.list_data,
+////                    _stringList));
+//            ExerciseAdapter adapter = new ExerciseAdapter(activity,
+//                    R.layout.list_style_buttons_text, _exerciseList.getExercise());
+//
+//            new Handler(Looper.getMainLooper()).post(() -> {
+//                _viewList.setAdapter(adapter);
+//                adapter.notifyDataSetChanged();
+//
+//            });
+//        }
+    } // End of run()
 }

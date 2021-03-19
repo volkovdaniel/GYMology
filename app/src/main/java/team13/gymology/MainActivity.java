@@ -1,21 +1,15 @@
 package team13.gymology;
 
-import android.app.Activity;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-
-// imports for radial menu
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import exerciseData.gymology.ExerciseController;
+import androidx.appcompat.app.AppCompatActivity;
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
-import menu.semiradialmenu.Utils;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
@@ -33,17 +27,17 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
- //       findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
+        //       findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
 //        radialMenuView.createRadialMenu();
 
         // Testing radial menu
         radialMenuView = findViewById(R.id.radial_menu_view);
         button = findViewById(R.id.button);
 
-        MenuItemView itemOne = new MenuItemView(this ,"Profile",R.drawable.ic_person, R.color.grayWeb);
-        MenuItemView itemTwo = new MenuItemView(this,"Workouts",R.drawable.ic_fitness, R.color.prussianBlue);
-        MenuItemView itemThree = new MenuItemView(this,"Home", R.drawable.ic_home, R.color.grayWeb);
-        MenuItemView itemFour = new MenuItemView(this,"Stats", R.drawable.ic_stats,
+        MenuItemView itemOne = new MenuItemView(this, "Profile", R.drawable.ic_person, R.color.grayWeb);
+        MenuItemView itemTwo = new MenuItemView(this, "Workouts", R.drawable.ic_fitness, R.color.prussianBlue);
+        MenuItemView itemThree = new MenuItemView(this, "Home", R.drawable.ic_home, R.color.grayWeb);
+        MenuItemView itemFour = new MenuItemView(this, "Stats", R.drawable.ic_stats,
                 R.color.prussianBlue);
         MenuItemView itemFive = new MenuItemView(this, "Calendar", R.drawable.ic_calendar, R.color.grayWeb);
         ArrayList<MenuItemView> items = new ArrayList<>();
@@ -86,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
                 break;
         }
     } // end OnItemClicked()
-
-
 
 
 }

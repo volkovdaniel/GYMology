@@ -1,16 +1,16 @@
 package team13.gymology;
 
 import android.content.Intent;
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
 import menu.semiradialmenu.RadialMenuView;
 
 public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
     RadialMenuView radialMenuView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +23,9 @@ public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView
 //        retrieveWorkout_DB(new WeakReference<>(this));
 
 
-
     }
-//    private void retrieveWgerAPI(WeakReference<Activity> weakActivity) {
+
+    //    private void retrieveWgerAPI(WeakReference<Activity> weakActivity) {
 //        // Create  and start thread
 //        ExerciseController exercise = new ExerciseController(weakActivity, "category");
 //        Thread t1 = new Thread(exercise);
@@ -40,8 +40,8 @@ public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView
 //
 //    }
     public void showClose(View view) {
-    radialMenuView.show();
-}
+        radialMenuView.show();
+    }
 
     public void onItemClicked(int i) {
         Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();

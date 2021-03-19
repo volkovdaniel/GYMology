@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class SimpleList {
     @SerializedName("results")
-    private List<ExtraItems> listItems;
+    private final List<ExtraItems> listItems;
 
     public SimpleList() {
         this.listItems = new ArrayList<>();

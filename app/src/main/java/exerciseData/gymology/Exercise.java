@@ -1,16 +1,14 @@
 package exerciseData.gymology;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 
-/** Exercise
+/**
+ * Exercise
  * Purpose: To provide an exercise object that includes all info on said exercise.
  */
 public class Exercise {
@@ -41,13 +39,12 @@ public class Exercise {
 
     /**
      * Getter and Setter Methods
-     *
      */
     public String getId() {
         return id;
     }
 
-    public String  getCategory() {
+    public String getCategory() {
         return category;
     }
 

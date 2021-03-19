@@ -5,16 +5,14 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import menu.semiradialmenu.RadialMenuView;
 
 public class Stopwatch extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
+    RadialMenuView radialMenuView;
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
-    RadialMenuView radialMenuView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +31,7 @@ public class Stopwatch extends AppCompatActivity implements RadialMenuView.Radia
             }
         });
     }
+
     public void startChronometer(View v) {
         if (!running) {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
@@ -40,6 +39,7 @@ public class Stopwatch extends AppCompatActivity implements RadialMenuView.Radia
             running = true;
         }
     }
+
     public void pauseChronometer(View v) {
         if (running) {
             chronometer.stop();
@@ -47,6 +47,7 @@ public class Stopwatch extends AppCompatActivity implements RadialMenuView.Radia
             running = false;
         }
     }
+
     public void resetChronometer(View v) {
         chronometer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;

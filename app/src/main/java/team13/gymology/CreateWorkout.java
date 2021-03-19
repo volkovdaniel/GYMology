@@ -1,10 +1,10 @@
 package team13.gymology;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import exerciseData.gymology.ExerciseController;
 import menu.semiradialmenu.RadialMenuView;
 import workoutData.gymology.WorkoutController;
@@ -13,8 +13,9 @@ import java.lang.ref.WeakReference;
 
 public class CreateWorkout extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
-    private String category = "arms";
+    private final String category = "arms";
     RadialMenuView radialMenuView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,19 +35,41 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
         findViewById(R.id.btn_saveNewWO).setOnClickListener(v ->
                 saveWorkout(new WeakReference<Activity>(this)));
 
-        // Add Exercise to Workout
-
-        // Edit
-
+        // Radio Button Workout Types
+        View weights = findViewById(R.id.radioWeights);
+        View cardio = findViewById(R.id.radioCardio);
+        View hiit = findViewById(R.id.radioHIIT);
+        weights.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            /**
+             * Called when the focus state of a view has changed.
+             *
+             * @param v        The view whose state has changed.
+             * @param hasFocus The new focus state of v.
+             */
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Toast.makeText(v.getContext(),
+                            String.format("Click ON"),
+                            Toast.LENGTH_SHORT).show();
+                    System.out.println("Click On");
+                } else {
+                    Toast.makeText(v.getContext(),
+                            String.format("Click OFF"),
+                            Toast.LENGTH_SHORT).show();
+                    System.out.println("Click OFF");
+                }
+            }
+        });
     }
-
 
     /**
      * Retrieve exercise database by category
+     *
      * @param weakActivity
-     * @param category default "arms"
+     * @param category     default "arms"
      */
-        private void retrieveWgerAPI(WeakReference<Activity> weakActivity, String category) {
+    private void retrieveWgerAPI(WeakReference<Activity> weakActivity, String category) {
         // Create  and start thread
         ExerciseController exercise = new ExerciseController(weakActivity, category);
         Thread t1 = new Thread(exercise);
@@ -54,11 +77,6 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
 
     }
 
-    /**
-     * Retrieve exercise database by category
-     * @param weakActivity
-     * @param category default "arms"
-     */
     private void saveWorkout(WeakReference<Activity> weakActivity) {
         // Create  and start thread
         WorkoutController workout = new WorkoutController(weakActivity);

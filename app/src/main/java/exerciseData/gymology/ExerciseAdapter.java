@@ -8,7 +8,6 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import team13.gymology.R;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ExerciseAdapter extends ArrayAdapter<Exercise> {
@@ -16,16 +15,9 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
     int actResource;
 
     public ExerciseAdapter(@NonNull Context context, int resource, @NonNull List<Exercise> objects) {
-        super(context,resource,objects);
+        super(context, resource, objects);
         actContext = context;
         actResource = resource;
-    }
-
-    public static class ViewHolder {
-        RelativeLayout _listLayout;
-        TextView _workoutData;
-        CheckBox _addButton;
-//        Button _editButton;
     }
 
     @NonNull
@@ -67,16 +59,35 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
 //                }
 //            });
 
-            holder._addButton.setOnClickListener(view -> {
+            holder._addButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                /**
+                 * Called when the checked state of a compound button has changed.
+                 *
+                 * @param buttonView The compound button view whose state has changed.
+                 * @param isChecked  The new checked state of buttonView.
+                 */
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        Toast.makeText(actContext,
+                                String.format("Added: %s", getItem(location).getName()),
+                                Toast.LENGTH_SHORT).show();
+                        System.out.println("Added Exercise");
+                    } else {
+                        Toast.makeText(actContext,
+                                String.format("Removed: %s", getItem(location).getName()),
+                                Toast.LENGTH_SHORT).show();
+                        System.out.println("Removed Exercise");
+                    }
+                }
+
 //                try {
                 // getItem is essentially accessing the current exercise in the list
 //                ExerciseController.saveExercise(actContext, getItem(location));
-                Toast.makeText(actContext,
-                        String.format("Saved: %s", getItem(location).getName()), Toast.LENGTH_SHORT).show();
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-        });
+            });
 
 //            holder._clearButton.setOnClickListener(view -> {
 //                    // Deletes exercise in localStorage
@@ -85,12 +96,18 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
 //                    });
 //
 //            alterView.setTag(holder);
-        }
-        else {
-            holder = (ViewHolder)alterView.getTag();
+        } else {
+            holder = (ViewHolder) alterView.getTag();
         }
 
         holder._workoutData.setText(getItem(location).getName());
         return alterView;
+    }
+
+    public static class ViewHolder {
+        RelativeLayout _listLayout;
+        TextView _workoutData;
+        CheckBox _addButton;
+//        Button _editButton;
     }
 }

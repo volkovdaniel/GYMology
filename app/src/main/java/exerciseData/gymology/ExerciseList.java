@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ExerciseList {
     @SerializedName("results")
-    private List<Exercise> exercise;
+    private final List<Exercise> exercise;
 
     public ExerciseList() {
         this.exercise = new ArrayList<>();
