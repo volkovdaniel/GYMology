@@ -222,22 +222,22 @@ public class ExerciseController implements Runnable {
                 exercise.setMuscleList(muscleList);
                 exercise.setSecondaryMList(secondaryMList);
             }
-            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
-                System.out.format("" +
-                                "Exercise: %s%n" +
-                                "ID: %s%n" +
-                                "Category: %s%n" +
-                                "Muscle Groups: %s,%s%n" +
-                                "Equipment: %s%n" +
-                                "Description: %s%n%n",
-                        exercise.getName(),
-                        exercise.getId(),
-                        exercise.getCategory(),
-                        exercise.getMuscleList(),
-                        exercise.getSecondaryMList(),
-                        exercise.getEquipmentList(),
-                        exercise.getDescription());
-            }
+//            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
+//                System.out.format("" +
+//                                "Exercise: %s%n" +
+//                                "ID: %s%n" +
+//                                "Category: %s%n" +
+//                                "Muscle Groups: %s,%s%n" +
+//                                "Equipment: %s%n" +
+//                                "Description: %s%n%n",
+//                        exercise.getName(),
+//                        exercise.getId(),
+//                        exercise.getCategory(),
+//                        exercise.getMuscleList(),
+//                        exercise.getSecondaryMList(),
+//                        exercise.getEquipmentList(),
+//                        exercise.getDescription());
+//            }
             return exercise_CB._exerciseList;
 
         } catch (IOException ex) {
