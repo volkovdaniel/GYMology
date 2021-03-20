@@ -3,6 +3,8 @@ package team13.gymology;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import exerciseData.gymology.ExerciseController;
@@ -12,7 +14,10 @@ import workoutData.gymology.WorkoutController;
 import java.lang.ref.WeakReference;
 
 public class CreateWorkout extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
-
+    private RadioGroup typeGroup;
+    private RadioButton cardio;
+    private RadioButton hiit;
+    private RadioButton weights;
     private final String category = "arms";
     RadialMenuView radialMenuView;
 
@@ -35,32 +40,10 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
         findViewById(R.id.btn_saveNewWO).setOnClickListener(v ->
                 saveWorkout(new WeakReference<Activity>(this)));
 
-        // Radio Button Workout Types
-        View weights = findViewById(R.id.radioWeights);
-        View cardio = findViewById(R.id.radioCardio);
-        View hiit = findViewById(R.id.radioHIIT);
-        weights.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            /**
-             * Called when the focus state of a view has changed.
-             *
-             * @param v        The view whose state has changed.
-             * @param hasFocus The new focus state of v.
-             */
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    Toast.makeText(v.getContext(),
-                            String.format("Click ON"),
-                            Toast.LENGTH_SHORT).show();
-                    System.out.println("Click On");
-                } else {
-                    Toast.makeText(v.getContext(),
-                            String.format("Click OFF"),
-                            Toast.LENGTH_SHORT).show();
-                    System.out.println("Click OFF");
-                }
-            }
-        });
+//        typeGroup = (RadioGroup) findViewById(R.id.radioGroup);
+
+
+
     }
 
     /**

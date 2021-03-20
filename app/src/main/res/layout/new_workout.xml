@@ -77,40 +77,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableRowSet1" />
 
-    <RadioButton
-        android:id="@+id/radioHIIT"
-        android:layout_width="106dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/radio_HIIT"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioCardio"
-        app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
+<!--    <RadioGroup-->
+<!--            android:id="@+id/typeGroup"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/list_exercises">-->
 
-    <RadioButton
-        android:id="@+id/radioCardio"
-        android:layout_width="106dp"
-        android:layout_height="50dp"
-        android:text="@string/radio_cardio"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
+        <RadioButton
+                android:id="@+id/radioHIIT"
+                android:layout_width="106dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/radio_HIIT"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/radioCardio"
+                app:layout_constraintTop_toBottomOf="@+id/typeLabel"/>
 
-    <RadioButton
-        android:id="@+id/radioWeights"
-        android:layout_width="106dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/radio_weights"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/radioCardio"
-        app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
+        <RadioButton
+                android:id="@+id/radioCardio"
+                android:layout_width="106dp"
+                android:layout_height="50dp"
+                android:text="@string/radio_cardio"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.526"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/typeLabel"/>
+
+        <RadioButton
+                android:id="@+id/radioWeights"
+                android:layout_width="106dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/radio_weights"
+                android:textColor="@color/gray"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/radioCardio"
+                app:layout_constraintTop_toBottomOf="@+id/typeLabel"/>
+
+<!--    </RadioGroup>-->
 
     <TableRow
         android:id="@+id/tableRow2"
