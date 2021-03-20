@@ -44,14 +44,6 @@
 
 <!--     Dropdown Menu options-->
     <string-array name="workout_array">
-<!--        Category names + ID's-->
-<!--        10 - abs-->
-<!--        8 - arms-->
-<!--        12 - back-->
-<!--        14 - calves-->
-<!--        11 - chest-->
-<!--        9 - legs-->
-<!--        13 - shoulders-->
         <item>Arms</item>
         <item>Abs</item>
         <item>Back</item>

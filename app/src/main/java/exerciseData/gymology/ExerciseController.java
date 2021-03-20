@@ -18,14 +18,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ExerciseController implements Runnable {
-    private final static Gson g = new Gson();
-    private static String query;
-    private final String TAG = "ExerciseController";
+    // Public
     public List<String> _stringList;
     ListView _viewList;
     List<Exercise> _nameList;
+    // Private
     private Activity activity;
     private ExerciseList _exerciseList;
+    private int category;
+    // Static
+    private static String query;
+    // Final
+    private final static Gson g = new Gson();
+    private final String TAG = "ExerciseController";
+
 
     /**
      * ExerciseController
@@ -37,10 +43,11 @@ public class ExerciseController implements Runnable {
         this._exerciseList = exercise;
     }
 
-    public ExerciseController(WeakReference<Activity> activity, String type) {
+    public ExerciseController(WeakReference<Activity> activity, int category) {
         this.activity = activity.get();
         this._stringList = new ArrayList<>();
         this._nameList = new ArrayList<>();
+        this.category = category;
     }
 
     /**
@@ -110,7 +117,7 @@ public class ExerciseController implements Runnable {
      * displayExercises
      * Purpose: Connects to the Wger API to retrieve data for the creation of Exercise Lists
      */
-    public static ExerciseList displayExercises() {
+    public ExerciseList displayExercises() {
         /*
         Database calls:
         -categories contains the names for groups of muscles
@@ -128,28 +135,15 @@ public class ExerciseController implements Runnable {
 
         ExerciseController exercise_CB = null;
         try {
-            // Retrieve Exercise categories data
-//            String response =
-//                    connectAPI(URLData.CATEGORIES.getData() + URLData.QUERY_DEFAULT.getData());
-
-
-            // Specific exercises from category
-            /*
-            10 - abs
-            8 - arms
-            12 - back
-            14 - calves
-            11 - chest
-            9 - legs
-            13 - shoulders
-             */
+            // Create Query String
             query = String.format("?%s&limit=40&%s",
                     URLData.LANGUAGE.getData(),
-                    URLData.CATEGORY_SINGLE.getData() + "9");
+                    URLData.CATEGORY_SINGLE.getData() + category);
 
             // Retrieve exercises from category
             String response =
                     connectAPI(URLData.EXERCISE_DB.getData() + query);
+
             /* OUTPUTS:
             count - how many items its found, limit is currently set to 40 per page
             next - reference url to next page
@@ -282,14 +276,10 @@ public class ExerciseController implements Runnable {
 
 
             // create adapter for list elements
-//            _arrayAdapter = (new ArrayAdapter<>(
-//                    activity.getApplicationContext(),
-//                    R.layout.list_style_buttons_text,
-//                    R.id.list_data,
-//                    _stringList));
             ExerciseAdapter adapter = new ExerciseAdapter(activity,
                     R.layout.list_items_new_workout, _exerciseList.getExercise());
 
+            // Display to Designated Activity
             new Handler(Looper.getMainLooper()).post(() -> {
                 _viewList.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
