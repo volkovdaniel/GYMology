@@ -2,12 +2,16 @@ package team13.gymology;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseController;
 import menu.semiradialmenu.RadialMenuView;
+import utilities.gymology.Actions;
+import utilities.gymology.Categories;
+import utilities.gymology.Types;
 import workoutData.gymology.Workout;
 import workoutData.gymology.WorkoutController;
 
@@ -25,14 +29,15 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
     public Workout userWorkout;
     //Private
     private RadioGroup typeGroup;
-    private String checkedBtnValue = "cardio";
+    private Types checkedBtnValue = Types.CARDIO;
     private Spinner category_menu;
     private int category = 8;
     private WorkoutController workoutController;
 
 /*
 TODO: Retrieve User Created Name from the edit text view
-TODO: Display Saved Workout button
+TODO: Make Name Text area customizable? Can't change the name for the workout created atm.
+DONE: Display Saved Workout button
 TODO: Fix Menu
 TODO: Save Completed Workout to Local Storage
  */
@@ -41,6 +46,7 @@ TODO: Save Completed Workout to Local Storage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_workout);
         userWorkout = new Workout();
+        workoutController = new WorkoutController();
 
 //        Resource to add button functionality on each list item
 //        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
@@ -85,6 +91,7 @@ TODO: Save Completed Workout to Local Storage
      * @param category     A Category of exercises to draw from, default arms
      */
     private void retrieveWgerAPI(WeakReference<Activity> weakActivity, int category) {
+        Log.d(TAG, "Loading exercises by specified category");
         // Create  and start thread
         ExerciseController exercise = new ExerciseController(weakActivity, category);
         Thread t2 = new Thread(exercise);
@@ -93,12 +100,13 @@ TODO: Save Completed Workout to Local Storage
     }
 
     private void saveWorkout(WeakReference<Activity> weakActivity) {
+        Log.d(TAG, "Saving User Workout");
 //        userWorkout.set_name((findViewById(R.id.input_name)).toString());
-        userWorkout.set_name("Default Workout");
+        userWorkout.set_name("Default_Workout");
         userWorkout.set_type(checkedBtnValue);
         // Create and start thread
-        WorkoutController workout = new WorkoutController(weakActivity);
-        Thread t1 = new Thread(workout);
+        workoutController = new WorkoutController(weakActivity, userWorkout, Actions.SAVE);
+        Thread t1 = new Thread(workoutController);
         t1.start();
 
     }
@@ -128,27 +136,30 @@ TODO: Save Completed Workout to Local Storage
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+        // Convert string item to category value
+        Categories userCat = Categories.valueOf((parent.getItemAtPosition(position)).toString().toUpperCase());
+
         // Save Category to correct id for display
-        switch ((parent.getItemAtPosition(position)).toString()) {
-            case "Arms":
+        switch (userCat) {
+            case ARMS:
                 category = 8;
                 break;
-            case "Abs":
+            case ABS:
                 category = 10;
                 break;
-            case "Back":
+            case BACK:
                 category = 12;
                 break;
-            case "Calves":
+            case CALVES:
                 category = 14;
                 break;
-            case "Chest":
+            case CHEST:
                 category = 11;
                 break;
-            case "Legs":
+            case LEGS:
                 category = 9;
                 break;
-            case "Shoulders":
+            case SHOULDERS:
                 category = 13;
                 break;
         }

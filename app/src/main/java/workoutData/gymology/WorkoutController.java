@@ -3,8 +3,10 @@ package workoutData.gymology;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 import com.google.gson.Gson;
-import exerciseData.gymology.Exercise;
+import utilities.gymology.Actions;
+import utilities.gymology.Types;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
@@ -12,111 +14,88 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+        /*
+        TODO: Make edit functions
+        TODO: LogPackage, Statistics Package
+         */
+
 public class WorkoutController implements Runnable {
+    //Static Variables
     // Final Static Variables
     private final static String TAG = "Workout Controller: ";
     private final static Gson g = new Gson();
-    //Static Variables
-    private static String db_cardio_fPath;
-    private static String db_strength_fPath;
-    private static String db_hiit_fPath;
+    // Private
     private List<String> _stringList;
     private Activity activity;
     private List<Workout> _nameList;
     private WorkoutList _workout_DB;
-    private Workout _workout;
+    private Workout _userWorkout;
+    private Actions _doThis;
+    private File _db_path;
+    private File _db_cardio;
+    private File _db_weights;
+    private File _db_hiit;
+    private Boolean _redo;
 
-    public WorkoutController(WorkoutList workout) {
-        _workout_DB = workout;
-        _workout = new Workout();
+
+    public WorkoutController() {
     }
 
-    public WorkoutController(WeakReference<Activity> activity) {
+    public WorkoutController(WorkoutList workoutList) {
+        _workout_DB = workoutList;
+    }
+
+    public WorkoutController(WeakReference<Activity> activity, Workout userWorkout,
+                             Actions doThis) {
         this.activity = activity.get();
         this._stringList = new ArrayList<>();
         this._nameList = new ArrayList<>();
-    }
-
-    public static Workout loadWorkout(Context context, Workout workout) throws IOException {
-        Log.d(TAG, "Loading Workout file");
-        File file = new File(context.getFilesDir(), workout.get_name());
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        return g.fromJson(bufferedReader, Workout.class);
+        this._userWorkout = userWorkout;
+        this._doThis = doThis;
     }
 
 //    public void editWorkout(Workout workout) {
 //        startActivity(new Intent(this.activity.getApplicationContext(), EditWorkout.class));
 //    }
 
-    public static void saveWorkout(Context context, Workout workout) throws IOException {
-        Log.d(TAG, " Saving Workout file");
-        // Get Files directory, and the new file name
+
+//     Couldn't figure out how to save files to the directory without context being included.
+//     Might not need to if the data base of workouts is already loaded.
+
+//    public void checkDirLayout(Context context) throws IOException {
+//        Log.d(TAG, "Creating new directories if they do not exist");
+//        File newDir = context.getDir("SavedWorkouts", Context.MODE_PRIVATE);
+//        File[] files = newDir.listFiles();
+//        if (files != null) {
+//            if (files.length != 0) {
+//                _db_cardio = files[0];
+//                _db_weights = files[1];
+//                _db_hiit = files[2];
+//            } else {
+//                _db_cardio = new File(newDir, "cardio");
+//                _db_weights = new File(newDir, "weights");
+//                _db_hiit = new File(newDir, "hiit");
+//            }
+//        }
+//    }
+
+    public static Workout loadWorkout(Context context, Workout workout) throws IOException {
+        Log.d("Exercise Controller: ", "Loading file");
         File file = new File(context.getFilesDir(), workout.get_name());
-        FileWriter fileWriter = new FileWriter(file);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(g.toJson(workout));
-
-        System.out.format(g.toJson(workout));
-
-        bufferedWriter.close();
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        return g.fromJson(bufferedReader, Workout.class);
     }
 
-    // Not sure if this works yet, building the save part to add workouts to ls
-    public static void load_workout_DB(Context context) throws FileNotFoundException {
-        Log.d(TAG, "Loading Workout Database");
-
-        // Grab the directory Saved Workouts
-        File newDir = context.getDir("SavedWorkouts", Context.MODE_PRIVATE);
-
-        // Make the directory if it doesn't exist
-        if (!newDir.exists()) {
-            newDir.mkdirs();
-        }
-
-        // Grab Type Folders
-        String db_path = newDir.getAbsolutePath();
-        File db_cardio = context.getDir(db_path + "/cardio", Context.MODE_PRIVATE);
-        File db_strength = context.getDir(db_path + "/strength", Context.MODE_PRIVATE);
-        File db_hiit = context.getDir(db_path + "/hiit", Context.MODE_PRIVATE);
-
-        // Make Folders if they don't exist
-        if (!db_cardio.exists() && !db_strength.exists() && !db_hiit.exists()) {
-            db_cardio.mkdirs();
-            db_strength.mkdirs();
-            db_hiit.mkdirs();
-        }
-
-        //File path names
-        db_cardio_fPath = db_cardio.getAbsolutePath();
-        db_strength_fPath = db_strength.getAbsolutePath();
-        db_hiit_fPath = db_hiit.getAbsolutePath();
-
-        //Get files in folders
-        File[] cardioFiles = db_cardio.listFiles();
-        File[] strengthFiles = db_cardio.listFiles();
-        File[] hiitFiles = db_cardio.listFiles();
-
-        // Files, display, and add listeners
-        for (int i = 0; i < cardioFiles.length; i++) {
-            FileReader fileReader = new FileReader(cardioFiles[i]);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            WorkoutList workoutList = g.fromJson(bufferedReader, WorkoutList.class);
-            new WorkoutController(workoutList);
-        }
-
-
-    }
-
-    public static void displayWorkoutByType(String type) {
+    public static void displayWorkoutByType(Types type) {
         switch (type) {
-            case "cardio":
+            case CARDIO:
                 Log.d(TAG, "Loading cardio workouts");
                 break;
-            case "hiit":
+            case HIIT:
                 Log.d(TAG, "Loading HIIT workouts");
                 break;
-            case "strength":
+            case WEIGHTS:
                 Log.d(TAG, "Loading strength workouts");
                 break;
             default:
@@ -128,10 +107,49 @@ public class WorkoutController implements Runnable {
 
 
     }
-        /*
-        TODO: Make edit functions
-        TODO: LogPackage, Statistics Package
-         */
+
+    /**
+     * checkFileName
+     *
+     * @param context current activity context
+     * @param edit    if editing file instead
+     */
+    public String checkFileName(Context context, Boolean edit) throws IOException {
+        Log.d(TAG, "Creating new directories if they do not exist");
+        _db_path = context.getFilesDir();
+        File[] files = _db_path.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.getName().equals(_userWorkout.get_name()) && !edit) {
+                    _redo = true;
+                    return String.format("Workout: %s already exists.", _userWorkout.get_name());
+                } else {
+                    _redo = false;
+                }
+            }
+        }
+        return String.format("Workout: %s being saved.", _userWorkout.get_name());
+    }
+
+    /**
+     * saveWorkout
+     * Stores the user's workout in Local Storage unless the workout named file already exists.
+     *
+     * @return String for toast message
+     * @throws IOException
+     */
+    public void saveWorkout(Context context) throws IOException {
+        Log.d(TAG, "Saving Workout to file");
+
+        if (_db_path.setWritable(true)) {
+            File file = new File(context.getFilesDir(), _userWorkout.get_name());
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(g.toJson(_userWorkout.getWorkout()));
+            bufferedWriter.close();
+        }
+    }
+
 //    public List<Workout> displayWorkouts() {
 //        //Load Workout
 //        _workout_DB
@@ -141,12 +159,43 @@ public class WorkoutController implements Runnable {
 
     @Override
     public void run() {
-        Log.d(TAG,
-                "run: Getting Workout DataBase");
+        Log.d(TAG, "Checking if File structure is in place");
 
-        // TODO: Check if we're saving data or loading it
 
-        // TODO: Check if we're loading the workout database list
+        // DONE: Check if we're saving data, loading it, loading db, or loading category
+        switch (_doThis) {
+            case SAVE:
+                // Save user workout
+                Log.d(TAG, "Saving User Workout");
+                activity.runOnUiThread(() -> {
+                    try {
+                        Toast.makeText(activity,
+                                checkFileName(activity.getApplicationContext(), false), Toast.LENGTH_LONG).show();
+                        if (_redo) {
+                            saveWorkout(activity.getApplicationContext());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                break;
+            case LOAD:
+                //Load user workout
+                Log.d(TAG, "Loading user workout");
+                break;
+            case LOAD_DB:
+                // Load workout database
+                Log.d(TAG, "Loading workout database");
+                break;
+            case LOAD_CAT:
+                // Load workouts database by category
+                Log.d(TAG, "Loading workout database by category");
+                break;
+            default:
+                Log.d(TAG, "No options were found in the run()'s switch, please debug");
+        }
+
 
 //        try {
 //            // Retrieve Data

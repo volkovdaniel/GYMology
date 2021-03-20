@@ -9,6 +9,8 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import team13.gymology.CreateWorkoutAdapter;
 import team13.gymology.R;
+import utilities.gymology.ExtraItems;
+import utilities.gymology.SimpleList;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
@@ -70,27 +72,27 @@ public class ExerciseController implements Runnable {
                 SimpleList.class);
     }
 
-    public static void saveExercise(Context context, Exercise exercise) throws IOException {
-        Log.d("Exercise Controller:", " Saving file");
-        // Get Files directory, and the new file name
-        File file = new File(context.getFilesDir(), exercise.getId());
-        FileWriter fileWriter = new FileWriter(file);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(exercise.getExercise());
-        bufferedWriter.close();
-    }
+//    public static void saveExercise(Context context, Exercise exercise) throws IOException {
+//        Log.d("Exercise Controller:", " Saving file");
+//        // Get Files directory, and the new file name
+//        File file = new File(context.getFilesDir(), exercise.getId());
+//        FileWriter fileWriter = new FileWriter(file);
+//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//        bufferedWriter.write(exercise.getExercise());
+//        bufferedWriter.close();
+//    }
 
-    public static Exercise loadExercise(Context context, Exercise exercise) throws IOException {
-        Log.d("Exercise Controller: ", "Loading file");
-        File file = new File(context.getFilesDir(), exercise.getId());
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        return g.fromJson(bufferedReader, Exercise.class);
-    }
+//    public static Exercise loadExercise(Context context, Exercise exercise) throws IOException {
+//        Log.d("Exercise Controller: ", "Loading file");
+//        File file = new File(context.getFilesDir(), exercise.getId());
+//        FileReader fileReader = new FileReader(file);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        return g.fromJson(bufferedReader, Exercise.class);
+//    }
 
-    public static void clearExercise(Context context, String id) {
-        context.deleteFile(id);
-    }
+//    public static void clearExercise(Context context, String id) {
+//        context.deleteFile(id);
+//    }
 
     /**
      * Method that makes a connection to an API

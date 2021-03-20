@@ -1,4 +1,4 @@
-package exerciseData.gymology;
+package utilities.gymology;
 
 import com.google.gson.annotations.SerializedName;
 

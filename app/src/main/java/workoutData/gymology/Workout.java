@@ -1,7 +1,9 @@
 package workoutData.gymology;
 
+import com.google.gson.Gson;
 import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseGroup;
+import utilities.gymology.Types;
 
 /**
  * Workout
@@ -13,7 +15,7 @@ public class Workout {
     private final ExerciseGroup _workoutExercises;
     private String _name;
     private Boolean _completed;
-    private String _type;
+    private Types _type;
 
     /**
      * Workout default constructor
@@ -21,9 +23,14 @@ public class Workout {
      */
     public Workout() {
         this._workoutExercises = new ExerciseGroup();
-        this._name = _name;
+        this._name = "";
         this._completed = false;
-        this._type = "";
+        this._type = Types.CARDIO;
+    }
+
+    public String getWorkout() {
+        Gson g = new Gson();
+        return g.toJson(this);
     }
 
     /**
@@ -31,7 +38,7 @@ public class Workout {
      * Getter method for retrieving the type
      * @return The workout type
      */
-    public String get_type() { return _type; }
+    public Types get_type() { return _type; }
 
     /**
      * get_name
@@ -54,9 +61,7 @@ public class Workout {
      * Setter method for setting the workout's type
      * @param type The user's selected type
      */
-    public void set_type(String type) {
-        this._type = type;
-    }
+    public void set_type(Types type) { this._type = type; }
 
     /**
      * set_name
