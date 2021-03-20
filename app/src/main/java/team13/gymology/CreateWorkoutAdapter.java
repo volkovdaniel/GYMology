@@ -1,14 +1,14 @@
 package team13.gymology;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import exerciseData.gymology.Exercise;
-import workoutData.gymology.Workout;
-import workoutData.gymology.WorkoutController;
+
 
 import java.util.List;
 
@@ -57,6 +57,7 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         if (actContext instanceof CreateWorkout) {
+                            System.out.println(getItem(location));
                             ((CreateWorkout)actContext).addToUserWorkout(getItem(location));
                         }
                         System.out.println("Added Exercise");
@@ -69,13 +70,21 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
                     }
                 }
             });
+
+            // Label each list item with it's name
+            System.out.println(getItem(location).getName());
+            try {
+                holder._workoutData.setText(getItem(location).getName());
+            } catch (NullPointerException ex) {
+                Log.d("Create Workout Adapter: ",ex.getMessage());
+                ex.getStackTrace();
+            }
+            return alterView;
         } else {
-            holder = (ViewHolder) alterView.getTag();
+            return alterView;
         }
 
-        // Label each list item with it's name
-        holder._workoutData.setText(getItem(location).getName());
-        return alterView;
+
     }
 
 

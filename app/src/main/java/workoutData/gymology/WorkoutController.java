@@ -143,6 +143,11 @@ public class WorkoutController implements Runnable {
     public void run() {
         Log.d(TAG,
                 "run: Getting Workout DataBase");
+
+        // TODO: Check if we're saving data or loading it
+
+        // TODO: Check if we're loading the workout database list
+
 //        try {
 //            // Retrieve Data
 //            _workout_DB = displayWorkouts();

@@ -219,7 +219,7 @@ public class ExerciseController implements Runnable {
             }
 //            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
 //                System.out.format("" +
-//                                "Exercise: %s%n" +
+//                                "%nExercise: %s%n" +
 //                                "ID: %s%n" +
 //                                "Category: %s%n" +
 //                                "Muscle Groups: %s,%s%n" +
@@ -233,7 +233,7 @@ public class ExerciseController implements Runnable {
 //                        exercise.getEquipmentList(),
 //                        exercise.getDescription());
 //            }
-            return exercise_CB._exerciseList;
+//            return exercise_CB._exerciseList;
 
         } catch (IOException ex) {
             ex.printStackTrace();

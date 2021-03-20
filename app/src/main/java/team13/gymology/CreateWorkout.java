@@ -25,7 +25,7 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
     public Workout userWorkout;
     //Private
     private RadioGroup typeGroup;
-    private int checkedBtnId;
+    private String checkedBtnValue = "cardio";
     private Spinner category_menu;
     private int category = 8;
     private WorkoutController workoutController;
@@ -57,7 +57,7 @@ TODO: Save Completed Workout to Local Storage
 //            Log.d(TAG, "Type of Workout Selected");
 //
 //            // Save checked workout type for later
-//            checkedBtnId = checkedId;
+//            checkedBtnId = (checkedId).toString();
 //        });
 
 
@@ -73,12 +73,6 @@ TODO: Save Completed Workout to Local Storage
 
         // Listener to bring up the updated page
         category_menu.setOnItemSelectedListener(this);
-
-        // Initialize the workout to be saved
-        workoutController = new WorkoutController(new WeakReference<>(this));
-        Thread t1 = new Thread(workoutController);
-        t1.start();
-
 
     }
 
@@ -99,7 +93,9 @@ TODO: Save Completed Workout to Local Storage
     }
 
     private void saveWorkout(WeakReference<Activity> weakActivity) {
-
+//        userWorkout.set_name((findViewById(R.id.input_name)).toString());
+        userWorkout.set_name("Default Workout");
+        userWorkout.set_type(checkedBtnValue);
         // Create and start thread
         WorkoutController workout = new WorkoutController(weakActivity);
         Thread t1 = new Thread(workout);
@@ -174,7 +170,7 @@ TODO: Save Completed Workout to Local Storage
 
     /**
      * AddtoUserWorkout
-     * Add's checked exercises to current userWorkout
+     * Adds checked exercises to current userWorkout
      * @param isChecked selected exercise
      */
     public void addToUserWorkout(Exercise isChecked) {

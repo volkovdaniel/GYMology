@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class ExerciseGroup {
     private final Map<String, Exercise> _group;
-    private Exercise _exercise;
 
     /**
      * ExerciseGroup default constructor
@@ -30,9 +29,7 @@ public class ExerciseGroup {
      * Builds the map consisting of the Name of the Exercise and the actual Exercise
      */
     public void addTo_group(Exercise exercise) {
-        if (_group != null) {
-            _group.put(exercise.getName(), exercise);
-        }
+        _group.put(exercise.getName(), exercise);
     }
 
     /**
@@ -40,8 +37,6 @@ public class ExerciseGroup {
      * Selects the named exercise from the group and removes it
      */
     public void removeFrom_group(Exercise removedExercise) {
-        if (_group != null) {
-            _group.remove(removedExercise.getName());
-        }
+        _group.remove(removedExercise.getName());
     }
 }
