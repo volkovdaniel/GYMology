@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/prussianBlue">
 
+<!--    TODO: Add a dropdown arrow to make it obvious it's a dropdown - resource:
+https://stackoverflow.com/questions/20422802/how-to-set-dropdown-arrow-in-spinner -->
     <TextView
         android:id="@+id/createWO"
         android:layout_width="350dp"
