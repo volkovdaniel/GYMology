@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.ListView;
 import com.google.gson.Gson;
+import team13.gymology.CreateWorkoutAdapter;
 import team13.gymology.R;
 
 import java.io.*;
@@ -276,7 +277,7 @@ public class ExerciseController implements Runnable {
 
 
             // create adapter for list elements
-            ExerciseAdapter adapter = new ExerciseAdapter(activity,
+            CreateWorkoutAdapter adapter = new CreateWorkoutAdapter(activity,
                     R.layout.list_items_new_workout, _exerciseList.getExercise());
 
             // Display to Designated Activity

@@ -42,9 +42,10 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             /*
             TODO: Replace Toasts with moving to the respective activity
             TODO: Add checking for if file exists before trying to load/save it -> msg the user
-            TODO: Make compatible for Workouts, and generalize the adapter
 
              */
+
+
             // Set Listeners to each button for each list item
             holder._editButton.setOnClickListener(view -> {
 //                try {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
+import exerciseData.gymology.Exercise;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
@@ -36,9 +37,6 @@ public class WorkoutController implements Runnable {
         this._nameList = new ArrayList<>();
     }
 
-    /*
-    TODO: Make Utility package containing overloaded methods like loadWorkout, and adapter View's
-     */
     public static Workout loadWorkout(Context context, Workout workout) throws IOException {
         Log.d(TAG, "Loading Workout file");
         File file = new File(context.getFilesDir(), workout.get_name());
@@ -166,7 +164,7 @@ public class WorkoutController implements Runnable {
 ////                    R.layout.list_style_buttons_text,
 ////                    R.id.list_data,
 ////                    _stringList));
-//            ExerciseAdapter adapter = new ExerciseAdapter(activity,
+//            CreateWorkoutAdapter adapter = new CreateWorkoutAdapter(activity,
 //                    R.layout.list_style_buttons_text, _exerciseList.getExercise());
 //
 //            new Handler(Looper.getMainLooper()).post(() -> {

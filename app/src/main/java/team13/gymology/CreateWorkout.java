@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseController;
 import menu.semiradialmenu.RadialMenuView;
+import workoutData.gymology.Workout;
 import workoutData.gymology.WorkoutController;
 
 import java.lang.ref.WeakReference;
@@ -20,16 +22,25 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
     private final String TAG = "CreateWorkout Activity: ";
     // Public
     RadialMenuView radialMenuView;
+    public Workout userWorkout;
     //Private
     private RadioGroup typeGroup;
     private int checkedBtnId;
     private Spinner category_menu;
     private int category = 8;
+    private WorkoutController workoutController;
 
+/*
+TODO: Retrieve User Created Name from the edit text view
+TODO: Display Saved Workout button
+TODO: Fix Menu
+TODO: Save Completed Workout to Local Storage
+ */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_workout);
+        userWorkout = new Workout();
 
 //        Resource to add button functionality on each list item
 //        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
@@ -63,8 +74,15 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
         // Listener to bring up the updated page
         category_menu.setOnItemSelectedListener(this);
 
+        // Initialize the workout to be saved
+        workoutController = new WorkoutController(new WeakReference<>(this));
+        Thread t1 = new Thread(workoutController);
+        t1.start();
+
 
     }
+
+
 
     /**
      * Retrieve the exercise database by category
@@ -75,8 +93,8 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
     private void retrieveWgerAPI(WeakReference<Activity> weakActivity, int category) {
         // Create  and start thread
         ExerciseController exercise = new ExerciseController(weakActivity, category);
-        Thread t1 = new Thread(exercise);
-        t1.start();
+        Thread t2 = new Thread(exercise);
+        t2.start();
 
     }
 
@@ -152,5 +170,23 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
      */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    /**
+     * AddtoUserWorkout
+     * Add's checked exercises to current userWorkout
+     * @param isChecked selected exercise
+     */
+    public void addToUserWorkout(Exercise isChecked) {
+        userWorkout.generateGroup(isChecked);
+    }
+
+    /**
+     * removeUserExercise
+     * Remove's un-checked exercise from current userWorkout
+     * @param notChecked
+     */
+    public void removeUserExercise(Exercise notChecked) {
+        userWorkout.removeFromGroup(notChecked);
     }
 }

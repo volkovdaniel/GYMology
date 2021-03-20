@@ -1,28 +1,26 @@
 package workoutData.gymology;
 
 import exerciseData.gymology.Exercise;
+import exerciseData.gymology.ExerciseGroup;
 
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * Workout
+ * User built workout from the Create Workout Screen.
+ * Builds the group of Exercises selected.
+ * Saves the workout as a certain type.
+ */
 public class Workout {
-    private final Map<String, Exercise> _workoutExercises;
-    private Exercise _exercise;
-    private String _name;
     private final String _completed;
     private final String _type;
+    private final ExerciseGroup _workoutExercises;
+    private String _name;
 
     public Workout() {
 
-        this._workoutExercises = new HashMap<>();
-        this._exercise = new Exercise();
+        this._workoutExercises = new ExerciseGroup();
         this._name = _name;
         this._completed = "";
         this._type = "";
-    }
-
-    public Map<String, Exercise> get_workoutMap() {
-        return _workoutExercises;
     }
 
     public String get_name() {
@@ -33,12 +31,20 @@ public class Workout {
         this._name = name;
     }
 
-    public void set_exercise(Exercise addExercise) {
-        this._exercise = addExercise;
+    /**
+     * generateExerciseGroup
+     * Builds and returns the group of exercises defined by the user for Workout Creation
+     */
+    public void generateGroup(Exercise exercise) {
+        _workoutExercises.addTo_group(exercise);
     }
 
-    public void addTo_workoutExercises() {
-        _workoutExercises.put(_exercise.getName(), _exercise);
+    /**
+     * removeExerciseFromGroup
+     * Method to clear specific exercises from the Exercise group
+     */
+    public void removeFromGroup(Exercise exercise) {
+        _workoutExercises.removeFrom_group(exercise);
     }
 
 }
