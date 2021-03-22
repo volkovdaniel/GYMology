@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import team13.gymology.R;
 
 public class MenuItemView extends LinearLayout {
@@ -23,12 +21,14 @@ public class MenuItemView extends LinearLayout {
     private boolean allowTitle = true;
     private View v;
 
-    /** MenuItemView Class
+    /**
+     * MenuItemView Class
      * The LinearLayout of the Menu display on click
+     *
      * @param context activity context
-     * @param title button title
-     * @param image button image
-     * @param color button color
+     * @param title   button title
+     * @param image   button image
+     * @param color   button color
      */
     public MenuItemView(Context context, String title, int image, int color) {
         super(context);

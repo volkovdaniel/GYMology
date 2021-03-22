@@ -2,45 +2,38 @@ package menu.semiradialmenu;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.os.Bundle;
 import android.os.Handler;
-
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import circualreveal.animation.SupportAnimator;
 import circualreveal.animation.ViewAnimationUtils;
 import circualreveal.widget.RevealFrameLayout;
 import team13.gymology.R;
 
+import java.util.ArrayList;
+
 
 public class RadialMenuView extends RevealFrameLayout {
-    Utils utils;
-
-
-    RadialMenuListener listener;
-    private int maxDistance;
     public boolean isOpen = false;
+    Utils utils;
+    RadialMenuListener listener;
+    RadialMenuView radialMenuView;
+    Button button;
+    private int maxDistance;
     private ArrayList<MenuItemView> menuItemViews;
     //inner circle is true default
     private boolean innerCircle = true;
     private int innerCircleColor;
-    private boolean allowTitle = true;
+    private final boolean allowTitle = true;
     private int minDistance;
     private SliceView v1;
     private FrameLayout rootView;
     private int offset = 0;
-
-    RadialMenuView radialMenuView;
-    Button button;
 
     public RadialMenuView(Context context) {
         super(context);

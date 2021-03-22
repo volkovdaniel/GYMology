@@ -7,7 +7,10 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.ListView;
 import com.google.gson.Gson;
+import team13.gymology.CreateWorkoutAdapter;
 import team13.gymology.R;
+import utilities.gymology.ExtraItems;
+import utilities.gymology.SimpleList;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
@@ -18,68 +21,42 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ExerciseController implements Runnable {
-    private static String query;
+    // Public
+    public List<String> _stringList;
     ListView _viewList;
+    List<Exercise> _nameList;
+    // Private
     private Activity activity;
     private ExerciseList _exerciseList;
-    public List<String> _stringList;
+    private int category;
+    // Static
+    private static String query;
+    // Final
     private final static Gson g = new Gson();
-    List<Exercise> _nameList;
-
     private final String TAG = "ExerciseController";
 
-    /** ExerciseController
+
+    /**
+     * ExerciseController
      * Purpose: Saves the exercise object for later use and retrieval
+     *
      * @param exercise
      */
     public ExerciseController(ExerciseList exercise) {
         this._exerciseList = exercise;
     }
 
-    public ExerciseController(WeakReference<Activity> activity, String type) {
+    public ExerciseController(WeakReference<Activity> activity, int category) {
         this.activity = activity.get();
         this._stringList = new ArrayList<>();
         this._nameList = new ArrayList<>();
+        this.category = category;
     }
 
-    @Override
-    public void run() {
-        Log.d(TAG,
-                "run: Getting Wger API data");
-        try {
-            // Retrieve Data
-            _exerciseList = displayExercises();
-            for (Exercise exercise : _exerciseList.getExercise()) {
-                _stringList.add(exercise.getName());
-            }
-            Thread.sleep(300);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        if (activity != null) {
-            // Define whole list
-            _viewList = activity.findViewById(R.id.list_exercises);
-
-
-            // create adapter for list elements
-//            _arrayAdapter = (new ArrayAdapter<>(
-//                    activity.getApplicationContext(),
-//                    R.layout.list_style_buttons_text,
-//                    R.id.list_data,
-//                    _stringList));
-            ExerciseAdapter adapter = new ExerciseAdapter(activity,
-                    R.layout.list_items_new_workout, _exerciseList.getExercise());
-
-            new Handler(Looper.getMainLooper()).post(() -> {
-                _viewList.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
-            });
-        }
-    }
-
-    /**Getter Functions
+    /**
+     * Getter Functions
      * Purpose: Getters for the  muscle, and equipment categories.
+     *
      * @return Lists
      * @throws IOException
      */
@@ -88,41 +65,42 @@ public class ExerciseController implements Runnable {
                 URLData.MUSCLE.getData() + URLData.QUERY_DEFAULT.getData()),
                 SimpleList.class);
     }
+
     public static SimpleList getEquipmentList() throws IOException {
         return g.fromJson(connectAPI(
                 URLData.EQUIPMENT.getData() + URLData.QUERY_DEFAULT.getData()),
                 SimpleList.class);
     }
 
-    public static void saveExercise(Context context, Exercise exercise) throws IOException {
-        Log.d("Exercise Controller:"," Saving file");
-        // Get Files directory, and the new file name
-        File file = new File(context.getFilesDir(), exercise.getId());
-        FileWriter fileWriter = new FileWriter(file);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(exercise.getExercise());
-        bufferedWriter.close();
-    }
+//    public static void saveExercise(Context context, Exercise exercise) throws IOException {
+//        Log.d("Exercise Controller:", " Saving file");
+//        // Get Files directory, and the new file name
+//        File file = new File(context.getFilesDir(), exercise.getId());
+//        FileWriter fileWriter = new FileWriter(file);
+//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//        bufferedWriter.write(exercise.getExercise());
+//        bufferedWriter.close();
+//    }
 
-    public static Exercise loadExercise(Context context, Exercise exercise) throws IOException {
-        Log.d("Exercise Controller: ", "Loading file");
-        File file = new File(context.getFilesDir(), exercise.getId());
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        return g.fromJson(bufferedReader,Exercise.class);
-    }
+//    public static Exercise loadExercise(Context context, Exercise exercise) throws IOException {
+//        Log.d("Exercise Controller: ", "Loading file");
+//        File file = new File(context.getFilesDir(), exercise.getId());
+//        FileReader fileReader = new FileReader(file);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        return g.fromJson(bufferedReader, Exercise.class);
+//    }
 
-    public static void clearExercise(Context context, String id) {
-        context.deleteFile(id);
-    }
-
+//    public static void clearExercise(Context context, String id) {
+//        context.deleteFile(id);
+//    }
 
     /**
      * Method that makes a connection to an API
+     *
      * @param url-made custom from
-     * @see URLData enum
      * @return String response
      * @throws IOException -if problems occur while connecting
+     * @see URLData enum
      */
     public static String connectAPI(String url) throws IOException {
         // Open Connection
@@ -138,10 +116,11 @@ public class ExerciseController implements Runnable {
         return scanner.useDelimiter("\\A").next();
     }
 
-    /**displayExercises
+    /**
+     * displayExercises
      * Purpose: Connects to the Wger API to retrieve data for the creation of Exercise Lists
      */
-    public static ExerciseList displayExercises() {
+    public ExerciseList displayExercises() {
         /*
         Database calls:
         -categories contains the names for groups of muscles
@@ -159,28 +138,15 @@ public class ExerciseController implements Runnable {
 
         ExerciseController exercise_CB = null;
         try {
-            // Retrieve Exercise categories data
-//            String response =
-//                    connectAPI(URLData.CATEGORIES.getData() + URLData.QUERY_DEFAULT.getData());
-
-
-            // Specific exercises from category
-            /*
-            10 - abs
-            8 - arms
-            12 - back
-            14 - calves
-            11 - chest
-            9 - legs
-            13 - shoulders
-             */
+            // Create Query String
             query = String.format("?%s&limit=40&%s",
                     URLData.LANGUAGE.getData(),
-                    URLData.CATEGORY_SINGLE.getData() + "9");
+                    URLData.CATEGORY_SINGLE.getData() + category);
 
             // Retrieve exercises from category
             String response =
                     connectAPI(URLData.EXERCISE_DB.getData() + query);
+
             /* OUTPUTS:
             count - how many items its found, limit is currently set to 40 per page
             next - reference url to next page
@@ -253,23 +219,23 @@ public class ExerciseController implements Runnable {
                 exercise.setMuscleList(muscleList);
                 exercise.setSecondaryMList(secondaryMList);
             }
-            for (Exercise exercise : exercise_CB._exerciseList.getExercise()){
-                System.out.format("" +
-                                "Exercise: %s%n" +
-                                "ID: %s%n" +
-                                "Category: %s%n" +
-                                "Muscle Groups: %s,%s%n" +
-                                "Equipment: %s%n" +
-                                "Description: %s%n%n",
-                        exercise.getName(),
-                        exercise.getId(),
-                        exercise.getCategory(),
-                        exercise.getMuscleList(),
-                        exercise.getSecondaryMList(),
-                        exercise.getEquipmentList(),
-                        exercise.getDescription());
-            }
-            return exercise_CB._exerciseList;
+//            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
+//                System.out.format("" +
+//                                "%nExercise: %s%n" +
+//                                "ID: %s%n" +
+//                                "Category: %s%n" +
+//                                "Muscle Groups: %s,%s%n" +
+//                                "Equipment: %s%n" +
+//                                "Description: %s%n%n",
+//                        exercise.getName(),
+//                        exercise.getId(),
+//                        exercise.getCategory(),
+//                        exercise.getMuscleList(),
+//                        exercise.getSecondaryMList(),
+//                        exercise.getEquipmentList(),
+//                        exercise.getDescription());
+//            }
+//            return exercise_CB._exerciseList;
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -279,9 +245,10 @@ public class ExerciseController implements Runnable {
 
     } // End of displayExercises()
 
-
-    /** generateList
+    /**
+     * generateList
      * Purpose: Provides a list of json data to save as an object.
+     *
      * @param response - json string provided from Gson
      * @return Exercise List by Category
      */
@@ -290,6 +257,38 @@ public class ExerciseController implements Runnable {
         // Deserialize response
         ExerciseList exercise = g.fromJson(response, ExerciseList.class);
         return new ExerciseController(exercise);
+    }
+
+    @Override
+    public void run() {
+        Log.d(TAG,
+                "run: Getting Wger API data");
+        try {
+            // Retrieve Data
+            _exerciseList = displayExercises();
+            for (Exercise exercise : _exerciseList.getExercise()) {
+                _stringList.add(exercise.getName());
+            }
+            Thread.sleep(300);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        if (activity != null) {
+            // Define whole list
+            _viewList = activity.findViewById(R.id.list_exercises);
+
+
+            // create adapter for list elements
+            CreateWorkoutAdapter adapter = new CreateWorkoutAdapter(activity,
+                    R.layout.list_items_new_workout, _exerciseList.getExercise());
+
+            // Display to Designated Activity
+            new Handler(Looper.getMainLooper()).post(() -> {
+                _viewList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            });
+        }
     }
 
 

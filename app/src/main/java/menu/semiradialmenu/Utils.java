@@ -16,7 +16,7 @@ public class Utils {
     private int offset = 0;
 
     public Utils(Context context) {
-        this.mContext = context;
+        mContext = context;
     }
 
     public static Utils getInstance(Context context) {
@@ -70,12 +70,12 @@ public class Utils {
         return myPaddingStart;
     }
 
-    public void setCenterView (View view) {
-        this.view = view;
+    protected View getCenterView() {
+        return view;
     }
 
-    protected View getCenterView () {
-        return view;
+    public void setCenterView(View view) {
+        this.view = view;
     }
 
     protected int getOffset() {

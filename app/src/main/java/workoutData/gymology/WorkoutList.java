@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class WorkoutList {
     @SerializedName("results")
-    private List<Exercise> _workout;
+    private final List<Exercise> _workout;
 
     public WorkoutList() {
         this._workout = new ArrayList<>();

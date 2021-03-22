@@ -1,4 +1,4 @@
-package exerciseData.gymology;
+package utilities.gymology;
 
 /**
  * Helper Class for the SimpleList class

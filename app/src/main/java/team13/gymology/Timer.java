@@ -6,16 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+import menu.semiradialmenu.RadialMenuView;
 
 import java.util.Locale;
 
-import menu.semiradialmenu.RadialMenuView;
-
-public class Timer extends AppCompatActivity implements RadialMenuView.RadialMenuListener{
+public class Timer extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
     private static final long START_TIME_IN_MILLIS = 600000;
+    RadialMenuView radialMenuView;
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
@@ -23,7 +22,6 @@ public class Timer extends AppCompatActivity implements RadialMenuView.RadialMen
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
-    RadialMenuView radialMenuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +47,7 @@ public class Timer extends AppCompatActivity implements RadialMenuView.RadialMen
         });
         updateCountDownText();
     }
+
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -56,6 +55,7 @@ public class Timer extends AppCompatActivity implements RadialMenuView.RadialMen
                 mTimeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
+
             @Override
             public void onFinish() {
                 mTimerRunning = false;
@@ -68,18 +68,21 @@ public class Timer extends AppCompatActivity implements RadialMenuView.RadialMen
         mButtonStartPause.setText("pause");
         mButtonReset.setVisibility(View.INVISIBLE);
     }
+
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
         mButtonStartPause.setText("Start");
         mButtonReset.setVisibility(View.VISIBLE);
     }
+
     private void resetTimer() {
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
         mButtonReset.setVisibility(View.INVISIBLE);
         mButtonStartPause.setVisibility(View.VISIBLE);
     }
+
     private void updateCountDownText() {
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;

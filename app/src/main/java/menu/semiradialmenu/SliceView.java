@@ -5,25 +5,18 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-//import android.support.v4.content.ContextCompat;
 import android.view.View;
-
-import android.widget.Toast;
 import androidx.core.content.ContextCompat;
-import team13.gymology.R;
-
-import java.util.ArrayList;
 
 public class SliceView extends View {
 
+    public float center_x, center_y;
     Utils utils;
-
-    private int color;
-    private int start;
-    private int sweep;
+    private final int color;
+    private final int start;
+    private final int sweep;
     private boolean inner;
     private RectF oval;
-    public float center_x, center_y;
 
     public SliceView(Context context, int color, int start, int sweep) {
         super(context);
@@ -79,7 +72,7 @@ public class SliceView extends View {
             center_x = width / 2;
             if (utils.getCenterView() == null) {
                 center_y = utils.getScreenHeight() - utils.getActionBarSize();
-            } else{
+            } else {
                 center_y = utils.getCenterView().getY() + utils.getOffset();
             }
 

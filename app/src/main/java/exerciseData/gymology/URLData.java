@@ -1,4 +1,5 @@
 package exerciseData.gymology;
+
 /**
  * Sets values needed for creating a URL
  */
@@ -27,7 +28,7 @@ public enum URLData {
 
     ;
 
-    private String data;
+    private final String data;
 
     // Construct values of constants
     URLData(String item) {
