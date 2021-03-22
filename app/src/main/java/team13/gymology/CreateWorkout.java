@@ -44,7 +44,7 @@ TODO: Save Completed Workout to Local Storage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_workout);
+        setContentView(R.layout.create_workout);
         userWorkout = new Workout();
         workoutController = new WorkoutController();
 
