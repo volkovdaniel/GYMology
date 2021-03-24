@@ -2,14 +2,15 @@ package profile.gymology;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import team13.gymology.R;
 
 public class BMI extends AppCompatActivity {
 
-    private TextView height;
-    private TextView weight;
+    private EditText height;
+    private EditText weight;
     private TextView result;
 
     @Override

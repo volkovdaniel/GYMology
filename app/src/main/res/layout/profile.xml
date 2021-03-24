@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/ageProfile"
         android:layout_width="106dp"
         android:layout_height="50dp"
@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_age"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings" />
 
-    <EditText
+    <TextView
         android:id="@+id/heightProfile"
         android:layout_width="106dp"
         android:layout_height="50dp"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ageProfile" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_height"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_age" />
 
-    <EditText
+    <TextView
         android:id="@+id/weightProfile"
         android:layout_width="106dp"
         android:layout_height="50dp"
@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heightProfile" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_weight"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -117,7 +117,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weightProfile" />
 
-    <EditText
+    <TextView
         android:id="@+id/typeLabel"
         android:layout_width="225dp"
         android:layout_height="50dp"
@@ -132,7 +132,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableRowSet1" />
 
-    <EditText
+    <TextView
         android:id="@+id/waterLabel"
         android:layout_width="225dp"
         android:layout_height="50dp"
@@ -147,7 +147,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typeLabel" />
 
-    <EditText
+    <TextView
         android:id="@+id/mealLabel"
         android:layout_width="225dp"
         android:layout_height="50dp"
