@@ -36,7 +36,7 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
 
 /*
 TODO: Retrieve User Created Name from the edit text view
-TODO: Make Name Text area customizable? Can't change the name for the workout created atm.
+DONE: Make Name Text area customizable? Can't change the name for the workout created atm.
 DONE: Display Saved Workout button
 TODO: Fix Menu
 TODO: Save Completed Workout to Local Storage
