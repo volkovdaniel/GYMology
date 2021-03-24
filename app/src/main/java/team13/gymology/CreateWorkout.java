@@ -102,7 +102,7 @@ DONE: Save Completed Workout to Local Storage
 
     private void saveWorkout(WeakReference<Activity> weakActivity) {
         Log.d(TAG, "Saving User Workout");
-        userWorkout.set_name((findViewById(R.id.input_name)).toString());
+        userWorkout.set_name(((EditText)findViewById(R.id.input_name)).getText().toString());
         userWorkout.set_type(checkedBtnValue);
         // Create and start thread
         workoutController = new WorkoutController(weakActivity, userWorkout, Actions.SAVE);
