@@ -39,7 +39,7 @@ TODO: Retrieve User Created Name from the edit text view
 DONE: Make Name Text area customizable? Can't change the name for the workout created atm.
 DONE: Display Saved Workout button
 TODO: Fix Menu
-TODO: Save Completed Workout to Local Storage
+DONE: Save Completed Workout to Local Storage
  */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +56,16 @@ TODO: Save Completed Workout to Local Storage
                 saveWorkout(new WeakReference<>(this)));
 
 
-//        typeGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        typeGroup = (RadioGroup) findViewById(R.id.typeGroup);
 
-        // Check for which type is selected and save to a member field
-//        typeGroup.setOnCheckedChangeListener((group, checkedId) -> {
-//            Log.d(TAG, "Type of Workout Selected");
-//
-//            // Save checked workout type for later
-//            checkedBtnId = (checkedId).toString();
-//        });
+//         Check for which type is selected and save to a member field
+        typeGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            Log.d(TAG, "Type of Workout Selected");
+
+            // Grab selected Radio Button, get the Text, convert to Type enum
+            checkedBtnValue =
+                    Types.valueOf(((RadioButton)findViewById(checkedId)).getText().toString().toUpperCase());
+        });
 
 
         // DONE: Dropdown menu passes in category
@@ -101,8 +102,7 @@ TODO: Save Completed Workout to Local Storage
 
     private void saveWorkout(WeakReference<Activity> weakActivity) {
         Log.d(TAG, "Saving User Workout");
-//        userWorkout.set_name((findViewById(R.id.input_name)).toString());
-        userWorkout.set_name("Default_Workout");
+        userWorkout.set_name((findViewById(R.id.input_name)).toString());
         userWorkout.set_type(checkedBtnValue);
         // Create and start thread
         workoutController = new WorkoutController(weakActivity, userWorkout, Actions.SAVE);
