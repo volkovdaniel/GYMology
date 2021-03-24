@@ -2,9 +2,14 @@ package workoutData.gymology;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 import com.google.gson.Gson;
+import team13.gymology.CreateWorkoutAdapter;
+import team13.gymology.R;
 import utilities.gymology.Actions;
 import utilities.gymology.Types;
 
@@ -27,8 +32,8 @@ public class WorkoutController implements Runnable {
     // Private
     private List<String> _stringList;
     private Activity activity;
-    private List<Workout> _nameList;
-    private WorkoutList _workout_DB;
+    private List<Workout> _workout_DB;
+//    private WorkoutList _workout_DB;
     private Workout _userWorkout;
     private Actions _doThis;
     private File _db_path;
@@ -36,21 +41,28 @@ public class WorkoutController implements Runnable {
     private File _db_weights;
     private File _db_hiit;
     private Boolean _redo;
+    private ListView _DB;
 
 
     public WorkoutController() {
     }
 
-    public WorkoutController(WorkoutList workoutList) {
-        _workout_DB = workoutList;
-    }
+//    public WorkoutController(WorkoutList workoutList) {
+//        _workout_DB = workoutList;
+//    }
 
     public WorkoutController(WeakReference<Activity> activity, Workout userWorkout,
                              Actions doThis) {
         this.activity = activity.get();
-        this._stringList = new ArrayList<>();
-        this._nameList = new ArrayList<>();
+//        this._stringList = new ArrayList<>();
         this._userWorkout = userWorkout;
+        this._doThis = doThis;
+    }
+    public WorkoutController(WeakReference<Activity> activity, Actions doThis) {
+        this.activity = activity.get();
+        this._workout_DB = new ArrayList<>();
+//        this._stringList = new ArrayList<>();
+//        this._nameList = new ArrayList<>();
         this._doThis = doThis;
     }
 
@@ -62,22 +74,19 @@ public class WorkoutController implements Runnable {
 //     Couldn't figure out how to save files to the directory without context being included.
 //     Might not need to if the data base of workouts is already loaded.
 
-//    public void checkDirLayout(Context context) throws IOException {
-//        Log.d(TAG, "Creating new directories if they do not exist");
-//        File newDir = context.getDir("SavedWorkouts", Context.MODE_PRIVATE);
-//        File[] files = newDir.listFiles();
+    public Workout grabWorkoutFiles(Context context) throws IOException {
+        Log.d(TAG, "Grabbing Files from LS");
+        File newDir = context.getFilesDir();
+        File[] files = newDir.listFiles();
 //        if (files != null) {
-//            if (files.length != 0) {
-//                _db_cardio = files[0];
-//                _db_weights = files[1];
-//                _db_hiit = files[2];
-//            } else {
-//                _db_cardio = new File(newDir, "cardio");
-//                _db_weights = new File(newDir, "weights");
-//                _db_hiit = new File(newDir, "hiit");
-//            }
-//        }
-//    }
+        assert files != null;
+        for (File file : files) {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            return g.fromJson(bufferedReader, Workout.class);
+        }
+        return null;
+    }
 
     public static Workout loadWorkout(Context context, Workout workout) throws IOException {
         Log.d("Exercise Controller: ", "Loading file");
@@ -101,11 +110,7 @@ public class WorkoutController implements Runnable {
             default:
                 Log.d(TAG, "Error: Unknown workout type");
                 break;
-
-
         }
-
-
     }
 
     /**
@@ -150,12 +155,26 @@ public class WorkoutController implements Runnable {
         }
     }
 
-//    public List<Workout> displayWorkouts() {
-//        //Load Workout
-//        _workout_DB
-//
-//
-//    }
+    public void loadWorkout(Context context) throws IOException {
+        Log.d(TAG, "Loading Workout from LS");
+
+        if (_db_path.setWritable(true)) {
+            File file = new File(context.getFilesDir(), _userWorkout.get_name());
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(g.toJson(_userWorkout.getWorkout()));
+            bufferedWriter.close();
+        }
+    }
+
+    public List<Workout> displayWorkouts(Context context) throws IOException {
+        //Load Workout
+        _workout_DB.add(grabWorkoutFiles(context));
+        return _workout_DB;
+
+
+
+    }
 
     @Override
     public void run() {
@@ -187,6 +206,28 @@ public class WorkoutController implements Runnable {
             case LOAD_DB:
                 // Load workout database
                 Log.d(TAG, "Loading workout database");
+                try {
+                    _workout_DB = displayWorkouts(activity.getApplicationContext());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (activity != null) {
+//                    // Define whole list
+                    _DB = activity.findViewById(R.id.list_DB_exercises);
+
+                    // create adapter for list elements
+                    WorkoutAdapter adapter = new WorkoutAdapter(activity,
+                            R.layout.list_items_workout_details,
+                            _workout_DB);
+
+                    // Display to Designated Activity
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        _DB.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+
+                    });
+                }
                 break;
             case LOAD_CAT:
                 // Load workouts database by category

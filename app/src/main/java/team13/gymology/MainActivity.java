@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
+import workoutData.gymology.Workout;
 
 import java.util.ArrayList;
 
@@ -60,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         switch (i) {
             case 0:
                 // Profile Screen
-                startActivity(new Intent(this, Profile.class));
+                startActivity(new Intent(this, CreateWorkout.class));
                 break;
             case 1:
                 // Workouts DB Screen
-                startActivity(new Intent(this, CreateWorkout.class));
+                startActivity(new Intent(this, WorkoutDatabase.class));
                 break;
             case 2:
                 // Home Screen

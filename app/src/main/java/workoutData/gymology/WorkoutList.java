@@ -11,20 +11,20 @@ import java.util.List;
  */
 public class WorkoutList {
     @SerializedName("results")
-    private final List<Exercise> _workout;
+    private final List<Exercise> _workoutList;
 
     public WorkoutList() {
-        this._workout = new ArrayList<>();
+        this._workoutList = new ArrayList<>();
     }
 
-    public List<Exercise> getWorkout() {
-        return _workout;
+    public List<Exercise> get_workoutList() {
+        return _workoutList;
     }
 
     @Override
     public String toString() {
         return "Workout{" +
-                "workoutData=" + _workout +
+                "workoutData=" + _workoutList +
                 '}';
     }
 }
