@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/exerciseName"
         app:srcCompat="@android:drawable/presence_video_online" />
 
-    <EditText
+    <TextView
         android:id="@+id/weightLabel"
         android:layout_width="106dp"
         android:layout_height="40dp"
@@ -40,13 +40,14 @@
         android:ems="10"
         android:inputType="text"
         android:text="@string/weight_label"
+        android:textSize="20sp"
         android:textColor="@color/gray"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/repsLabel"
         app:layout_constraintTop_toBottomOf="@+id/exerciseName"
         tools:text="@string/weight_label" />
 
-    <EditText
+    <TextView
         android:id="@+id/repsLabel"
         android:layout_width="106dp"
         android:layout_height="40dp"
@@ -54,6 +55,7 @@
         android:ems="10"
         android:inputType="text"
         android:text="@string/reps_label"
+        android:textSize="20sp"
         android:textColor="@color/gray"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseName" />
 
-    <EditText
+    <TextView
         android:id="@+id/timeLabel"
         android:layout_width="106dp"
         android:layout_height="40dp"
@@ -70,12 +72,13 @@
         android:ems="10"
         android:inputType="text"
         android:text="@string/time_label"
+        android:textSize="20sp"
         android:textColor="@color/gray"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@+id/repsLabel"
         app:layout_constraintTop_toBottomOf="@+id/exerciseName" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_weight"
         android:layout_width="106dp"
         android:layout_height="50dp"
@@ -87,7 +90,7 @@
         app:layout_constraintEnd_toStartOf="@+id/input_reps"
         app:layout_constraintTop_toBottomOf="@+id/weightLabel" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_reps"
         android:layout_width="106dp"
         android:layout_height="50dp"
@@ -99,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repsLabel" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_time"
         android:layout_width="106dp"
         android:layout_height="50dp"
