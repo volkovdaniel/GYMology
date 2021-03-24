@@ -16,13 +16,14 @@ public class ExerciseVideo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercise_video);
+//        setContentView(R.layout.exercise_video);
+        setContentView(R.layout.exercise_details);
+        TextView eName = findViewById(R.id.exerciseName);
 
-        View inflatedView = getLayoutInflater().inflate(R.layout.exercise_details, null);
-        TextView eName = (TextView) inflatedView.findViewById(R.id.exerciseName);
+//        View inflatedView = getLayoutInflater().inflate(R.layout.exercise_details, null);
+//        TextView eName = (TextView) inflatedView.findViewById(R.id.exerciseName);
 
         String enStr = eName.getText().toString();
-        enStr = enStr.replaceAll("\\s", "");
         final WebView webView = findViewById(R.id.webView);
 
         webView.loadUrl(
