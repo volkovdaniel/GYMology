@@ -3,6 +3,7 @@
           package="team13.gymology">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
             android:allowBackup="true"
@@ -11,7 +12,7 @@
             android:roundIcon="@mipmap/ic_screen_icon_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.GYMology">
-        <activity android:name=".LogExercise"></activity>
+        <activity android:name=".ExerciseDetails"></activity>
         <activity android:name=".WorkoutDetails"></activity>
         <activity android:name=".Calendar"></activity>
         <activity android:name=".Profile"></activity>
@@ -19,6 +20,7 @@
         <activity android:name=".Stopwatch" />
         <activity android:name=".Statistics"></activity>
         <activity android:name=".WorkoutDatabase"></activity>
+        <activity android:name=".ExerciseVideo"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

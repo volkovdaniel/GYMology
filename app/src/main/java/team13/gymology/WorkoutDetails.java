@@ -19,7 +19,7 @@ public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.
 
     // testing screens
     public void exerciseView(View view) {
-        Intent intent = new Intent(this, LogExercise.class);
+        Intent intent = new Intent(this, ExerciseDetails.class);
         startActivity(intent);
     }
 
