@@ -40,8 +40,8 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             // Hold the items in the listview
             holder._listLayout = alterView.findViewById(R.id.list_layout);
             holder._workoutData = alterView.findViewById(R.id.list_data);
-            holder._editButton = alterView.findViewById(R.id.btn_edit);
-            holder._addButton = alterView.findViewById(R.id.btn_add);
+            holder._editButton = alterView.findViewById(R.id.btn_play);
+            holder._addButton = alterView.findViewById(R.id.btn_edit);
             holder._clearButton = alterView.findViewById(R.id.btn_clear);
 
 
