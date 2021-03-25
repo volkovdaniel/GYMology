@@ -3,7 +3,9 @@ package team13.gymology;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,6 +49,14 @@ public class Profile extends AppCompatActivity implements RadialMenuView.RadialM
         Intent intent = new Intent(this, BMI.class);
         startActivity(intent);
     }
+
+    // Use this as example for bmiCalc?
+//    public void exerciseVideo(View view) {
+//        TextView eName = findViewById(R.id.exerciseName);
+//        String enStr = eName.getText().toString();
+//        final WebView webView = findViewById(R.id.webView);
+//        webView.loadUrl("https://www.youtube.com/results?search_query=" + enStr);
+//    }
 
     public void showClose(View view) { radialMenuView.show(); }
 
