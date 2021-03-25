@@ -2,10 +2,16 @@ package team13.gymology;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
 import workoutData.gymology.Workout;
@@ -23,13 +29,20 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
     Button button;
     // end test
 
+//    // Testing fragments
+//    ViewPager2 viewPager;
+//    // end test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //       findViewById(R.id.btn_savedW).setOnClickListener(v -> savedWorkouts());
-//        radialMenuView.createRadialMenu();
+//        // Testing fragments
+//        viewPager = findViewById(R.id.view_pager);
+//        MenuAdapter menuAdapter = new MenuAdapter(this);
+//        viewPager.setAdapter(menuAdapter);
+//        // end test
 
         // Testing radial menu
         radialMenuView = findViewById(R.id.radial_menu_view);
@@ -38,8 +51,7 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         MenuItemView itemOne = new MenuItemView(this, "Profile", R.drawable.ic_person, R.color.grayWeb);
         MenuItemView itemTwo = new MenuItemView(this, "Workouts", R.drawable.ic_fitness, R.color.prussianBlue);
         MenuItemView itemThree = new MenuItemView(this, "Home", R.drawable.ic_home, R.color.grayWeb);
-        MenuItemView itemFour = new MenuItemView(this, "Stats", R.drawable.ic_stats,
-                R.color.prussianBlue);
+        MenuItemView itemFour = new MenuItemView(this, "Stats", R.drawable.ic_stats, R.color.prussianBlue);
         MenuItemView itemFive = new MenuItemView(this, "Calendar", R.drawable.ic_calendar, R.color.grayWeb);
         ArrayList<MenuItemView> items = new ArrayList<>();
         items.add(itemOne);
@@ -49,12 +61,31 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         items.add(itemFive);
         radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true,
                 R.color.black).setOffset(10).build();
+
     } // end onCreate()
 
     // Show that radial menu
     public void showClose(View view) {
         radialMenuView.show();
     }
+
+//    // testing out fragments
+//    @Override
+//    public void onItemClicked(int i) {
+//
+//        loadFragment(i);
+//    } // end OnItemClicked()
+//
+//    private void loadFragment(int i) {
+//        /* Load the fragment from the ViewPager based on the Menu ID.  This mapping is the
+//           same as what is found in the DemoPagerAdapter. */
+//        if (i == 0) {
+//            viewPager.setCurrentItem(0);
+//            Log.d("FragmentDemo", "Loading Profile Fragment");
+//        }
+//    }
+//    // end fragment test
+
 
     @Override
     public void onItemClicked(int i) {

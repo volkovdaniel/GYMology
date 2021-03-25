@@ -10,6 +10,26 @@ import profile.gymology.BMI;
 
 public class Profile extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
 
+//// Testing out fragments
+//public class Profile extends Fragment {
+//
+//    private View rootView;
+//
+//    public Profile() {rootView = null; }
+//
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        if (rootView == null) {
+//            Log.d("Fragment", "Creating Layout for Profile Fragment");
+//
+//            rootView = inflater.inflate(R.layout.profile, container, false);
+//        }
+//
+//        return rootView;
+//    }
+//
+//    // End fragment testing
+
     RadialMenuView radialMenuView;
 
     @Override
