@@ -14,15 +14,15 @@ import java.util.List;
 public class Exercise {
     private String id;
     private String category;
-    private String description;
+//    private String description;
     private String name;
-    // Values below will need to be retrieved.
-    @SerializedName("muscles")
-    private List<String> muscleList;
-    @SerializedName("muscles_secondary")
-    private List<String> secondaryMList;
-    @SerializedName("equipment")
-    private List<String> equipmentList;
+//    // Values below will need to be retrieved.
+//    @SerializedName("muscles")
+//    private List<String> muscleList;
+//    @SerializedName("muscles_secondary")
+//    private List<String> secondaryMList;
+//    @SerializedName("equipment")
+//    private List<String> equipmentList;
     // private int variation; Not sure what this is referencing
 
     /*
@@ -32,9 +32,9 @@ public class Exercise {
     Android can take strings, and display the html content.
      */
     public Exercise() {
-        this.muscleList = new ArrayList<>();
-        this.secondaryMList = new ArrayList<>();
-        this.equipmentList = new ArrayList<>();
+//        this.muscleList = new ArrayList<>();
+//        this.secondaryMList = new ArrayList<>();
+//        this.equipmentList = new ArrayList<>();
     }
 
     /**
@@ -48,37 +48,37 @@ public class Exercise {
         return category;
     }
 
-    public String getDescription() {
-        return description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
 
     public String getName() {
         return name;
     }
 
-    public List<String> getMuscleList() {
-        return muscleList;
-    }
+//    public List<String> getMuscleList() {
+//        return muscleList;
+//    }
+//
+//    public void setMuscleList(List<String> muscle) {
+//        this.muscleList = muscle;
+//    }
+//
+//    public List<String> getSecondaryMList() {
+//        return secondaryMList;
+//    }
 
-    public void setMuscleList(List<String> muscle) {
-        this.muscleList = muscle;
-    }
+//    public void setSecondaryMList(List<String> secondary) {
+//        this.secondaryMList = secondary;
+//    }
 
-    public List<String> getSecondaryMList() {
-        return secondaryMList;
-    }
+//    public List<String> getEquipmentList() {
+//        return equipmentList;
+//    }
 
-    public void setSecondaryMList(List<String> secondary) {
-        this.secondaryMList = secondary;
-    }
-
-    public List<String> getEquipmentList() {
-        return equipmentList;
-    }
-
-    public void setEquipmentList(List<String> equipment) {
-        this.equipmentList = equipment;
-    }
+//    public void setEquipmentList(List<String> equipment) {
+//        this.equipmentList = equipment;
+//    }
 
     public String getExercise() {
         Gson g = new Gson();
@@ -90,11 +90,7 @@ public class Exercise {
         return "ExerciseData{" +
                 "id=" + id +
                 ", category=" + category +
-                ", description='" + description + '\'' +
                 ", name='" + name + '\'' +
-                ", muscle=" + muscleList +
-                ", secondary=" + secondaryMList +
-                ", equipment=" + equipmentList +
                 '}';
     }
 }

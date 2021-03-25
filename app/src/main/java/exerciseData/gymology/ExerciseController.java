@@ -1,7 +1,6 @@
 package exerciseData.gymology;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -9,10 +8,8 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import team13.gymology.CreateWorkoutAdapter;
 import team13.gymology.R;
-import utilities.gymology.ExtraItems;
-import utilities.gymology.SimpleList;
 
-import java.io.*;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.net.URLConnection;
@@ -29,8 +26,6 @@ public class ExerciseController implements Runnable {
     private Activity activity;
     private ExerciseList _exerciseList;
     private int category;
-    // Static
-    private static String query;
     // Final
     private final static Gson g = new Gson();
     private final String TAG = "ExerciseController";
@@ -60,18 +55,26 @@ public class ExerciseController implements Runnable {
      * @return Lists
      * @throws IOException
      */
-    public static SimpleList getMuscleList() throws IOException {
-        return g.fromJson(connectAPI(
-                URLData.MUSCLE.getData() + URLData.QUERY_DEFAULT.getData()),
-                SimpleList.class);
-    }
 
-    public static SimpleList getEquipmentList() throws IOException {
-        return g.fromJson(connectAPI(
-                URLData.EQUIPMENT.getData() + URLData.QUERY_DEFAULT.getData()),
-                SimpleList.class);
-    }
+    /*
+    Separate possible calls to the api for retrieving based on muscles, or equipment
+     */
+//    public static SimpleList getMuscleList() throws IOException {
+//        return g.fromJson(connectAPI(
+//                URLData.MUSCLE.getData() + URLData.QUERY_DEFAULT.getData()),
+//                SimpleList.class);
+//    }
 
+//    public static SimpleList getEquipmentList() throws IOException {
+//        return g.fromJson(connectAPI(
+//                URLData.EQUIPMENT.getData() + URLData.QUERY_DEFAULT.getData()),
+//                SimpleList.class);
+//    }
+
+    /*
+    Saves an exercise to local storage. Could be turned into prepping the display
+    exercises to save on loading lag.
+     */
 //    public static void saveExercise(Context context, Exercise exercise) throws IOException {
 //        Log.d("Exercise Controller:", " Saving file");
 //        // Get Files directory, and the new file name
@@ -82,6 +85,9 @@ public class ExerciseController implements Runnable {
 //        bufferedWriter.close();
 //    }
 
+    /*
+    Simply Loads exercises from local storage
+     */
 //    public static Exercise loadExercise(Context context, Exercise exercise) throws IOException {
 //        Log.d("Exercise Controller: ", "Loading file");
 //        File file = new File(context.getFilesDir(), exercise.getId());
@@ -90,6 +96,9 @@ public class ExerciseController implements Runnable {
 //        return g.fromJson(bufferedReader, Exercise.class);
 //    }
 
+    /*
+    Clears exercise files from storage
+     */
 //    public static void clearExercise(Context context, String id) {
 //        context.deleteFile(id);
 //    }
@@ -116,38 +125,16 @@ public class ExerciseController implements Runnable {
         return scanner.useDelimiter("\\A").next();
     }
 
-    /**
-     * displayExercises
-     * Purpose: Connects to the Wger API to retrieve data for the creation of Exercise Lists
-     */
-    public ExerciseList displayExercises() {
-        /*
+    /*
         Database calls:
         -categories contains the names for groups of muscles
         -exercise_db contains all exercises, pages of them
-
-        Todo: Process multiple pages from one category.
-        DONE: Pass in the value that selects the category from an onclick event
-        Todo: Use given pictures from muscle category
-        Todo: Process youtube links, and see if most exercises have them.
 
         Ideas:
         -Call a separate function to assemble the query, since this functions purpose is display
 
          */
-
-        ExerciseController exercise_CB = null;
-        try {
-            // Create Query String
-            query = String.format("?%s&limit=40&%s",
-                    URLData.LANGUAGE.getData(),
-                    URLData.CATEGORY_SINGLE.getData() + category);
-
-            // Retrieve exercises from category
-            String response =
-                    connectAPI(URLData.EXERCISE_DB.getData() + query);
-
-            /* OUTPUTS:
+        /* OUTPUTS:
             count - how many items its found, limit is currently set to 40 per page
             next - reference url to next page
             previous - reference url to previous page
@@ -164,61 +151,83 @@ public class ExerciseController implements Runnable {
             }
              */
 
+    /**
+     * displayExercises
+     * Purpose: Connects to the Wger API to retrieve data for the creation of Exercise Lists
+     */
+    public ExerciseList displayExercises() {
+        ExerciseController exercise_CB = null;
+        try {
+            // Create Query String
+            // Static
+            String query = String.format("?%s&limit=40&%s",
+                    URLData.LANGUAGE.getData(),
+                    URLData.CATEGORY_SINGLE.getData() + category);
+
+            // Retrieve exercises from category
+            String response =
+                    connectAPI(URLData.EXERCISE_DB.getData() + query);
+
+
             // Create exercise database by category
             exercise_CB = generateList(response);
-
-            // Obtain Muscle and Equipment Lists
-            final List<ExtraItems> muscle_DB = getMuscleList().getListItems();
-            final List<ExtraItems> equipment_DB = getEquipmentList().getListItems();
-
-
             /*
+            Took out the following code because we aren't using it, and no need to
+            waste extra space.
+
             Idea:
-            -Make the following for loops into a function. They repeat a lot of code. Not
-            sure if it is worth it to make into a function though.
+            -Make the following for loops into a function. They repeat a lot of code.
              */
 
-            // Loop through Exercises to retrieve names of each item of equipment and muscles.
-            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
-                List<String> equipmentList = exercise.getEquipmentList();
-                List<String> muscleList = exercise.getMuscleList();
-                List<String> secondaryMList = exercise.getSecondaryMList();
+//            // Obtain Muscle and Equipment Lists
+//            final List<ExtraItems> muscle_DB = getMuscleList().getListItems();
+//            final List<ExtraItems> equipment_DB = getEquipmentList().getListItems();
 
-                // Check if Lists are empty
-                if (!(equipmentList.isEmpty())) {
-                    // Loop through all items in equipment
-                    for (String i : equipmentList) {
-                        for (ExtraItems value : equipment_DB) {
-                            if (value.id.equals(i)) {
-                                equipmentList.set(equipmentList.indexOf(i), value.name);
-                            }
-                        }
-                    }
-                }
-                if (!(muscleList.isEmpty())) {
-                    // Loop through all items in muscleList
-                    for (String i : muscleList) {
-                        for (ExtraItems value : muscle_DB) {
-                            if (value.id.equals(i)) {
-                                muscleList.set(muscleList.indexOf(i), value.name);
-                            }
-                        }
-                    }
-                }
-                if (!(secondaryMList.isEmpty())) {
-                    // Loop through all items in secondaryMList
-                    for (String i : secondaryMList) {
-                        for (ExtraItems value : muscle_DB) {
-                            if (value.id.equals(i)) {
-                                secondaryMList.set(secondaryMList.indexOf(i), value.name);
-                            }
-                        }
-                    }
-                }
-                exercise.setEquipmentList(equipmentList);
-                exercise.setMuscleList(muscleList);
-                exercise.setSecondaryMList(secondaryMList);
-            }
+//            // Loop through Exercises to retrieve names of each item of equipment and muscles.
+//            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
+//                List<String> equipmentList = exercise.getEquipmentList();
+//                List<String> muscleList = exercise.getMuscleList();
+//                List<String> secondaryMList = exercise.getSecondaryMList();
+//
+//                // Check if Lists are empty
+//                if (!(equipmentList.isEmpty())) {
+//                    // Loop through all items in equipment
+//                    for (String i : equipmentList) {
+//                        for (ExtraItems value : equipment_DB) {
+//                            if (value.id.equals(i)) {
+//                                equipmentList.set(equipmentList.indexOf(i), value.name);
+//                            }
+//                        }
+//                    }
+//                }
+//                if (!(muscleList.isEmpty())) {
+//                    // Loop through all items in muscleList
+//                    for (String i : muscleList) {
+//                        for (ExtraItems value : muscle_DB) {
+//                            if (value.id.equals(i)) {
+//                                muscleList.set(muscleList.indexOf(i), value.name);
+//                            }
+//                        }
+//                    }
+//                }
+//                if (!(secondaryMList.isEmpty())) {
+//                    // Loop through all items in secondaryMList
+//                    for (String i : secondaryMList) {
+//                        for (ExtraItems value : muscle_DB) {
+//                            if (value.id.equals(i)) {
+//                                secondaryMList.set(secondaryMList.indexOf(i), value.name);
+//                            }
+//                        }
+//                    }
+//                }
+//                exercise.setEquipmentList(equipmentList);
+//                exercise.setMuscleList(muscleList);
+//                exercise.setSecondaryMList(secondaryMList);
+//            }
+
+            /*
+            Outputs the contents of the call to system output.
+             */
 //            for (Exercise exercise : exercise_CB._exerciseList.getExercise()) {
 //                System.out.format("" +
 //                                "%nExercise: %s%n" +

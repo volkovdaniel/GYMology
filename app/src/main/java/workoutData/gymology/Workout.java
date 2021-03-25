@@ -15,6 +15,8 @@ public class Workout {
     private String _name;
     private Boolean _completed;
     private Types _type;
+//    private Date dateCreated;
+//    private Sets setsList;
 
     /**
      * Workout default constructor
