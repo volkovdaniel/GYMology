@@ -20,7 +20,6 @@
         <activity android:name=".Stopwatch" />
         <activity android:name=".Statistics"></activity>
         <activity android:name=".WorkoutDatabase"></activity>
-        <activity android:name=".ExerciseVideo"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

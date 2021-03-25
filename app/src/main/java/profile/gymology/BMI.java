@@ -26,8 +26,8 @@ public class BMI extends AppCompatActivity {
 
     public void calculateBMI(View v) {
         View inflatedView = getLayoutInflater().inflate(R.layout.profile, null);
-        EditText height = inflatedView.findViewById(R.id.height);
-        EditText weight = inflatedView.findViewById(R.id.weight);
+        EditText height = inflatedView.findViewById(R.id.input_height);
+        EditText weight = inflatedView.findViewById(R.id.input_weight);
         String heightStr = height.getText().toString();
         String weightStr = weight.getText().toString();
 

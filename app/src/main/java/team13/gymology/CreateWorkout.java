@@ -1,6 +1,7 @@
 package team13.gymology;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseController;
+import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
 import utilities.gymology.Actions;
 import utilities.gymology.Categories;
@@ -16,6 +18,7 @@ import workoutData.gymology.Workout;
 import workoutData.gymology.WorkoutController;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 /**
  * CreateWorkout
@@ -25,7 +28,8 @@ public class CreateWorkout extends AppCompatActivity implements RadialMenuView.R
     // Final
     private final String TAG = "CreateWorkout Activity: ";
     // Public
-    RadialMenuView radialMenuView;
+    public RadialMenuView radialMenuView;
+    public Button button;
     public Workout userWorkout;
     //Private
     private RadioGroup typeGroup;
@@ -47,6 +51,23 @@ DONE: Save Completed Workout to Local Storage
         setContentView(R.layout.create_workout);
         userWorkout = new Workout();
         workoutController = new WorkoutController();
+
+        radialMenuView = findViewById(R.id.radial_menu_view);
+        button = findViewById(R.id.button);
+
+        MenuItemView itemOne = new MenuItemView(this, "Profile", R.drawable.ic_person, R.color.grayWeb);
+        MenuItemView itemTwo = new MenuItemView(this, "Workouts", R.drawable.ic_fitness, R.color.prussianBlue);
+        MenuItemView itemThree = new MenuItemView(this, "Home", R.drawable.ic_home, R.color.grayWeb);
+        MenuItemView itemFour = new MenuItemView(this, "Stats", R.drawable.ic_stats, R.color.prussianBlue);
+        MenuItemView itemFive = new MenuItemView(this, "Calendar", R.drawable.ic_calendar, R.color.grayWeb);
+        ArrayList<MenuItemView> items = new ArrayList<>();
+        items.add(itemOne);
+        items.add(itemTwo);
+        items.add(itemThree);
+        items.add(itemFour);
+        items.add(itemFive);
+        radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true,
+                R.color.black).setOffset(10).build();
 
 //        Resource to add button functionality on each list item
 //        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
@@ -109,14 +130,6 @@ DONE: Save Completed Workout to Local Storage
         Thread t1 = new Thread(workoutController);
         t1.start();
 
-    }
-
-    public void showClose(View view) {
-        radialMenuView.show();
-    }
-
-    public void onItemClicked(int i) {
-        Toast.makeText(this, String.valueOf(i), Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -196,4 +209,40 @@ DONE: Save Completed Workout to Local Storage
     public void removeUserExercise(Exercise notChecked) {
         userWorkout.removeFromGroup(notChecked);
     }
+
+    // Shows the radial menu
+    public void showClose(View view) {
+        radialMenuView.show();
+    }
+
+    @Override
+    public void onItemClicked(int i) {
+        switch (i) {
+            case 0:
+                // Profile Screen
+                startActivity(new Intent(this, Profile.class));
+                finish();
+                break;
+            case 1:
+                // Workouts DB Screen
+                startActivity(new Intent(this, WorkoutDatabase.class));
+                finish();
+                break;
+            case 2:
+                // Home Screen
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+            case 3:
+                // Statistics
+                startActivity(new Intent(this, Statistics.class));
+                finish();
+                break;
+            case 4:
+                // Calendar Screen
+                startActivity(new Intent(this, Calendar.class));
+                finish();
+                break;
+        }
+    } // end OnItemClicked()
 }

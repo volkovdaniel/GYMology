@@ -24,27 +24,15 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
     /*
     TODO: Save any updated workouts/exercises onStop() of app
      */
-    // Testing radial menu
-    RadialMenuView radialMenuView;
-    Button button;
-    // end test
 
-//    // Testing fragments
-//    ViewPager2 viewPager;
-//    // end test
+    public RadialMenuView radialMenuView;
+    public Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        // Testing fragments
-//        viewPager = findViewById(R.id.view_pager);
-//        MenuAdapter menuAdapter = new MenuAdapter(this);
-//        viewPager.setAdapter(menuAdapter);
-//        // end test
-
-        // Testing radial menu
         radialMenuView = findViewById(R.id.radial_menu_view);
         button = findViewById(R.id.button);
 
@@ -69,34 +57,18 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         radialMenuView.show();
     }
 
-//    // testing out fragments
-//    @Override
-//    public void onItemClicked(int i) {
-//
-//        loadFragment(i);
-//    } // end OnItemClicked()
-//
-//    private void loadFragment(int i) {
-//        /* Load the fragment from the ViewPager based on the Menu ID.  This mapping is the
-//           same as what is found in the DemoPagerAdapter. */
-//        if (i == 0) {
-//            viewPager.setCurrentItem(0);
-//            Log.d("FragmentDemo", "Loading Profile Fragment");
-//        }
-//    }
-//    // end fragment test
-
-
     @Override
     public void onItemClicked(int i) {
         switch (i) {
             case 0:
                 // Profile Screen
-                startActivity(new Intent(this, CreateWorkout.class));
+                startActivity(new Intent(this, Profile.class));
+                finish();
                 break;
             case 1:
                 // Workouts DB Screen
-                startActivity(new Intent(this, WorkoutDatabase.class));
+                startActivity(new Intent(this, CreateWorkout.class));
+                finish();
                 break;
             case 2:
                 // Home Screen
@@ -105,10 +77,12 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
             case 3:
                 // Statistics
                 startActivity(new Intent(this, Statistics.class));
+                finish();
                 break;
             case 4:
                 // Calendar Screen
                 startActivity(new Intent(this, ExerciseDetails.class));
+                finish();
                 break;
         }
     } // end OnItemClicked()
