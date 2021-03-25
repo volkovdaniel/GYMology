@@ -8,23 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
 import utilities.gymology.Actions;
 import workoutData.gymology.WorkoutController;
-import workoutData.gymology.WorkoutList;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView.RadialMenuListener {
     private final String TAG = "Workout Database: ";
-    private WorkoutList workout_DB;
-    private WorkoutController workoutController;
-
     public RadialMenuView radialMenuView;
     public Button button;
+
+    //        Resource to add button functionality on each list item
+//        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +31,11 @@ public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView
 
         load_DB(new WeakReference<>(this));
 
-//        Resource to add button functionality on each list item
-//        https://stackoverflow.com/questions/12596199/android-how-to-set-onclick-event-for-button-in-list-item-of-listview
 
-//        retrieveWgerAPI(new WeakReference<>(this));
-//        retrieveWorkout_DB(new WeakReference<>(this));
+        // Set Create Workout Button Listener
+        findViewById(R.id.btn_add_newWO).setOnClickListener((v) -> startActivity(new Intent(this, CreateWorkout.class)));
 
+        // Radial Menu Creation
         radialMenuView = findViewById(R.id.radial_menu_view);
         button = findViewById(R.id.button);
 
@@ -55,41 +52,32 @@ public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView
         items.add(itemFive);
         radialMenuView.setListener(this).setMenuItems(items).setCenterView(button).setInnerCircle(true,
                 R.color.black).setOffset(10).build();
-    }
+    } // end onCreate
 
-    //    private void retrieveWgerAPI(WeakReference<Activity> weakActivity) {
-//        // Create  and start thread
-//        ExerciseController exercise = new ExerciseController(weakActivity, "category");
-//        Thread t1 = new Thread(exercise);
-//        t1.start();
-//
-//    }
-//    private void retrieveWorkout_DB(WeakReference<Activity> weakActivity) {
-//        // Create  and start thread
-//        WorkoutController workout_DB = new WorkoutController(weakActivity);
-//        Thread t1 = new Thread(workout_DB);
-//        t1.start();
-//
-//    }
-
+    /**
+     * Load_DB
+     * Loads the current saved workouts to a list.
+     *
+     * @param weakActivity
+     */
     private void load_DB(WeakReference<Activity> weakActivity) {
         Log.d(TAG, "Loading Workout DB");
         // Create and start thread
-        workoutController = new WorkoutController(weakActivity, Actions.LOAD_DB);
+        WorkoutController workoutController = new WorkoutController(weakActivity, Actions.LOAD_DB);
         Thread t1 = new Thread(workoutController);
         t1.start();
-    }
-
-    // Testing screens
-    public void workoutView(View view) {
-        Intent intent = new Intent(this, WorkoutDetails.class);
-        startActivity(intent);
     }
 
     public void showClose(View view) {
         radialMenuView.show();
     }
 
+    /**
+     * OnItemClicked
+     * Method to assign the locations for each button to go to on click.
+     *
+     * @param i
+     */
     @Override
     public void onItemClicked(int i) {
         switch (i) {
