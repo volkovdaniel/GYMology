@@ -1,12 +1,18 @@
 package workoutData.gymology;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
+import com.google.gson.Gson;
+import team13.gymology.CreateWorkout;
 import team13.gymology.R;
+import team13.gymology.WorkoutDetails;
 
 import java.util.List;
 
@@ -40,50 +46,54 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
 
 
             /*
-            TODO: Replace Toasts with moving to the respective activity
-            TODO: Add checking for if file exists before trying to load/save it -> msg the user
-
+            DONE: Replace Toasts with moving to the respective activity
              */
 
+            holder._workoutData.setText(getItem(location).get_name());
 
             // Set Listeners to each button for each list item
             holder._editButton.setOnClickListener(view -> {
 //                try {
-//                    (new Intent(actContext, EditWorkout.class));
-//                    // Retrieves Workout from json file by id as a Workout object
-//                    Workout workout = WorkoutController.loadWorkout(actContext,
-//                            getItem(location));
+                Intent intent = new Intent(actContext, CreateWorkout.class);
+                intent.putExtra("Edit", (new Gson()).toJson(getItem(location)));
+
                 Toast.makeText(actContext,
                         String.format("Loaded: %s", getItem(location).get_name()),
                         Toast.LENGTH_SHORT).show();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+
+                Log.d("Workout Adapter: ", "Editing current selected workout");
+
+                (actContext).startActivity(intent);
             });
 
-//            holder._addButton.setOnClickListener(view -> {
-//                try {
-//                    // getItem is essentially accessing the current workout in the list
-//                    WorkoutController.saveWorkout(actContext, getItem(location));
-//                    Toast.makeText(actContext,
-//                            String.format("Saved: %s", getItem(location).getName()), Toast.LENGTH_SHORT).show();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            });
+            holder._addButton.setOnClickListener(view -> {
+                // Create new intent for Logging the workout selected
+                Intent intent = new Intent(actContext, WorkoutDetails.class);
+                intent.putExtra("Log", (new Gson()).toJson(getItem(location)));
 
-//            holder._clearButton.setOnClickListener(view -> {
-//                // Deletes workout in localStorage
-//                WorkoutController.clearWorkout(actContext,getItem(location).getId());
-//                Toast.makeText(actContext,getItem(location).getId(), Toast.LENGTH_SHORT).show();
-//            });
-//
-//            alterView.setTag(holder);
+
+                Toast.makeText(actContext,
+                        String.format("Saved: %s", getItem(location).get_type()),
+                        Toast.LENGTH_SHORT).show();
+
+                Log.d("Workout Adapter: ", "Starting new WorkoutDetails Activity");
+
+                (actContext).startActivity(intent);
+            });
+
+            holder._clearButton.setOnClickListener(view -> {
+                // Deletes workout in localStorage
+                WorkoutController.clearWorkout(actContext, getItem(location).get_name());
+                // Clear List item
+                this.remove(getItem(location));
+                // Display confirmation toast
+                ((Activity) actContext).runOnUiThread(() -> Toast.makeText(actContext,
+                        "Cleared: " + getItem(location).get_name(),
+                        Toast.LENGTH_SHORT).show());
+            });
         } else {
             holder = (ViewHolder) alterView.getTag();
         }
-
-//        holder._workoutData.setText(getItem(location).getName());
         return alterView;
     }
 

@@ -1,8 +1,5 @@
 package workoutData.gymology;
 
-import com.google.gson.annotations.SerializedName;
-import exerciseData.gymology.Exercise;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,21 +7,17 @@ import java.util.List;
  * Purpose: Provides the base layout for the makeup of an exercise
  */
 public class WorkoutList {
-    @SerializedName("results")
-    private final List<Exercise> _workoutList;
+    private final List<Workout> _DB;
 
     public WorkoutList() {
-        this._workoutList = new ArrayList<>();
+        this._DB = new ArrayList<>();
     }
 
-    public List<Exercise> get_workoutList() {
-        return _workoutList;
+    public List<Workout> get_workoutList() {
+        return _DB;
     }
 
-    @Override
-    public String toString() {
-        return "Workout{" +
-                "workoutData=" + _workoutList +
-                '}';
+    public void addTo_DB(Workout workout) {
+        _DB.add(workout);
     }
 }

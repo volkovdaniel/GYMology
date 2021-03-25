@@ -1,6 +1,5 @@
 package workoutData.gymology;
 
-import com.google.gson.Gson;
 import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseGroup;
 import utilities.gymology.Types;
@@ -28,17 +27,19 @@ public class Workout {
         this._type = Types.CARDIO;
     }
 
-    public String getWorkout() {
-        Gson g = new Gson();
-        return g.toJson(this);
-    }
+//    public Workout getWorkout() {
+//        return this;
+//    }
 
     /**
      * get_type
      * Getter method for retrieving the type
+     *
      * @return The workout type
      */
-    public Types get_type() { return _type; }
+    public Types get_type() {
+        return _type;
+    }
 
     /**
      * get_name
@@ -91,10 +92,20 @@ public class Workout {
     /**
      * removeExerciseFromGroup
      * Method to clear specific exercises from the Exercise group
+     *
      * @param exercise The user exercise for removal
      */
     public void removeFromGroup(Exercise exercise) {
         _workoutExercises.removeFrom_group(exercise);
     }
 
+    @Override
+    public String toString() {
+        return "Workout{" +
+                "_workoutExercises=" + _workoutExercises +
+                ", _name='" + _name + '\'' +
+                ", _completed=" + _completed +
+                ", _type=" + _type +
+                '}';
+    }
 }

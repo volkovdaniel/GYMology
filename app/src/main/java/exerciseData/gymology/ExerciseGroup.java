@@ -39,4 +39,11 @@ public class ExerciseGroup {
     public void removeFrom_group(Exercise removedExercise) {
         _group.remove(removedExercise.getName());
     }
+
+    @Override
+    public String toString() {
+        return "ExerciseGroup{" +
+                "_group=" + _group +
+                '}';
+    }
 }

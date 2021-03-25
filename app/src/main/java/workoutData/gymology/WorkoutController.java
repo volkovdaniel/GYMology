@@ -8,15 +8,12 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.google.gson.Gson;
-import team13.gymology.CreateWorkoutAdapter;
 import team13.gymology.R;
 import utilities.gymology.Actions;
 import utilities.gymology.Types;
 
 import java.io.*;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 
         /*
@@ -25,44 +22,33 @@ import java.util.List;
          */
 
 public class WorkoutController implements Runnable {
-    //Static Variables
     // Final Static Variables
     private final static String TAG = "Workout Controller: ";
     private final static Gson g = new Gson();
     // Private
-    private List<String> _stringList;
     private Activity activity;
-    private List<Workout> _workout_DB;
-//    private WorkoutList _workout_DB;
+    private WorkoutList _workout_DB;
     private Workout _userWorkout;
+
     private Actions _doThis;
     private File _db_path;
-    private File _db_cardio;
-    private File _db_weights;
-    private File _db_hiit;
-    private Boolean _redo;
-    private ListView _DB;
+    private Boolean _save;
+    private ListView _DBview;
 
 
     public WorkoutController() {
+        _userWorkout = new Workout();
     }
-
-//    public WorkoutController(WorkoutList workoutList) {
-//        _workout_DB = workoutList;
-//    }
 
     public WorkoutController(WeakReference<Activity> activity, Workout userWorkout,
                              Actions doThis) {
         this.activity = activity.get();
-//        this._stringList = new ArrayList<>();
         this._userWorkout = userWorkout;
         this._doThis = doThis;
     }
     public WorkoutController(WeakReference<Activity> activity, Actions doThis) {
         this.activity = activity.get();
-        this._workout_DB = new ArrayList<>();
-//        this._stringList = new ArrayList<>();
-//        this._nameList = new ArrayList<>();
+        this._workout_DB = new WorkoutList();
         this._doThis = doThis;
     }
 
@@ -70,51 +56,68 @@ public class WorkoutController implements Runnable {
 //        startActivity(new Intent(this.activity.getApplicationContext(), EditWorkout.class));
 //    }
 
+    /**
+     * ClearWorkout
+     * Method that removes the workout on file from local storage
+     * @param context workout database activity
+     * @param id name of the file
+     */
+    public static void clearWorkout(Context context, String id) {
+        context.deleteFile(id);
+    }
 
-//     Couldn't figure out how to save files to the directory without context being included.
-//     Might not need to if the data base of workouts is already loaded.
+//    public static Workout loadWorkout(Context context, Workout workout) throws IOException {
+//        Log.d("Exercise Controller: ", "Loading file");
+//        File file = new File(context.getFilesDir(), workout.get_name());
+//        FileReader fileReader = new FileReader(file);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        return g.fromJson(bufferedReader, Workout.class);
+//    }
 
-    public Workout grabWorkoutFiles(Context context) throws IOException {
+//    /**
+//     * DisplayWorkoutByType
+//     * Method to display workouts by type
+//     * @param type
+//     */
+//    public static void displayWorkoutByType(Types type) {
+//        switch (type) {
+//            case CARDIO:
+//                Log.d(TAG, "Loading cardio workouts");
+//                break;
+//            case HIIT:
+//                Log.d(TAG, "Loading HIIT workouts");
+//                break;
+//            case WEIGHTS:
+//                Log.d(TAG, "Loading strength workouts");
+//                break;
+//            default:
+//                Log.d(TAG, "Error: Unknown workout type");
+//                break;
+//        }
+//    }
+
+    /**
+     * GrabWorkoutFiles
+     * Retrieves all files in local storage stores them for database retrieval.
+     * @param context
+     * @throws IOException
+     */
+    public void grabWorkoutFiles(Context context) throws IOException {
         Log.d(TAG, "Grabbing Files from LS");
         File newDir = context.getFilesDir();
         File[] files = newDir.listFiles();
-//        if (files != null) {
         assert files != null;
         for (File file : files) {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            return g.fromJson(bufferedReader, Workout.class);
-        }
-        return null;
-    }
-
-    public static Workout loadWorkout(Context context, Workout workout) throws IOException {
-        Log.d("Exercise Controller: ", "Loading file");
-        File file = new File(context.getFilesDir(), workout.get_name());
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        return g.fromJson(bufferedReader, Workout.class);
-    }
-
-    public static void displayWorkoutByType(Types type) {
-        switch (type) {
-            case CARDIO:
-                Log.d(TAG, "Loading cardio workouts");
-                break;
-            case HIIT:
-                Log.d(TAG, "Loading HIIT workouts");
-                break;
-            case WEIGHTS:
-                Log.d(TAG, "Loading strength workouts");
-                break;
-            default:
-                Log.d(TAG, "Error: Unknown workout type");
-                break;
+            _workout_DB.addTo_DB(g.fromJson(bufferedReader, Workout.class));
         }
     }
 
     /**
-     * checkFileName
+     * CheckFileName
+     * Method to check if file names already exist. If they do, created workout will
+     * not be saved.
      *
      * @param context current activity context
      * @param edit    if editing file instead
@@ -126,19 +129,18 @@ public class WorkoutController implements Runnable {
         if (files != null) {
             for (File file : files) {
                 if (file.getName().equals(_userWorkout.get_name()) && !edit) {
-                    _redo = true;
+                    _save = false;
                     return String.format("Workout: %s already exists.", _userWorkout.get_name());
-                } else {
-                    _redo = false;
                 }
             }
         }
+        _save = true;
         return String.format("Workout: %s being saved.", _userWorkout.get_name());
     }
 
     /**
      * saveWorkout
-     * Stores the user's workout in Local Storage unless the workout named file already exists.
+     * Stores the user's workout in Local Storage.
      *
      * @return String for toast message
      * @throws IOException
@@ -150,38 +152,34 @@ public class WorkoutController implements Runnable {
             File file = new File(context.getFilesDir(), _userWorkout.get_name());
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(g.toJson(_userWorkout.getWorkout()));
+            String jsonF = g.toJson(_userWorkout);
+            System.out.println(jsonF);
+            bufferedWriter.write(g.toJson(_userWorkout));
             bufferedWriter.close();
         }
     }
 
-    public void loadWorkout(Context context) throws IOException {
-        Log.d(TAG, "Loading Workout from LS");
-
-        if (_db_path.setWritable(true)) {
-            File file = new File(context.getFilesDir(), _userWorkout.get_name());
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(g.toJson(_userWorkout.getWorkout()));
-            bufferedWriter.close();
-        }
-    }
-
-    public List<Workout> displayWorkouts(Context context) throws IOException {
-        //Load Workout
-        _workout_DB.add(grabWorkoutFiles(context));
-        return _workout_DB;
-
-
-
-    }
+//    /**
+//     * LoadWorkout
+//     * Loads a single workout from Local Storage. Generally used for editing a workout.
+//     * @param context
+//     * @throws IOException
+//     */
+//    public void loadWorkout(Context context) throws IOException {
+//        Log.d(TAG, "Loading Workout from LS");
+//
+//        if (_db_path.setWritable(true)) {
+//            File file = new File(context.getFilesDir(), _userWorkout.get_name());
+//            FileWriter fileWriter = new FileWriter(file);
+//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//            bufferedWriter.write(g.toJson(_userWorkout));
+//            bufferedWriter.close();
+//        }
+//    }
 
     @Override
     public void run() {
         Log.d(TAG, "Checking if File structure is in place");
-
-
-        // DONE: Check if we're saving data, loading it, loading db, or loading category
         switch (_doThis) {
             case SAVE:
                 // Save user workout
@@ -190,14 +188,13 @@ public class WorkoutController implements Runnable {
                     try {
                         Toast.makeText(activity,
                                 checkFileName(activity.getApplicationContext(), false), Toast.LENGTH_LONG).show();
-                        if (_redo) {
+                        if (_save) {
                             saveWorkout(activity.getApplicationContext());
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
-
                 break;
             case LOAD:
                 //Load user workout
@@ -207,66 +204,36 @@ public class WorkoutController implements Runnable {
                 // Load workout database
                 Log.d(TAG, "Loading workout database");
                 try {
-                    _workout_DB = displayWorkouts(activity.getApplicationContext());
+                    // Grab Database
+                    grabWorkoutFiles(activity.getApplication());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                if (activity != null) {
-//                    // Define whole list
-                    _DB = activity.findViewById(R.id.list_DB_exercises);
-
+                if (_workout_DB.get_workoutList().size() != (0)) {
+                    assert activity != null;
+                    _DBview = activity.findViewById(R.id.list_DB_exercises);
                     // create adapter for list elements
                     WorkoutAdapter adapter = new WorkoutAdapter(activity,
                             R.layout.list_items_workout_details,
-                            _workout_DB);
+                            _workout_DB.get_workoutList());
 
                     // Display to Designated Activity
                     new Handler(Looper.getMainLooper()).post(() -> {
-                        _DB.setAdapter(adapter);
+                        _DBview.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-
                     });
+                } else {
+                    activity.runOnUiThread(() -> Toast.makeText(activity.getApplicationContext(),
+                            "Oh no, looks like there aren't any saved workouts.",
+                            Toast.LENGTH_LONG).show());
                 }
                 break;
-            case LOAD_CAT:
-                // Load workouts database by category
-                Log.d(TAG, "Loading workout database by category");
-                break;
+//            case LOAD_CAT:
+//                // Load workouts database by category
+//                Log.d(TAG, "Loading workout database by category");
+//                break;
             default:
                 Log.d(TAG, "No options were found in the run()'s switch, please debug");
         }
-
-
-//        try {
-//            // Retrieve Data
-//            _workout_DB = displayWorkouts();
-//            for (Workout workout : _workout_DB.getWorkout()) {
-//                _stringList.add(workout.get_name());
-//            }
-//            Thread.sleep(300);
-//        } catch (InterruptedException ex) {
-//            ex.printStackTrace();
-//        }
-//        if (activity != null) {
-//            // Define whole list
-//            _viewList = activity.findViewById(R.id.list_stats);
-//
-//
-////            // create adapter for list elements
-////            _arrayAdapter = (new ArrayAdapter<>(
-////                    activity.getApplicationContext(),
-////                    R.layout.list_style_buttons_text,
-////                    R.id.list_data,
-////                    _stringList));
-//            CreateWorkoutAdapter adapter = new CreateWorkoutAdapter(activity,
-//                    R.layout.list_style_buttons_text, _exerciseList.getExercise());
-//
-//            new Handler(Looper.getMainLooper()).post(() -> {
-//                _viewList.setAdapter(adapter);
-//                adapter.notifyDataSetChanged();
-//
-//            });
-//        }
     } // End of run()
 }
