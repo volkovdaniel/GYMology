@@ -10,6 +10,7 @@ import team13.gymology.R;
 
 public class BMI extends AppCompatActivity {
 
+    TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +19,12 @@ public class BMI extends AppCompatActivity {
         View inflatedView = getLayoutInflater().inflate(R.layout.profile, null);
         EditText height = inflatedView.findViewById(R.id.input_height);
         EditText weight = inflatedView.findViewById(R.id.input_weight);
+
         String heightStr = height.getText().toString();
         String weightStr = weight.getText().toString();
 
+        result = findViewById(R.id.bmi_result);
         calculateBMI(heightStr, weightStr);
-
     }
 
     public void calculateBMI(String heightStr, String weightStr) {
@@ -60,7 +62,6 @@ public class BMI extends AppCompatActivity {
         }
 
         bmiLabel = bmi + "\n\n" + bmiLabel;
-        TextView result = findViewById(R.id.bmi_result);
         result.setText(bmiLabel);
         Log.d("BMI", "Value: " + result);
     }

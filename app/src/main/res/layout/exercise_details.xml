@@ -198,7 +198,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_exercises" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/list_exercises"
         android:layout_width="350dp"
         android:layout_height="300dp"
