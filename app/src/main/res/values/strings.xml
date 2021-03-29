@@ -42,8 +42,15 @@
     <string name="obese_class_ii">Obese Class 2</string>
     <string name="obese_class_iii">Obese Class 3</string>
     <string name="workout_name">Workout Name</string>
+    <string name="years">Years</string>
+    <string name="inches">Inches</string>
+    <string name="pounds">Pounds</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="_00_00">00:00</string>
 
-<!--     Dropdown Menu options-->
+    <!--     Dropdown Menu options-->
     <string-array name="workout_array">
         <item>Arms</item>
         <item>Abs</item>
