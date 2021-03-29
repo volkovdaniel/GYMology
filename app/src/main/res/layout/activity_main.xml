@@ -21,7 +21,7 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             android:layout_marginTop="16dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
             android:layout_width="0dp"
             android:background="@color/jasmine"
             android:id="@+id/recyclerView"

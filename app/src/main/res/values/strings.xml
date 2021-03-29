@@ -41,6 +41,7 @@
     <string name="obese_class_i">Obese Class 1</string>
     <string name="obese_class_ii">Obese Class 2</string>
     <string name="obese_class_iii">Obese Class 3</string>
+    <string name="workout_name">Workout Name</string>
 
 <!--     Dropdown Menu options-->
     <string-array name="workout_array">
