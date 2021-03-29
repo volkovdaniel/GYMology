@@ -75,7 +75,7 @@ public class BMI extends AppCompatActivity implements RadialMenuView.RadialMenuL
     }
 
     private void displayBMI(float bmi) {
-        String bmiLabel = "";
+        String bmiLabel;
 
         if (Float.compare(bmi, 15f) <= 0) {
             bmiLabel = getString(R.string.very_severely_underweight);
