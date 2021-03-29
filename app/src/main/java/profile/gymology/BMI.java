@@ -1,6 +1,7 @@
 package profile.gymology;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -9,23 +10,22 @@ import team13.gymology.R;
 
 public class BMI extends AppCompatActivity {
 
-    private TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statistics);
-
-        result = findViewById(R.id.bmi_result);
-
-    }
-
-    public void calculateBMI(View v) {
         View inflatedView = getLayoutInflater().inflate(R.layout.profile, null);
         EditText height = inflatedView.findViewById(R.id.input_height);
         EditText weight = inflatedView.findViewById(R.id.input_weight);
         String heightStr = height.getText().toString();
         String weightStr = weight.getText().toString();
+
+        calculateBMI(heightStr, weightStr);
+
+    }
+
+    public void calculateBMI(String heightStr, String weightStr) {
 
         if (heightStr != null && !"".equals(heightStr)
                 && weightStr != null && !"".equals(weightStr)) {
@@ -60,6 +60,8 @@ public class BMI extends AppCompatActivity {
         }
 
         bmiLabel = bmi + "\n\n" + bmiLabel;
+        TextView result = findViewById(R.id.bmi_result);
         result.setText(bmiLabel);
+        Log.d("BMI", "Value: " + result);
     }
 }
