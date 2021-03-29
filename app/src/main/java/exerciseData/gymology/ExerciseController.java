@@ -6,8 +6,10 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.ListView;
 import com.google.gson.Gson;
+import team13.gymology.CreateWorkout;
 import team13.gymology.CreateWorkoutAdapter;
 import team13.gymology.R;
+import team13.gymology.WorkoutDetails;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -26,6 +28,7 @@ public class ExerciseController implements Runnable {
     private Activity activity;
     private ExerciseList _exerciseList;
     private int category;
+    private ExerciseGroup _exerciseGroup;
     // Final
     private final static Gson g = new Gson();
     private final String TAG = "ExerciseController";
@@ -46,6 +49,20 @@ public class ExerciseController implements Runnable {
         this._stringList = new ArrayList<>();
         this._nameList = new ArrayList<>();
         this.category = category;
+    }
+
+    /**
+     * ExerciseController
+     *
+     * Displays the user's current selected exercise list
+     *
+     * @param activity
+     * @param exerciseGroup The class containing the Map of exercises
+     */
+    public ExerciseController(WeakReference<Activity> activity,
+                              ExerciseGroup exerciseGroup) {
+        this.activity = activity.get();
+        this._exerciseGroup = exerciseGroup;
     }
 
     /**
@@ -254,6 +271,10 @@ public class ExerciseController implements Runnable {
 
     } // End of displayExercises()
 
+    public void displayExerciseGroup() {
+
+    }
+
     /**
      * generateList
      * Purpose: Provides a list of json data to save as an object.
@@ -272,24 +293,14 @@ public class ExerciseController implements Runnable {
     public void run() {
         Log.d(TAG,
                 "run: Getting Wger API data");
-        try {
-            // Retrieve Data
-            _exerciseList = displayExercises();
-            for (Exercise exercise : _exerciseList.getExercise()) {
-                _stringList.add(exercise.getName());
-            }
-            Thread.sleep(300);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        if (activity != null) {
+        assert activity != null;
+        if (activity instanceof WorkoutDetails) {
             // Define whole list
-            _viewList = activity.findViewById(R.id.list_exercises);
-
+            _viewList = activity.findViewById(R.id.routineExerciseList);
 
             // create adapter for list elements
             CreateWorkoutAdapter adapter = new CreateWorkoutAdapter(activity,
-                    R.layout.list_items_new_workout, _exerciseList.getExercise());
+                    R.layout.list_items_new_workout, _exerciseGroup.get_group());
 
             // Display to Designated Activity
             new Handler(Looper.getMainLooper()).post(() -> {
@@ -297,6 +308,31 @@ public class ExerciseController implements Runnable {
                 adapter.notifyDataSetChanged();
 
             });
+        }
+        else if (activity instanceof CreateWorkout) {
+            try {
+                // Retrieve Data
+                _exerciseList = displayExercises();
+                for (Exercise exercise : _exerciseList.getExercise()) {
+                    _stringList.add(exercise.getName());
+                }
+                Thread.sleep(300);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+                // Define whole list
+                _viewList = activity.findViewById(R.id.list_exercises);
+
+                // create adapter for list elements
+                CreateWorkoutAdapter adapter = new CreateWorkoutAdapter(activity,
+                        R.layout.list_items_new_workout, _exerciseList.getExercise());
+
+                // Display to Designated Activity
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    _viewList.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                });
         }
     }
 

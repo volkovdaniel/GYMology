@@ -1,6 +1,9 @@
 package exerciseData.gymology;
 
-import java.time.Duration;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * ExerciseSet
@@ -11,18 +14,49 @@ public class ExerciseSet {
     // Return a object of int, String
     private int _reps;
     private int _set;
-    private Duration _duration;
+    private Date _duration;
+    Exercise _exercise;
 
     public ExerciseSet() {
         _reps = 0;
         _set = 0;
-        _duration = Duration.ZERO;
-    }
-    public void set_duration(Duration _duration) {
-        this._duration = _duration;
+        _duration = new Date();
     }
 
-    public Duration get_duration() {
+    public ExerciseSet(Exercise exercise) {
+        this._exercise = exercise;
+
+    }
+    /**
+     * Set_duration
+     *
+     * The time it took to complete the exercise
+     *
+     * @param duration The specified time
+     * @throws ParseException
+     */
+    public void set_duration(String duration) throws ParseException {
+        DateFormat formatTime = new SimpleDateFormat("mm:ss");
+        this._duration = formatTime.parse(duration);
+    }
+
+    public Date get_duration() {
         return _duration;
+    }
+
+    public int get_reps() {
+        return _reps;
+    }
+
+    public void set_reps(int reps) {
+        this._reps = reps;
+    }
+
+    public int get_set() {
+        return _set;
+    }
+
+    public void set_set(int set) {
+        this._set = set;
     }
 }

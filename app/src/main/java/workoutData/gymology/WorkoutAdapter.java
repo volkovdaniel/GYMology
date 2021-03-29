@@ -40,8 +40,8 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             // Hold the items in the listview
             holder._listLayout = alterView.findViewById(R.id.list_layout);
             holder._workoutData = alterView.findViewById(R.id.list_data);
-            holder._editButton = alterView.findViewById(R.id.btn_play);
-            holder._addButton = alterView.findViewById(R.id.btn_edit);
+            holder._editButton = alterView.findViewById(R.id.btn_edit);
+            holder._playButton = alterView.findViewById(R.id.btn_play);
             holder._clearButton = alterView.findViewById(R.id.btn_clear);
 
 
@@ -55,7 +55,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             holder._editButton.setOnClickListener(view -> {
 //                try {
                 Intent intent = new Intent(actContext, CreateWorkout.class);
-                intent.putExtra("Edit", (new Gson()).toJson(getItem(location)));
+                intent.putExtra("EditWorkout", (new Gson()).toJson(getItem(location)));
 
                 Toast.makeText(actContext,
                         String.format("Loaded: %s", getItem(location).get_name()),
@@ -66,10 +66,10 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
                 (actContext).startActivity(intent);
             });
 
-            holder._addButton.setOnClickListener(view -> {
+            holder._playButton.setOnClickListener(view -> {
                 // Create new intent for Logging the workout selected
                 Intent intent = new Intent(actContext, WorkoutDetails.class);
-                intent.putExtra("Log", (new Gson()).toJson(getItem(location)));
+                intent.putExtra("LogWorkout", (new Gson()).toJson(getItem(location)));
 
 
                 Toast.makeText(actContext,
@@ -78,6 +78,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
 
                 Log.d("Workout Adapter: ", "Starting new WorkoutDetails Activity");
 
+                // Start workout details activity
                 (actContext).startActivity(intent);
             });
 
@@ -88,7 +89,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
                 this.remove(getItem(location));
                 // Display confirmation toast
                 ((Activity) actContext).runOnUiThread(() -> Toast.makeText(actContext,
-                        "Cleared: " + getItem(location).get_name(),
+                        "ClearedWorkout: " + getItem(location).get_name(),
                         Toast.LENGTH_SHORT).show());
             });
         } else {
@@ -100,7 +101,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
     public static class ViewHolder {
         RelativeLayout _listLayout;
         TextView _workoutData;
-        Button _addButton;
+        Button _playButton;
         Button _clearButton;
         Button _editButton;
     }

@@ -1,12 +1,14 @@
 package team13.gymology;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
+import com.google.gson.Gson;
 import exerciseData.gymology.Exercise;
 
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
     Context actContext;
     int actResource;
+    final String TAG = "CreateWorkoutAdapter: ";
 
     public CreateWorkoutAdapter(@NonNull Context context, int resource, @NonNull List<Exercise> objects) {
         super(context, resource, objects);
@@ -57,16 +60,25 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         if (actContext instanceof CreateWorkout) {
-                            System.out.println(getItem(location));
+                            Log.d(TAG, "Adding exercise to userWorkout");
                             ((CreateWorkout)actContext).addToUserWorkout(getItem(location));
                         }
-                        System.out.println("Added Exercise");
+                        else if (actContext instanceof WorkoutDetails) {
+                            Intent intent = new Intent(actContext, ExerciseDetails.class);
+                            intent.putExtra("Exercise",
+                                    (new Gson()).toJson(getItem(location)));
+                            Log.d(TAG, "Starting new ExerciseDetails activity for " +
+                                    "selected exercise");
+
+                            // Starting Exercise Details Activity
+                            actContext.startActivity(intent);
+                        }
 
                     } else {
                         if (actContext instanceof CreateWorkout) {
+                            Log.d(TAG, "Removing exercise to userWorkout");
                             ((CreateWorkout)actContext).removeUserExercise(getItem(location));
                         }
-                        System.out.println("Removed Exercise");
                     }
                 }
             });

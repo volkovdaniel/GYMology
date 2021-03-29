@@ -1,17 +1,19 @@
 package exerciseData.gymology;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ExerciseGroup {
-    private final Map<String, Exercise> _group;
+    private final List<Exercise> _group;
 
     /**
      * ExerciseGroup default constructor
      * Initializes HashMap
      */
     public ExerciseGroup() {
-        _group = new HashMap<>();
+        _group = new ArrayList<>();
     }
 
     /**
@@ -20,7 +22,7 @@ public class ExerciseGroup {
      *
      * @return exercise group
      */
-    public Map<String, Exercise> get_group() {
+    public List<Exercise> get_group() {
         return _group;
     }
 
@@ -29,15 +31,15 @@ public class ExerciseGroup {
      * Builds the map consisting of the Name of the Exercise and the actual Exercise
      */
     public void addTo_group(Exercise exercise) {
-        _group.put(exercise.getName(), exercise);
+        _group.add(exercise);
     }
 
     /**
      * removeFrom_group
      * Selects the named exercise from the group and removes it
      */
-    public void removeFrom_group(Exercise removedExercise) {
-        _group.remove(removedExercise.getName());
+    public void removeFrom_group(Exercise exercise) {
+        _group.remove(exercise);
     }
 
     @Override

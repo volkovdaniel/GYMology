@@ -10,16 +10,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import team13.gymology.R;
 import utilities.gymology.Actions;
-import utilities.gymology.Types;
+
 
 import java.io.*;
 import java.lang.ref.WeakReference;
 
 
-        /*
-        TODO: Make edit functions
-        TODO: LogPackage, Statistics Package
-         */
 
 public class WorkoutController implements Runnable {
     // Final Static Variables
@@ -195,6 +191,9 @@ public class WorkoutController implements Runnable {
                         e.printStackTrace();
                     }
                 });
+                break;
+            case LOG:
+                Log.d(TAG, "Logs/Updates user's workout details");
                 break;
             case LOAD:
                 //Load user workout

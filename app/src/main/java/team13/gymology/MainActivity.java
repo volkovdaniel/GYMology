@@ -22,7 +22,27 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
 
 
     /*
-    TODO: Save any updated workouts/exercises onStop() of app
+    Overall items to accomplish
+
+    TODO: Exit each of the new activity created on menu change, except ones like the
+     WorkoutDetails class.
+
+     TODO: Build and implement Exercise sets/reps into Workout object
+
+     TODO: Stats activity created and accessing completed workouts
+
+     TODO: Summary on Main displaying past five workouts, or last workout, or do random
+       workout - anything
+
+     TODO: Workout object including date created.
+
+     TODO: WorkoutDetails resuming activity state from started exercise
+
+     TODO: Starting saved workout places in saved values for changing
+
+     TODO: Profile page displaying editable stuff, and saving to sharedPreferences Not LS
+
+
      */
 
     public RadialMenuView radialMenuView;
@@ -67,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
                 break;
             case 1:
                 // Workouts DB Screen
-                startActivity(new Intent(this, CreateWorkout.class));
+                startActivity(new Intent(this, WorkoutDatabase.class));
                 finish();
                 break;
             case 2:

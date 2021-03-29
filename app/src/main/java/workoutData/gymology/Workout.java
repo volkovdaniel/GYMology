@@ -4,6 +4,8 @@ import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseGroup;
 import utilities.gymology.Types;
 
+import java.util.Calendar;
+
 /**
  * Workout
  * User built workout from the Create Workout Screen.
@@ -15,7 +17,8 @@ public class Workout {
     private String _name;
     private Boolean _completed;
     private Types _type;
-//    private Date dateCreated;
+    private Calendar _created;
+
 //    private Sets setsList;
 
     /**
@@ -27,6 +30,7 @@ public class Workout {
         this._name = "";
         this._completed = false;
         this._type = Types.CARDIO;
+        this._created = Calendar.getInstance();
     }
 
 //    public Workout getWorkout() {
