@@ -16,6 +16,7 @@
         <activity android:name=".WorkoutDetails"></activity>
         <activity android:name=".Calendar"></activity>
         <activity android:name=".Profile"></activity>
+        <activity android:name="profile.gymology.BMI"></activity>
         <activity android:name=".CreateWorkout"></activity>
         <activity android:name=".Stopwatch" />
         <activity android:name=".Statistics"></activity>

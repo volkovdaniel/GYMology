@@ -50,14 +50,6 @@ public class Profile extends AppCompatActivity implements RadialMenuView.RadialM
         startActivity(intent);
     }
 
-    // Use this as example for bmiCalc?
-//    public void exerciseVideo(View view) {
-//        TextView eName = findViewById(R.id.exerciseName);
-//        String enStr = eName.getText().toString();
-//        final WebView webView = findViewById(R.id.webView);
-//        webView.loadUrl("https://www.youtube.com/results?search_query=" + enStr);
-//    }
-
     public void showClose(View view) { radialMenuView.show(); }
 
     @Override
