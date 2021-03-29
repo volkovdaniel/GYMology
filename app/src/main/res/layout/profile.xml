@@ -194,7 +194,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tableRowSet1" />
 
     <CheckBox
-        android:id="@+id/checkbox_calories2"
+        android:id="@+id/checkbox_water"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -203,13 +203,13 @@
         app:layout_constraintTop_toBottomOf="@+id/checkbox_calories" />
 
     <CheckBox
-        android:id="@+id/checkbox_calories3"
+        android:id="@+id/checkbox_meal"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_calories2" />
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_water" />
 
     <TableRow
         android:id="@+id/tableRowSet2"
