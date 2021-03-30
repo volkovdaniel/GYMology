@@ -15,7 +15,7 @@ public class ExerciseSet {
     private int _reps;
     private int _set;
     private Date _duration;
-    Exercise _exercise;
+//    Exercise _exercise;
 
     public ExerciseSet() {
         _reps = 0;
@@ -23,10 +23,10 @@ public class ExerciseSet {
         _duration = new Date();
     }
 
-    public ExerciseSet(Exercise exercise) {
-        this._exercise = exercise;
-
-    }
+//    public ExerciseSet(Exercise exercise) {
+//        this._exercise = exercise;
+//
+//    }
     /**
      * Set_duration
      *

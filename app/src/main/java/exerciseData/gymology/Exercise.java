@@ -2,6 +2,7 @@ package exerciseData.gymology;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import utilities.gymology.SimpleList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Exercise {
     private String category;
 //    private String description;
     private String name;
+    private SimpleList _setGroup;
 //    // Values below will need to be retrieved.
 //    @SerializedName("muscles")
 //    private List<String> muscleList;
@@ -52,11 +54,20 @@ public class Exercise {
 //        return description;
 //    }
 
+
+    public SimpleList get_setGroup() {
+        return _setGroup;
+    }
+
     public String getName() {
         return name;
     }
 
-//    public List<String> getMuscleList() {
+    public void set_setGroup(SimpleList setGroup) {
+        this._setGroup = setGroup;
+    }
+
+    //    public List<String> getMuscleList() {
 //        return muscleList;
 //    }
 //
