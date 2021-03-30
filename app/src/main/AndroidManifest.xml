@@ -12,16 +12,38 @@
             android:roundIcon="@mipmap/ic_screen_icon_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.GYMology">
-        <activity android:name=".ExerciseDetails" />
-        <activity android:name=".WorkoutDetails" />
-        <activity android:name=".Calendar" />
-        <activity android:name=".Profile" />
-        <activity android:name="profile.gymology.BMI" />
-        <activity android:name=".CreateWorkout" />
-        <activity android:name=".Stopwatch" />
-        <activity android:name=".Statistics" />
-        <activity android:name=".WorkoutDatabase" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ExerciseDetails" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".WorkoutDetails" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".Calendar" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".Profile" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name="profile.gymology.BMI" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".CreateWorkout" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".Stopwatch" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".Timer" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".Statistics" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".WorkoutDatabase" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

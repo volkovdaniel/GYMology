@@ -8,14 +8,48 @@
     android:background="@color/prussianBlue"
     tools:context="team13.gymology.Timer">
 
+    <EditText
+        android:id="@+id/edit_text_input"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/lightCyan"
+        android:gravity="center"
+        android:ems="10"
+        android:hint="@string/minutes"
+        android:inputType="number"
+        android:maxLength="4"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/button_set"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/edit_text_input"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="@string/set" />
+
     <TextView
         android:id="@+id/text_view_countdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@id/button_set"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:text="@string/_00_00"
-        android:textColor="@color/light_gray"
-        android:textSize="60sp" />
+        android:textColor="#ccfbfe"
+        android:textSize="60sp"
+        app:drawableTopCompat="@drawable/ic_timer" />
 
     <Button
         android:id="@+id/button_start_pause"
@@ -60,4 +94,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
 </RelativeLayout>
