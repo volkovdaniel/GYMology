@@ -12,9 +12,15 @@ import java.util.List;
  * Purpose: Used to create simple lists of only an id and name.
  */
 public class SimpleList {
+
+    // Private
+    private List<ExerciseSet> setGroup;
+
+    // Final
     @SerializedName("results")
     private final List<ExtraItems> listItems;
-    private final List<ExerciseSet> setGroup;
+
+
 
     public SimpleList() {
         this.listItems = new ArrayList<>();
@@ -33,5 +39,9 @@ public class SimpleList {
      *
      * @return The completed sets
      */
-    public List<ExerciseSet> getsetGroup() { return setGroup;}
+    public List<ExerciseSet> get_setGroup() { return setGroup;}
+
+    public List<ExerciseSet> getSetGroup() {
+        return setGroup;
+    }
 }

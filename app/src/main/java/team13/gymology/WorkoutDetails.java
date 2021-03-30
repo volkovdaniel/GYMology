@@ -40,6 +40,10 @@ public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.
     TODO: On resume, Save Updated workout to LS or send to WorkoutDatabase and have it
      update it
      */
+    /*
+When workout is logged,
+-save to ls with an edit tag in order to not flag the name already exists
+ */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,13 +62,10 @@ public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.
         displayUserExercises(new WeakReference<>(this));
 
         // Setting Back Button on Log Workout
-        findViewById(R.id.logWorkout).setOnClickListener(View -> super.onBackPressed());
+        findViewById(R.id.logWorkout).setOnClickListener(View ->
+                // Save to LS
+                super.onBackPressed());
 
-
-/*
-When workout is logged,
--save to ls with an edit tag in order to not flag the name already exists
- */
 
         // Radial menu
         radialMenuView = findViewById(R.id.radial_menu_view);
