@@ -17,7 +17,7 @@ public class Exercise {
     private String category;
 //    private String description;
     private String name;
-    private SimpleList _setGroup;
+    private List<ExerciseSet> _setGroup;
 //    // Values below will need to be retrieved.
 //    @SerializedName("muscles")
 //    private List<String> muscleList;
@@ -34,6 +34,7 @@ public class Exercise {
     Android can take strings, and display the html content.
      */
     public Exercise() {
+        this._setGroup = new ArrayList<>();
 //        this.muscleList = new ArrayList<>();
 //        this.secondaryMList = new ArrayList<>();
 //        this.equipmentList = new ArrayList<>();
@@ -52,10 +53,9 @@ public class Exercise {
 
 //    public String getDescription() {
 //        return description;
-//    }
+//   }
 
-
-    public SimpleList get_setGroup() {
+    public List<ExerciseSet> get_setGroup() {
         return _setGroup;
     }
 
@@ -63,10 +63,20 @@ public class Exercise {
         return name;
     }
 
-    public void set_setGroup(SimpleList setGroup) {
+    public void set_setGroup(List<ExerciseSet> setGroup) {
         this._setGroup = setGroup;
     }
 
+    public void addTo_setGroup(ExerciseSet set) {
+        _setGroup.add(set);
+    }
+
+    public void addNameTo_sets() {
+        assert _setGroup != null;
+        for (ExerciseSet set : _setGroup) {
+            set.set_name(name);
+        }
+    }
     //    public List<String> getMuscleList() {
 //        return muscleList;
 //    }
@@ -98,10 +108,11 @@ public class Exercise {
 
     @Override
     public String toString() {
-        return "ExerciseData{" +
-                "id=" + id +
-                ", category=" + category +
+        return "Exercise{" +
+                "id='" + id + '\'' +
+                ", category='" + category + '\'' +
                 ", name='" + name + '\'' +
+                ", _setGroup=" + _setGroup +
                 '}';
     }
 }

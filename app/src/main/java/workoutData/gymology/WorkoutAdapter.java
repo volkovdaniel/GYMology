@@ -35,6 +35,8 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             // Essentially places the view into an xml layout, to alter
             LayoutInflater inflater = LayoutInflater.from(actContext);
             alterView = inflater.inflate(actResource, group, false);
+        }
+
             holder = new ViewHolder();
 
             // Hold the items in the listview
@@ -45,9 +47,6 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             holder._clearButton = alterView.findViewById(R.id.btn_clear);
 
 
-            /*
-            DONE: Replace Toasts with moving to the respective activity
-             */
 
             holder._workoutData.setText(getItem(location).get_name());
 
@@ -92,9 +91,7 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
                         "ClearedWorkout: " + getItem(location).get_name(),
                         Toast.LENGTH_SHORT).show());
             });
-        } else {
-            holder = (ViewHolder) alterView.getTag();
-        }
+
         return alterView;
     }
 

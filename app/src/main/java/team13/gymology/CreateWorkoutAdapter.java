@@ -37,11 +37,17 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
     @Override
     public View getView(final int location, View alterView, ViewGroup group) {
         final ViewHolder holder;
+
+        // If List View is null, inflate and add in the new content
+        // If List view is not null, means the user scrolled and wants new items show
+        // on the list
         if (alterView == null) {
             // Grabs the context to inflate the layout, or take apart and manipulate the view item
             // Essentially places the view into an xml layout, to alter
             LayoutInflater inflater = LayoutInflater.from(actContext);
             alterView = inflater.inflate(actResource, group, false);
+        }
+
             holder = new ViewHolder();
 
             // Hold the items in each list item
@@ -70,6 +76,7 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
                             buttonView.setEnabled(false);
                             // Package the Workout and send to new activity
                             Intent intent = new Intent(actContext, ExerciseDetails.class);
+                            Exercise e = getItem(location);
                             intent.putExtra("Exercise",
                                     (new Gson()).toJson(getItem(location)));
                             Log.d(TAG, "Starting new ExerciseDetails activity for " +
@@ -96,12 +103,7 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
                 Log.d("Create Workout Adapter: ",ex.getMessage());
                 ex.getStackTrace();
             }
-            return alterView;
-        } else {
-            return alterView;
-        }
-
-
+        return alterView;
     }
 
     @Override

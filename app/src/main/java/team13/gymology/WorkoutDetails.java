@@ -121,7 +121,7 @@ When workout is logged,
         SimpleList exerciseGroup = g.fromJson(exerciseSet, SimpleList.class);
 
         // Append the SimpleList to the ExerciseGroup of the Workout Object
-//        userWorkout.get_workoutExercises();
+//        userWorkout.get_workoutExercises().removeFrom_group(exerciseGroup.);
 
     }
 

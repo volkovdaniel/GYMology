@@ -1,5 +1,7 @@
 package exerciseData.gymology;
 
+import utilities.gymology.SimpleList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,11 +37,24 @@ public class ExerciseGroup {
     }
 
     /**
-     * removeFrom_group
-     * Selects the named exercise from the group and removes it
+     * RemoveFrom_Group
+     *
+     * Removes an exercise from the current exercise group
+     *
+     * @param exercise The Exercise that's removed
      */
-    public void removeFrom_group(Exercise exercise) {
-        _group.remove(exercise);
+    public void removeFrom_group(Exercise exercise) { _group.remove(exercise); }
+
+    /**
+     * RemoveFrom_Group
+     *
+     * Removes an exercise from the current group by String Name
+     *
+     * @param exerciseName The name of the exercise to be removed
+     */
+    public void removeFrom_group(String exerciseName) {
+        // Collections remove if, quick way to grab an item from a list's matching string
+        _group.removeIf(e -> e.getName().equals(exerciseName));
     }
 
     @Override
