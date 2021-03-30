@@ -23,6 +23,7 @@ import exerciseData.gymology.ExerciseGroup;
 import exerciseData.gymology.ExerciseSet;
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
+import utilities.gymology.SimpleList;
 import workoutData.gymology.Workout;
 import workoutData.gymology.WorkoutController;
 
@@ -37,8 +38,8 @@ public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.
 
 
     /*
-    TODO: On resume, Save Updated workout to LS or send to WorkoutDatabase and have it
-     update it
+    TODO: On resume, Save Updated workout back to LS or send to WorkoutDatabase and
+     have it update it
      */
     /*
 When workout is logged,
@@ -90,7 +91,7 @@ When workout is logged,
     protected void onResume() {
         super.onResume();
         // Update exercise in workout object
-//        updateExercise();
+//        updateExercise(String updatedExercise);
         // Set checkbox of completed exercise to checked
         Log.d(TAG, "Arrived from ExerciseDetails Activity");
     }
@@ -113,10 +114,14 @@ When workout is logged,
 
     }
 
-    public void updateExercise(Exercise exercise) {
+    public void updateExercise(String updatedExercise) {
         // Grab Updated exercise from Shared Preferences
-        SharedPreferences sp = getSharedPreferences(exercise.getName(),MODE_APPEND);
-        String exerciseSet = sp.getString(exercise.getName(), "");
+        SharedPreferences sp = getSharedPreferences(updatedExercise,MODE_APPEND);
+        String exerciseSet = sp.getString(updatedExercise, "");
+        SimpleList exerciseGroup = g.fromJson(exerciseSet, SimpleList.class);
+
+        // Append the SimpleList to the ExerciseGroup of the Workout Object
+//        userWorkout.get_workoutExercises();
 
     }
 

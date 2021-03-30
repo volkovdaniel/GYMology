@@ -28,10 +28,13 @@ public class ExerciseDetails extends AppCompatActivity implements RadialMenuView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exercise_details);
 
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("");
+
         // Setting Back Button on Log Exercise
         findViewById(R.id.btn_saveNewWO).setOnClickListener(View ->
         {
-            // Save to SharedPreferences
+            // TODO: Save to SharedPreferences
             super.onBackPressed();
         });
 

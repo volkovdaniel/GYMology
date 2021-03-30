@@ -18,11 +18,13 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
     Context actContext;
     int actResource;
     final String TAG = "CreateWorkoutAdapter: ";
+    int size;
 
     public CreateWorkoutAdapter(@NonNull Context context, int resource, @NonNull List<Exercise> objects) {
         super(context, resource, objects);
         actContext = context;
         actResource = resource;
+        size = objects.size();
     }
 
     public static class ViewHolder {
@@ -102,5 +104,8 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
 
     }
 
-
+    @Override
+    public int getCount() {
+        return size;
+    }
 }

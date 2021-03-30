@@ -59,4 +59,13 @@ public class ExerciseSet {
     public void set_set(int set) {
         this._set = set;
     }
+
+    @Override
+    public String toString() {
+        return "ExerciseSet{" +
+                "_reps=" + _reps +
+                ", _set=" + _set +
+                ", _duration=" + _duration +
+                '}';
+    }
 }
