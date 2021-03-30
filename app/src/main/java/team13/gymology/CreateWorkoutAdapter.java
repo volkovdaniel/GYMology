@@ -64,6 +64,9 @@ public class CreateWorkoutAdapter extends ArrayAdapter<Exercise> {
                             ((CreateWorkout)actContext).addToUserWorkout(getItem(location));
                         }
                         else if (actContext instanceof WorkoutDetails) {
+                            // Disable checkbox from activation again
+                            buttonView.setEnabled(false);
+                            // Package the Workout and send to new activity
                             Intent intent = new Intent(actContext, ExerciseDetails.class);
                             intent.putExtra("Exercise",
                                     (new Gson()).toJson(getItem(location)));

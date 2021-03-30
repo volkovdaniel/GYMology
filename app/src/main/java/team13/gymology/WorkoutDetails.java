@@ -2,11 +2,13 @@ package team13.gymology;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +20,7 @@ import com.google.gson.Gson;
 import exerciseData.gymology.Exercise;
 import exerciseData.gymology.ExerciseController;
 import exerciseData.gymology.ExerciseGroup;
+import exerciseData.gymology.ExerciseSet;
 import menu.semiradialmenu.MenuItemView;
 import menu.semiradialmenu.RadialMenuView;
 import workoutData.gymology.Workout;
@@ -34,7 +37,8 @@ public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.
 
 
     /*
-    TODO: On resume, set past checked exercise to be checked once more for continuation
+    TODO: On resume, Save Updated workout to LS or send to WorkoutDatabase and have it
+     update it
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,15 @@ public class WorkoutDetails extends AppCompatActivity implements RadialMenuView.
         userWorkout = g.fromJson(intent.getStringExtra("LogWorkout"),
                 Workout.class);
 
+        // Set Title of Workout
+        ((TextView)findViewById(R.id.routineName)).setText(userWorkout.get_name());
+
+        // Display Workout's Exercises
         displayUserExercises(new WeakReference<>(this));
+
+        // Setting Back Button on Log Workout
+        findViewById(R.id.logWorkout).setOnClickListener(View -> super.onBackPressed());
+
 
 /*
 When workout is logged,
@@ -74,6 +86,20 @@ When workout is logged,
         //End radial menu
     }
 
+    protected void onResume() {
+        super.onResume();
+        // Update exercise in workout object
+//        updateExercise();
+        // Set checkbox of completed exercise to checked
+        Log.d(TAG, "Arrived from ExerciseDetails Activity");
+    }
+
+    /**
+     * DisplayUserExercise
+     *
+     * Takes the current workout's exercises and displays them to its respective list
+     * @param activity
+     */
     public void displayUserExercises(WeakReference<Activity> activity) {
         // Set up the exercise controller with current exercises
         ExerciseController ec = new ExerciseController(activity,
@@ -86,10 +112,11 @@ When workout is logged,
 
     }
 
-    // testing screens
-    public void exerciseView(View view) {
-        Intent intent = new Intent(this, ExerciseDetails.class);
-        startActivity(intent);
+    public void updateExercise(Exercise exercise) {
+        // Grab Updated exercise from Shared Preferences
+        SharedPreferences sp = getSharedPreferences(exercise.getName(),MODE_APPEND);
+        String exerciseSet = sp.getString(exercise.getName(), "");
+
     }
 
     public void showClose(View view) {

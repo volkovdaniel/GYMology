@@ -54,6 +54,12 @@ public class WorkoutDatabase extends AppCompatActivity implements RadialMenuView
                 R.color.black).setOffset(10).build();
     } // end onCreate
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "Returning from WorkoutDetails activity");
+    }
+
     /**
      * Load_DB
      * Loads the current saved workouts to a list.
