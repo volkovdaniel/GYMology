@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
                 break;
             case 4:
                 // Calendar Screen
-                startActivity(new Intent(this, ExerciseDetails.class));
+                startActivity(new Intent(this, Calendar.class));
                 finish();
                 break;
         }
