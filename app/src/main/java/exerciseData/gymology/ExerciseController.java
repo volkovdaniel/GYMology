@@ -294,6 +294,7 @@ public class ExerciseController implements Runnable {
         Log.d(TAG,
                 "run: Getting Wger API data");
         assert activity != null;
+
         if (activity instanceof WorkoutDetails) {
             // Define whole list
             _viewList = activity.findViewById(R.id.routineExerciseList);
@@ -313,9 +314,6 @@ public class ExerciseController implements Runnable {
             try {
                 // Retrieve Data
                 _exerciseList = displayExercises();
-                for (Exercise exercise : _exerciseList.getExercise()) {
-                    _stringList.add(exercise.getName());
-                }
                 Thread.sleep(300);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();

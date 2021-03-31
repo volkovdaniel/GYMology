@@ -11,22 +11,18 @@ import java.util.Date;
  * Saves the reps done for the specific exercise
  */
 public class ExerciseSet {
-    // Return a object of int, String
     private int _reps;
     private int _set;
     private Date _duration;
-//    Exercise _exercise;
+    private String _name;
 
     public ExerciseSet() {
+        _name = "";
         _reps = 0;
         _set = 0;
         _duration = new Date();
     }
 
-//    public ExerciseSet(Exercise exercise) {
-//        this._exercise = exercise;
-//
-//    }
     /**
      * Set_duration
      *
@@ -43,6 +39,10 @@ public class ExerciseSet {
     public Date get_duration() {
         return _duration;
     }
+
+    public String get_name() { return _name; }
+
+    public void set_name(String _name) { this._name = _name; }
 
     public int get_reps() {
         return _reps;
