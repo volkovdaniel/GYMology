@@ -52,6 +52,17 @@
     <string name="chest_amp_arms"><![CDATA[Chest & Arms]]></string>
     <string name="minutes">Minutes</string>
     <string name="set">Set</string>
+    <string name="calf_raises">Calf Raises</string>
+    <string name="videolink">VideoLink</string>
+    <string name="_50">50</string>
+    <string name="_12">12</string>
+    <string name="hh_mm_ss">HH:MM:SS</string>
+    <string name="repeat_last_workout">Repeat Last Workout</string>
+    <string name="view_stats">View Stats</string>
+    <string name="calendar">Calendar</string>
+    <string name="schedule_workout">Schedule Workout</string>
+    <string name="countdown_timer">Countdown Timer</string>
+    <string name="load_workout_routines">Load Workout Routines</string>
 
     <!--     Dropdown Menu options-->
     <string-array name="workout_array">
