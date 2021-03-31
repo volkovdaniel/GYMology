@@ -157,7 +157,6 @@
         android:id="@+id/btn_timer"
         android:layout_width="158dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/grayWeb"
         android:onClick="timer"
@@ -168,7 +167,7 @@
 
     <Button
         android:id="@+id/btn_saveSet"
-        android:layout_width="200dp"
+        android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
         android:background="@color/oxfordBlue"
@@ -183,7 +182,6 @@
         android:layout_width="158dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:background="@color/grayWeb"
         android:backgroundTint="@color/grayWeb"
         android:onClick="stopwatch"
