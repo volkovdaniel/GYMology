@@ -107,5 +107,13 @@ public class MainActivity extends AppCompatActivity implements RadialMenuView.Ra
         }
     } // end OnItemClicked()
 
+    public void lastWorkout(View view) {
+        Toast.makeText(this, "You haven't completed a workout yet", Toast.LENGTH_SHORT).show();
+    }
+
+    public void stats(View view) {
+        Intent intent = new Intent(this, Statistics.class);
+        startActivity(intent);
+    }
 
 }
